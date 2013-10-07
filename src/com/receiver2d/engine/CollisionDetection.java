@@ -1,6 +1,5 @@
 package com.receiver2d.engine;
 
-import java.awt.geom.Line2D;
 import java.util.ArrayList;
 
 public class CollisionDetection {
@@ -29,7 +28,6 @@ public class CollisionDetection {
 				Vector2D b1 = polyB[j];
 				Vector2D b2 = polyB[(j == polyB.length - 1 ? 0 : j + 1)];
 
-				
 				// calculations
 				try {
 					/*
@@ -61,4 +59,5 @@ public class CollisionDetection {
 		}
 		return intersections.toArray(new Vector2D[intersections.size()]);
 	}
+
 }
