@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class Entity {
 	private String uuid;
-	Vector2D position, dimension;
+	Vec2d position, dimension;
 	ArrayList<Component> components;
 
 	public Entity() {
