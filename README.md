@@ -4,7 +4,8 @@ Hi there! This is a _fork_ of Remote2D, hopefully designed
 to address some of the inefficiencies of the original version
 and thus to serve as an improvement. It is currently a proof-
 of-concept, and is not intended for commercial use.
--------------------------------------------------------------
+
+
 Remote2D is the basic class that initializes all of the other
 components of the editor and the engine.
 In Remote2D, the editor runs separately and pulls in 
