@@ -12,4 +12,5 @@ The source code for this engine can be found at the GitHub repository:
 - https://github.com/Prince781/Remote2D
 
 With that, we hope that you may find our version to be useful.
-- Ben and Princeton
+
+\- Ben and Princeton
