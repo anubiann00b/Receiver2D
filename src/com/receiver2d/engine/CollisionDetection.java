@@ -49,10 +49,17 @@ public class CollisionDetection {
 
 					// TODO: check for lines where slope is undefined
 
-					float x = (m_a * a1.x - m_b * b1.x + a1.y + a1.x)
-							/ (m_a - m_b);
-					float y = m_a * (x - a1.x) + a1.y;
-					intersections.add(new Vector2D(x, y));
+					if (m_a_undefined && m_b_undefined)
+						if (a1.equals(b1)) {
+							intersections.add(a1); //a1 == b1
+							intersections.add(a2); //a2 == b2
+						} //don't do anything if a1.x != b1.x
+					else {
+						float x = (m_a * a1.x - m_b * b1.x + a1.y + a1.x)
+								/ (m_a - m_b);
+						float y = m_a * (x - a1.x) + a1.y;
+						intersections.add(new Vector2D(x, y));
+					}
 				} catch (Exception e) {
 				}
 			}
