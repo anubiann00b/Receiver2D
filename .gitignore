@@ -1,2 +1,8 @@
 *.class
+<<<<<<< HEAD
 /bin
+=======
+
+# Backup Files
+*~
+>>>>>>> d21b640813105b2b845b5968f7b10e7fd6af4b11
