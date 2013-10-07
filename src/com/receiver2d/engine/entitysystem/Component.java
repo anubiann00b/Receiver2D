@@ -1,4 +1,4 @@
-package com.receiver2d.engine;
+package com.receiver2d.engine.entitysystem;
 
 /**
  * Anything that is able to be attached to an Entity, such as a Collider, 
