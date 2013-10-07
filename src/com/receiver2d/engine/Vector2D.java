@@ -1,6 +1,10 @@
 package com.receiver2d.engine;
 
 public class Vector2D {
+	// static stuff
+	
+	// static stuff
+	
 	public float x = 0.0f;
 	public float y = 0.0f;
 	
@@ -14,7 +18,7 @@ public class Vector2D {
 		this.y += y;
 		return new Vector2D(this.x, this.y);
 	}
-	//add() overrides
+	// add() overrides
 		public Vector2D add(Vector2D vector) {
 			return add(vector.x, vector.y);
 		}
@@ -30,7 +34,7 @@ public class Vector2D {
 		this.y *= y;
 		return new Vector2D(this.x, this.y);
 	}
-	//multiply() overrides
+	// multiply() overrides
 		public Vector2D multiply(Vector2D vector) {
 			return multiply(vector.x, vector.y);
 		}
@@ -46,7 +50,7 @@ public class Vector2D {
 		this.y /= y;
 		return new Vector2D(this.x, this.y);
 	}
-	//divide() overrides
+	// divide() overrides
 		public Vector2D divide(Vector2D vector) {
 			return divide(vector.x, vector.y);
 		}
@@ -60,7 +64,7 @@ public class Vector2D {
 	public float distanceTo(float x, float y) {
 		return (float) Math.sqrt(Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2));
 	}
-	//distanceTo() overrides
+	// distanceTo() overrides
 		public float distanceTo(int x, int y) {
 			return distanceTo((float) x, (float) y);
 		}
@@ -69,5 +73,18 @@ public class Vector2D {
 		}
 		public float distanceTo(Vector2D vector) {
 			return distanceTo(vector.x, vector.y);
+		}
+	public boolean equals(float x, float y) {
+		return this.x == x && this.y == y;
+	}
+	// equals() overrides
+		public boolean equals(int x, int y) {
+			return equals((float) x, (float) y);
+		}
+		public boolean equals(double x, double y) {
+			return equals((float) x, (float) y);
+		}
+		public boolean equals(Vector2D vector) {
+			return equals(vector.x, vector.y);
 		}
 }
