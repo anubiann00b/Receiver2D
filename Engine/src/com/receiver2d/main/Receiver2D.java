@@ -27,7 +27,7 @@
  * useful.
  * - Ben and Princeton
  */
-package com.receiver2d.engine;
+package com.receiver2d.main;
 
 import com.receiver2d.engine.Console;
 
