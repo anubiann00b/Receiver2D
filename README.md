@@ -2,8 +2,8 @@ Remote2D
 ========
 Hi there! This is a _fork_ of Remote2D, hopefully designed
 to address some of the inefficiencies of the original version
-and thus to serve as an improvement. It is currently a proof-
-of-concept, and is not intended for commercial use.
+and thus to serve as an improvement. It is currently a 
+proof-of-concept, and is not intended for commercial use.
 
 
 Remote2D is the basic class that initializes all of the other
@@ -19,14 +19,7 @@ everything can be neatly parallelized.
 
 
 The original engine was created by Adrian Biagioli and can
-be found at his GitHub repository:
-- https://github.com/Flafla2/Remote2D-Engine
-
-
-
-The source code for this engine can be found at the GitHub
-repository:
-- https://github.com/Prince781/Remote2D
+be [found at his GitHub repository](https://github.com/Flafla2/Remote2D-Engine).
 
 With that, we hope that you may find our version to be 
 useful.
