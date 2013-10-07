@@ -28,7 +28,7 @@
  * - Ben and Princeton
  */
 package com.receiver2d.engine;
-import com.receiver2d.editor.Editor;
+
 import com.receiver2d.engine.Console;
 
 public class Receiver2D {	
@@ -66,12 +66,14 @@ public class Receiver2D {
 			
 		};
 		
-		//GUI Editor thread
-		Thread r2dEditor = new Thread(threadList, "R2DEditor") {
-			@Override
-			public void run() {
-				Editor.run();
-			}
+		//Collision detection thread
+		Thread r2dCollisionDetection = new Thread(threadList, "R2DCollisionDetection") {
+			
+		};
+		
+		//Physics thread
+		Thread r2dPhysics = new Thread(threadList, "R2DPhysics") {
+			
 		};
 		
 		Console.log(programName+" ended.");
