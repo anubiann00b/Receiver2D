@@ -6,8 +6,8 @@ package com.receiver2d.engine;
 
 public class Receiver2D {
 	// program values
-	public static String programName = "Receiver2D";
-	public static long startTime = System.nanoTime();
+	public static final String programName = "Receiver2D";
+	public static long startTime = 0;
 	public static boolean running = true;
 	// program values
 
@@ -15,10 +15,16 @@ public class Receiver2D {
 	public static ThreadGroup threadList;
 	// engine values
 
+	// returns the time in nanoseconds since the program was launched
 	public static long getTimeSinceLaunch() {
-		return startTime - System.nanoTime();
+		return System.nanoTime() - startTime;
 	}
 
+	// for testing, not for release
+	public static void main(String[] args){
+		StartReciever2D();
+	}
+	
 	// start the engine
 	public static void StartReciever2D() {
 		startTime = System.nanoTime();
