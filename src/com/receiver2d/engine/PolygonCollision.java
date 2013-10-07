@@ -7,12 +7,13 @@ public class PolygonCollision {
 	 * Checks whether two polygons collide.
 	 * Polygons are defined as an array of vertices with each vertex (Vector2D)
 	 * connected to the next one in the array.
+	 * 
 	 * Example: square - (0,0) (0,1) (1,1) (1,0)
 	 * 
 	 * @param polyA
-	 *            - the array of points for the first polygon
+	 *           the array of points for the first polygon
 	 * @param polyB
-	 *            - the array of points for the second polygon
+	 *            the array of points for the second polygon
 	 * @return The array of points where the two polygons overlap, or null if 
 	 * they do not collide at all.
 	 */

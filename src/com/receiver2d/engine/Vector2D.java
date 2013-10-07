@@ -1,11 +1,20 @@
 package com.receiver2d.engine;
 
+/**
+ * Contains point data (x, y). Very useful for positions, velocity, forces, etc.
+ */
 public class Vector2D {
 	// static stuff
 	
 	// static stuff
 	
+	/**
+	 * A coordinate value along the dimensional x-axis.
+	 */
 	public float x = 0.0f;
+	/**
+	 * A coordinate value along the dimensional y-axis.
+	 */
 	public float y = 0.0f;
 	
 	public Vector2D(float x, float y) {
@@ -13,6 +22,13 @@ public class Vector2D {
 		this.y = y;
 	}
 	
+	/**
+	 * Increments the instantiated Vector2D by x, y.
+	 * @param x An x-coordinate.
+	 * @param y A y-coordinate.
+	 * @return A new Vector2D whose points are the sum of the instantiated 
+	 * 			Vector2D object and the parameters.
+	 */
 	public Vector2D add(float x, float y) {
 		this.x += x;
 		this.y += y;
@@ -61,6 +77,13 @@ public class Vector2D {
 			return divide((float) x, (float) y);
 		}
 	
+	/**
+	 * Calculates the Euclidean distance from the instantiated Vector2D to the
+	 * parameter.
+	 * @param x An x-coordinate.
+	 * @param y A y-coordiante.
+	 * @return The Euclidean distance to the Vector2D.
+	 */
 	public float distanceTo(float x, float y) {
 		return (float) Math.sqrt(Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2));
 	}
@@ -74,6 +97,14 @@ public class Vector2D {
 		public float distanceTo(Vector2D vector) {
 			return distanceTo(vector.x, vector.y);
 		}
+	
+	/**
+	 * Checks if the current Vector2D has the same position as the given
+	 * Vector2D.
+	 * @param x An x-coordinate.
+	 * @param y A y-coordinate.
+	 * @return A true/false value indicating this.
+	 */
 	public boolean equals(float x, float y) {
 		return this.x == x && this.y == y;
 	}

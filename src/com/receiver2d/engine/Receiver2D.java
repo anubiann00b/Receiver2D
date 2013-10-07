@@ -1,28 +1,50 @@
-/**
- * This is the main class, where the engine can be started and managed.
- */
 
 package com.receiver2d.engine;
 
+import java.util.ArrayList;
+
+/**
+ * This is the main class, where the engine can be started and managed.
+ */
 public class Receiver2D {
 	// program values
 	public static final String programName = "Receiver2D";
+	/**
+	 * The initial time at which the program began running.
+	 */
 	public static long startTime = 0;
+	/**
+	 * Whether or not the program is running. When false, all currently-running
+	 * threads will automatically close.
+	 */
 	public static boolean running = true;
 	// program values
 
 	// engine values
+	/**
+	 * A ThreadGroup containing all of the currently running threads which the
+	 * game engine uses to perform updates to rendering and the world.
+	 */
 	public static ThreadGroup threadList;
+	/**
+	 * The central rendering component of the game engine.
+	 */
 	public static Renderer renderer;
+	/**
+	 * The central logic component of the game engine, responsible for tick(),
+	 * logic updates, physics updates, collision updates, and more.
+	 */
 	public static GameUpdater gameUpdater;
 	// engine values
 
-	// start the engine
+	/**
+	 * Starts the game engine.
+	 */
 	public static void StartReciever2D() {
 		startTime = System.nanoTime();
 		Console.log(programName + " started.");
 
-		/**
+		/*
 		 * Below, we create new threads. These threads will only run as long as
 		 * the program value "running" is true. As soon as "running" is false,
 		 * all of the threads will exit on their own and Remote2D will

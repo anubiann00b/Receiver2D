@@ -5,6 +5,12 @@ package com.receiver2d.engine;
  */
 
 public class Console {
+	
+	/**
+	 * Logs system information to the console with time and message.
+	 * @param message A custom string containing the message to log.
+	 * @param exception A possible exception to include in the log.
+	 */
 	public static void log(String message, Exception exception) {
 		long nanoDeltaTime = System.nanoTime() - Receiver2D.startTime;
 		int totalSeconds = (int) (nanoDeltaTime / 1000 / 1000 / 1000);
