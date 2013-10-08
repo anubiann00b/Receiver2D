@@ -43,6 +43,7 @@ public class CollisionDetection {
 				float y = (A1*C2 - A2*C1)/delta;
 				// TODO: return null if x, y are out of range for our finite 
 				// lines
+				
 				return new Vector2D(x, y);
 			}
 	}
@@ -94,10 +95,29 @@ public class CollisionDetection {
 	 *            A Vector2D array containing points of the second polygon/line.
 	 * @return "true" if the polygons collide; "false" otherwise
 	 */
-	public boolean checkCollides(Vector2D[] poly1, Vector2D[] poly2) {
+	public static boolean checkCollides(Vector2D[] poly1, Vector2D[] poly2) {
 		if (poly1.length > 2 && poly2.length > 2)
 			return linearIntersectionPoint(poly1, poly2) != null;
 			//we do this to save unnecessary calculations for lines
 		return polygonalIntersectionPoints(poly1, poly2) != null;
+	}
+
+	/**
+	 * Determines if a point is inside a polygon using a winding algorithm.
+	 * @param pnt A point.
+	 * @param poly An array of points, or a polygon.
+	 * @return A true/false value depending on whether or not the point is
+	 *         inside the polygon.
+	 */
+	public static boolean pointInPolygon(Vector2D pnt, Vector2D[] poly) {
+		// compute each of the angles between "pnt" and poly[i]
+		float[] degs = new float[poly.length];
+		float deg = 0.0f;
+		for (int i=0; i<poly.length; i++) {
+			float d = (float)Math.atan((poly[i].x - pnt.x)/(poly[i].y - pnt.y));
+			degs[i] = d;
+			deg += i == 0 ? degs[i] : degs[i] - degs[i-1];
+		}
+		return (int)deg == 0;
 	}
 }

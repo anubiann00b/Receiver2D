@@ -1,121 +1,30 @@
 package com.receiver2d.engine;
 
+import org.lwjgl.util.vector.Vector2f;
+
 /**
  * Contains point data (x, y). Very useful for positions, velocity, forces, etc.
  */
-public class Vector2D {
-	// static stuff
-	
-	// static stuff
-	
-	/**
-	 * A coordinate value along the dimensional x-axis.
-	 */
-	public float x = 0.0f;
-	/**
-	 * A coordinate value along the dimensional y-axis.
-	 */
-	public float y = 0.0f;
-	
+@SuppressWarnings("serial")
+public class Vector2D extends Vector2f {
 	public Vector2D(float x, float y) {
 		this.x = x;
 		this.y = y;
 	}
-	
+	// Vector2D() overrides
+		public Vector2D(Vector2f vec) {
+			this.x = vec.x;
+			this.y = vec.y;
+		}
 	/**
-	 * Increments the instantiated Vector2D by x, y.
-	 * @param x An x-coordinate.
-	 * @param y A y-coordinate.
-	 * @return A new Vector2D whose points are the sum of the instantiated 
-	 * 			Vector2D object and the parameters.
+	 * Calculates the Euclidean distance between two points.
+	 * @param vec1 The first vector.
+	 * @param vec2 The second vector.
+	 * @return The distance between two vectors.
 	 */
-	public Vector2D add(float x, float y) {
-		this.x += x;
-		this.y += y;
-		return new Vector2D(this.x, this.y);
+	public static float distance(Vector2D vec1, Vector2D vec2) {
+		return (float) Math.sqrt(
+				Math.pow(vec1.x - vec2.x, 2) +
+				Math.pow(vec1.y - vec2.y, 2));
 	}
-	// add() overrides
-		public Vector2D add(Vector2D vector) {
-			return add(vector.x, vector.y);
-		}
-		public Vector2D add(int x, int y) {
-			return add((float) x, (float) y);
-		}
-		public Vector2D add(double x, double y) {
-			return add((float) x, (float) y);
-		}
-	
-	public Vector2D multiply(float x, float y) {
-		this.x *= x;
-		this.y *= y;
-		return new Vector2D(this.x, this.y);
-	}
-	// multiply() overrides
-		public Vector2D multiply(Vector2D vector) {
-			return multiply(vector.x, vector.y);
-		}
-		public Vector2D multiply(int x, int y) {
-			return multiply((float) x, (float) y);
-		}
-		public Vector2D multiply(double x, double y) {
-			return multiply((float) x, (float) y);
-		}
-	
-	public Vector2D divide(float x, float y) {
-		this.x /= x;
-		this.y /= y;
-		return new Vector2D(this.x, this.y);
-	}
-	// divide() overrides
-		public Vector2D divide(Vector2D vector) {
-			return divide(vector.x, vector.y);
-		}
-		public Vector2D divide(int x, int y) {
-			return divide((float) x, (float) y);
-		}
-		public Vector2D divide(double x, double y) {
-			return divide((float) x, (float) y);
-		}
-	
-	/**
-	 * Calculates the Euclidean distance from the instantiated Vector2D to the
-	 * parameter.
-	 * @param x An x-coordinate.
-	 * @param y A y-coordiante.
-	 * @return The Euclidean distance to the Vector2D.
-	 */
-	public float distanceTo(float x, float y) {
-		return (float) Math.sqrt(Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2));
-	}
-	// distanceTo() overrides
-		public float distanceTo(int x, int y) {
-			return distanceTo((float) x, (float) y);
-		}
-		public float distanceTo(double x, double y) {
-			return distanceTo((float) x, (float) y);
-		}
-		public float distanceTo(Vector2D vector) {
-			return distanceTo(vector.x, vector.y);
-		}
-	
-	/**
-	 * Checks if the current Vector2D has the same position as the given
-	 * Vector2D.
-	 * @param x An x-coordinate.
-	 * @param y A y-coordinate.
-	 * @return A true/false value indicating this.
-	 */
-	public boolean equals(float x, float y) {
-		return this.x == x && this.y == y;
-	}
-	// equals() overrides
-		public boolean equals(int x, int y) {
-			return equals((float) x, (float) y);
-		}
-		public boolean equals(double x, double y) {
-			return equals((float) x, (float) y);
-		}
-		public boolean equals(Vector2D vector) {
-			return equals(vector.x, vector.y);
-		}
 }
