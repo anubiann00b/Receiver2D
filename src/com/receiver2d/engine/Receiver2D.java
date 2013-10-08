@@ -1,7 +1,4 @@
-
 package com.receiver2d.engine;
-
-import java.util.ArrayList;
 
 /**
  * This is the main class, where the engine can be started and managed.
@@ -27,7 +24,8 @@ public class Receiver2D {
 	 */
 	public static ThreadGroup threadList;
 	/**
-	 * The central rendering component of the game engine.
+	 * The central rendering component of the game engine. Rendering functions
+	 * are abstracted to this one class.
 	 */
 	public static Renderer renderer;
 	/**
@@ -35,6 +33,7 @@ public class Receiver2D {
 	 * logic updates, physics updates, collision updates, and more.
 	 */
 	public static GameUpdater gameUpdater;
+
 	// engine values
 
 	/**
@@ -57,9 +56,10 @@ public class Receiver2D {
 
 		// Renderer thread (everything graphics-related)
 		Thread r2dRenderer = new Thread(threadList, renderer, "R2DRenderer");
-		
+
 		// Game logic updater thread (physics and other game updates)
-		Thread r2dUpdater = new Thread(threadList, gameUpdater, "R2DGameUpdater");
+		Thread r2dUpdater = new Thread(threadList, gameUpdater,
+				"R2DGameUpdater");
 
 		threadList.setMaxPriority(Thread.MAX_PRIORITY);
 		r2dUpdater.start();
