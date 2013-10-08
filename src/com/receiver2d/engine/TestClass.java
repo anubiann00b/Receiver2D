@@ -8,11 +8,12 @@ import org.lwjgl.util.vector.Vector2f;
  */
 public class TestClass {
 	public static void main(String[] args) {
+		Receiver2D.StartReciever2D();
 		for (Vector2f v : 
-			CollisionDetection.polygonalIntersectionPoints(
-//			CollisionByBen.checkCollide(
-				new Vector2f[] { new Vector2f(0, 0), new Vector2f(1, 1) },
-				new Vector2f[] { new Vector2f(0, 0), new Vector2f(1, 1) })) {
+//			CollisionDetection.polygonalIntersectionPoints(
+			CollisionByBen.checkCollide(
+				new Vector2f[] { new Vector2f(0, 0), new Vector2f(0, 1) },
+				new Vector2f[] { new Vector2f(0, 0), new Vector2f(0, 1) })) {
 			System.out.println(v.x + ", " + v.y);
 		}
 	}

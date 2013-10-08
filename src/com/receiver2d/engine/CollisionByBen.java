@@ -3,6 +3,7 @@ package com.receiver2d.engine;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import org.lwjgl.util.vector.Vector;
 import org.lwjgl.util.vector.Vector2f;
 
 public class CollisionByBen {
@@ -24,21 +25,22 @@ public class CollisionByBen {
 		HashSet<Vector2f> result = new HashSet<Vector2f>();
 		for (int i = 0; i < polyA.length; i++) {
 			for (int j = 0; j < polyB.length; j++) {
-
+				System.out.println();
 				Vector2f a1 = polyA[i]; // line from vertex poly[i] to poly[i+1]
 				Vector2f a2 = polyA[(i == polyA.length - 1 ? 0 : i + 1)];
 				Vector2f b1 = polyB[j]; // line from vertex poly[j] to poly[j+1]
 				Vector2f b2 = polyB[(j == polyB.length - 1 ? 0 : j + 1)];
 
 				if ((a1.equals(b1) && a2.equals(b2)) || (a1.equals(b2) && a2.equals(b1))) {
-					result.add(new Vector2f(a1.x, a1.y));
-					result.add(new Vector2f(a2.x, a2.y));
+					result.add(a1);
+					result.add(a2);
+					System.out.println("identical edges");
 				} else {
+					System.out.println(a1.equals(b1));
 					float m_a = (a1.y - a2.y) / (a1.x - a2.x);
 					float m_b = (b1.y - b2.y) / (b1.x - b2.x);
 					float b_a = a1.y - m_a * a1.x;
 					float b_b = b1.y - m_b * b1.x;
-					
 					if (m_a != m_b) {
 						float x = (b_b - b_a) / (m_a - m_b);
 						float y = m_a * x + b_a;

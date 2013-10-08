@@ -1,5 +1,7 @@
 package com.receiver2d.engine.entitysystem;
 
-public class EntityList {
+import java.util.ArrayList;
 
+public class EntityList {
+	ArrayList<Entity> entities = new ArrayList<Entity>();
 }
