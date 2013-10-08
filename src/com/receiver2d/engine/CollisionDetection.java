@@ -2,6 +2,11 @@ package com.receiver2d.engine;
 
 import java.util.ArrayList;
 
+/**
+ * Deals with analyzing collisions between geometric figures in two-dimensional
+ * space. This comes in handy for all sorts of things pertaining to the game
+ * engine, such as AI and physics.
+ */
 public class CollisionDetection {
 	/**
 	 * Checks whether or not two finite lines (Vector2D array of length 2)
