@@ -4,6 +4,44 @@ import java.util.ArrayList;
 
 public class PolygonCollision {
 	/**
+	 * Checks whether or not two finite lines (Vector2D array of length 2)
+	 * collide, and if they do, returns the point of their collision as a
+	 * Vector2D.
+	 * 
+	 * @param ln1
+	 *            An array containing two points on the first line.
+	 * @param ln2
+	 *            An array containing two points on the second line.
+	 * @return A point of intersection, or null otherwise.
+	 */
+	public static Vector2D linearIntersectionPoint(Vector2D[] ln1, Vector2D[] ln2) {
+		if (ln1.length < 2 || ln2.length < 2)
+			return null; //our parameters do not contain a line
+		
+		/*
+		 * we assume line of format Ax + By = C
+		 * for example, with ln1:
+		 * 	x1 = ln1[0].x, x2 = ln1[1].x
+		 * 	y1 = ln1[0].y, y2 = ln1[1].y
+		 */
+		float A1 = ln1[1].y - ln1[0].y,
+				   B1 = ln1[0].x - ln1[1].x,
+				   C1 = A1*ln1[0].x + B1*ln1[0].y,
+				   A2 = ln2[1].y - ln2[0].y,
+				   B2 = ln2[0].x - ln2[1].x,
+				   C2 = A2*ln2[0].x + B2*ln2[0].y;
+			float delta = A1*B2 - A2*B1;
+			if (delta == 0) 
+				return null; //lines are parallel
+			else {
+				float x = (B2*C1 - B1*C2)/delta;
+				float y = (A1*C2 - A2*C1)/delta;
+				// TODO: return null if x, y are out of range for our finite 
+				// lines
+				return new Vector2D(x, y);
+			}
+	}
+	/**
 	 * Checks whether two polygons collide. Polygons are defined as an array of
 	 * vertices with each vertex (Vector2D) connected to the next one in the
 	 * array.
@@ -18,8 +56,8 @@ public class PolygonCollision {
 	 *         they do not collide at all.
 	 */
 	public static Vector2D[] checkCollide(Vector2D[] polyA, Vector2D[] polyB) {
-		ArrayList<Vector2D> result = new ArrayList<Vector2D>();
-		for (int i = 0; i < polyA.length; i++) {
+		ArrayList<Vector2D> results = new ArrayList<Vector2D>();
+		for (int i = 0; i < polyA.length; i++) 
 			for (int j = 0; j < polyB.length; j++) {
 
 				Vector2D a1 = polyA[i]; // line from vertex poly[i] to poly[i+1]
@@ -27,44 +65,15 @@ public class PolygonCollision {
 				Vector2D b1 = polyB[j]; // line from vertex poly[j] to poly[j+1]
 				Vector2D b2 = polyB[(j == polyB.length - 1 ? 0 : j + 1)];
 
-				float m_a = (a1.y - a2.y) / (a1.x - a2.x);
-				float m_b = (b1.y - b2.y) / (b1.x - b2.x);
-				float b_a = a1.y / a1.x / m_a;
-				float b_b = b1.y / b1.x / m_b;
-				float x = (b_b - b_a) / (m_a - m_b);
-				float y = m_a * x + b_a;
-
-				//if (x,y) is on line a and b
-				if ((a1.x < x && x < a2.x) || (a2.x < x && x < a1.x)) {
-					if ((b1.x < x && x < b2.x) || (b2.x < x && x < b1.x)) {
-						if ((a1.y < y && y < a2.y) || (a2.y < y && y < a1.y)){
-							if ((b1.y < y && y < b2.y) || (b2.y < y && y < b1.y)){
-								result.add(new Vector2D(x, y));
-							}
-						}
-					}
-				}
-				
-				/*
-				 * // calculations try { // we must have a try/catch block for
-				 * potential division // by zero
-				 * 
-				 * float m_a = (a1.y - a2.y) / (a1.x - a2.x); // slope, line a
-				 * float m_b = (b1.y - b2.y) / (b1.x - b2.x); // slope, line b
-				 * 
-				 * // TODO: check for lines where slope is undefined
-				 * 
-				 * float x = (m_a * a1.x - m_b * b1.x + a1.y + a1.x) / (m_a -
-				 * m_b); float y = m_a * (x - a1.x) + a1.y;
-				 * 
-				 * intersections.add(new Vector2D(x, y)); } catch (Exception e)
-				 * { }
-				 */
+				Vector2D pnt = linearIntersectionPoint(
+						new Vector2D[]{a1, a2},
+						new Vector2D[]{b1, b2});
+				if (pnt != null) 
+					results.add(pnt);
 			}
-		}
-		if(result.size() == 0)
+		if (results.size() == 0)
 			return null;
 		else
-			return result.toArray(new Vector2D[result.size()]);
+			return results.toArray(new Vector2D[results.size()]);
 	}
 }
