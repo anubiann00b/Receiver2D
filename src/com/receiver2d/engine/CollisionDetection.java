@@ -2,7 +2,7 @@ package com.receiver2d.engine;
 
 import java.util.ArrayList;
 
-public class PolygonCollision {
+public class CollisionDetection {
 	/**
 	 * Checks whether or not two finite lines (Vector2D array of length 2)
 	 * collide, and if they do, returns the point of their collision as a
@@ -55,7 +55,9 @@ public class PolygonCollision {
 	 * @return The array of points where the two polygons overlap, or null if
 	 *         they do not collide at all.
 	 */
-	public static Vector2D[] checkCollide(Vector2D[] polyA, Vector2D[] polyB) {
+	public static Vector2D[] polygonalIntersectionPoints(Vector2D[] polyA, Vector2D[] polyB) {
+		if (polyA.length < 2 || polyB.length < 2)
+			return null; //we have not been given lines 
 		ArrayList<Vector2D> results = new ArrayList<Vector2D>();
 		for (int i = 0; i < polyA.length; i++) 
 			for (int j = 0; j < polyB.length; j++) {
@@ -75,5 +77,22 @@ public class PolygonCollision {
 			return null;
 		else
 			return results.toArray(new Vector2D[results.size()]);
+	}
+
+	/**
+	 * Returns a true/false value determining whether or not two polygons or
+	 * lines collide.
+	 * 
+	 * @param poly1
+	 *            A Vector2D array containing points of the first polygon/line.
+	 * @param poly2
+	 *            A Vector2D array containing points of the second polygon/line.
+	 * @return "true" if the polygons collide; "false" otherwise
+	 */
+	public boolean checkCollides(Vector2D[] poly1, Vector2D[] poly2) {
+		if (poly1.length > 2 && poly2.length > 2)
+			return linearIntersectionPoint(poly1, poly2) != null;
+			//we do this to save unnecessary calculations for lines
+		return polygonalIntersectionPoints(poly1, poly2) != null;
 	}
 }
