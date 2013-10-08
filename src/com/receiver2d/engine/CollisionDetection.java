@@ -114,6 +114,7 @@ public class CollisionDetection {
 		float[] degs = new float[poly.length];
 		float deg = 0.0f;
 		for (int i=0; i<poly.length; i++) {
+			// TODO: implement wrap-around and fix algorithm
 			float d = (float)Math.atan((poly[i].x - pnt.x)/(poly[i].y - pnt.y));
 			degs[i] = d;
 			deg += i == 0 ? degs[i] : degs[i] - degs[i-1];
