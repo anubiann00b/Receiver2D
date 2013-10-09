@@ -16,9 +16,18 @@ public class TestClass {
 			new Vector2D(0, 0), new Vector2D(0, 10),
 			new Vector2D(10, 10), new Vector2D(10, 0)
 		};
-		Vector2D pnt1 = new Vector2D(5, 9);
+		Vector2D pnt1 = new Vector2D(4, 4);
 		Console.debug("Geometry.pointInPolygon test: ");
 		Console.debug(""+Geometry.pointInPolygon(pnt1, square)); //is false
+		
+		Vector2D[] ln1 = new Vector2D[] {
+			new Vector2D(0, 0), new Vector2D(10, 10)
+		};
+		Vector2D[] ln2 = new Vector2D[] {
+			new Vector2D(0, 5), new Vector2D(1, 5)
+		};
+		Console.debug("Geometry.linearIntersectionPoint test: ");
+		//Console.debug(""+Geometry.linearIntersectionPoint(ln1, ln2).toString());
 	}
 	public static void main(String[] args) {
 		//Receiver2D.StartReciever2D(); // initialize the game
