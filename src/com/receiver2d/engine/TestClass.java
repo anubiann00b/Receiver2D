@@ -7,17 +7,21 @@ import org.lwjgl.util.vector.Vector2f;
  * for initializing Receiver2D. NOT FOR RELEASE
  */
 public class TestClass {
+	/**
+	 * Used to test that each of the methods in Geometry work properly. This
+	 * method will be removed later.
+	 */
+	public static void testGeometryMethods() {
+		Vector2D[] square = new Vector2D[] { //10x10 square
+			new Vector2D(0, 0), new Vector2D(0, 10),
+			new Vector2D(10, 10), new Vector2D(10, 0)
+		};
+		Vector2D pnt1 = new Vector2D(5, 9);
+		Console.debug("Geometry.pointInPolygon test: ");
+		Console.debug(""+Geometry.pointInPolygon(pnt1, square)); //is false
+	}
 	public static void main(String[] args) {
-		Receiver2D.StartReciever2D(); // initialize the game
-		Vector2D[] ln1 = new Vector2D[2];
-			ln1[0] = new Vector2D(0, 5);
-			ln1[1] = new Vector2D(8, -4);
-		Vector2D[] ln2 = new Vector2D[2];
-			ln2[0] = new Vector2D(-2, 2);
-			ln2[1] = new Vector2D(10, 1);
-		Vector2D iPnt = Geometry.linearIntersectionPoint(ln1, ln2);
-		System.out.print("Lines collide: ");
-		System.out.println(iPnt.toString());
-		System.out.println(Vector2f.angle(ln1[0], ln1[1]) * 180/Math.PI);
+		//Receiver2D.StartReciever2D(); // initialize the game
+		testGeometryMethods(); //test all of the Geometry methods
 	}
 }
