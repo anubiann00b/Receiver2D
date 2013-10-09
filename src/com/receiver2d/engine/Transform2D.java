@@ -19,7 +19,7 @@ public abstract class Transform2D {
 	/**
 	 * Take the current rotation of the entity and apply a new rotation to it,
 	 * therefore making its final rotation a sum of the original and the
-	 * specified rotation value, degrees.
+	 * specified rotation value, in degrees.
 	 */
 	public void rotate(float degrees) {
 		rotation = (rotation+degrees) % 360;

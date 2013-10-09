@@ -41,8 +41,6 @@ public class Geometry {
 			else {
 				float x = (B2*C1 - B1*C2)/delta;
 				float y = (A1*C2 - A2*C1)/delta;
-				// TODO: return null if x, y are out of range for our finite 
-				// lines
 				if (
 					((x >= ln1[0].x && x <= ln1[1].x) || (x <= ln1[0].x && x >= ln1[1].x))
 				 && ((x >= ln2[0].x && x <= ln2[1].x) || (x <= ln2[0].x && x >= ln2[1].x))
