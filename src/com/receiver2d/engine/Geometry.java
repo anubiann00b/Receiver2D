@@ -132,15 +132,21 @@ public class Geometry {
 		int j = 0;
 		// compute each of the angles between "pnt" and poly[i], wrapping around
 		for (int i=0; i<poly.length && j<degs.length; i=(i==poly.length-1 ? 0 : i+1), j++) {
+			/* doesn't work:
 			degs[i] = atan(poly[i].x-pnt.x, poly[i].y-pnt.y);
 			if (i > 0)
 				deg += degs[i] - degs[i-1];
 			else deg = degs[i];
-//			Console.debug("Degree "+j+" is currently "+deg+" degrees.");
+			*/
+			degs[j] = atan(poly[i].x-pnt.x, poly[i].y-pnt.y);
+			deg += degs[j];
+			Console.debug("Degree " + j + " is currently " + degs[j]
+					+ " degrees between pnt " + pnt.toString() + " poly point "
+					+ poly[i].toString());
 		}
 //		Console.debug("Iterated through "+j+" points.");
 //		Console.debug("Degree is "+deg);
-		return deg == 0.0f;
+		return (int)(deg % 360.0f) == 0;
 	}
 	public static float atan(float x, float y) {
 		//enables angles from 0->360, instead of Math.tan's 90->(-90)

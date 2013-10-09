@@ -1,7 +1,5 @@
 package com.receiver2d.engine;
 
-import org.lwjgl.util.vector.Vector2f;
-
 /**
  * This class is for testing purposes only, although it currently is responsible
  * for initializing Receiver2D. NOT FOR RELEASE
@@ -16,9 +14,9 @@ public class TestClass {
 			new Vector2D(0, 0), new Vector2D(0, 10),
 			new Vector2D(10, 10), new Vector2D(10, 0)
 		};
-		Vector2D pnt1 = new Vector2D(4, 4);
+		Vector2D pnt1 = new Vector2D(4, 10);
 		Console.debug("Geometry.pointInPolygon test: ");
-		Console.debug(""+Geometry.pointInPolygon(pnt1, square)); //is false
+		Console.debug(""+Geometry.pointInPolygon(pnt1, square)); //is true
 		
 		Vector2D[] ln1 = new Vector2D[] {
 			new Vector2D(0, 0), new Vector2D(10, 10)
