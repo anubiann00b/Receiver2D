@@ -1,4 +1,4 @@
-package com.receiver2d.editor;
+package com.receiver2d.editor.gui;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,8 +13,7 @@ public class FileIO {
 	static JFileChooser jfc = new JFileChooser();
 
 	/**
-	 * Request a single file from the user
-	 * 
+	 * Requests a single file from the user.
 	 * @return the requested file or null if user presses 'cancel'
 	 */
 	public static File requestFile() {
@@ -29,7 +28,7 @@ public class FileIO {
 	}
 
 	/**
-	 * Request multiple files from the user
+	 * Requests multiple files from the user.
 	 * 
 	 * @return the requested files or null if user presses 'cancel'
 	 */

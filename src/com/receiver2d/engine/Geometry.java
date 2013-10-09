@@ -115,8 +115,8 @@ public class Geometry {
 	}
 
 	/**
-	 * Determines if a point is inside a polygon using a winding algorithm.
-	 * 
+	 * Determines if a point is inside a polygon using a winding number
+	 * algorithm.
 	 * @param pnt
 	 *            A point.
 	 * @param poly
@@ -127,27 +127,21 @@ public class Geometry {
 	public static boolean pointInPolygon(Vector2D pnt, Vector2D[] poly) {
 		// TODO: fix this; it doesn't work
 		
-		float[] degs = new float[poly.length+1];
-		float deg = 0.0f; //this is our winding number
-		int j = 0;
-		// compute each of the angles between "pnt" and poly[i], wrapping around
-		for (int i=0; i<poly.length && j<degs.length; i=(i==poly.length-1 ? 0 : i+1), j++) {
-			/* doesn't work:
-			degs[i] = atan(poly[i].x-pnt.x, poly[i].y-pnt.y);
-			if (i > 0)
-				deg += degs[i] - degs[i-1];
-			else deg = degs[i];
-			*/
-			degs[j] = atan(poly[i].x-pnt.x, poly[i].y-pnt.y);
-			deg += degs[j];
-			Console.debug("Degree " + j + " is currently " + degs[j]
-					+ " degrees between pnt " + pnt.toString() + " poly point "
-					+ poly[i].toString());
+		float deg = 0.0f;
+		for (int i=0; i<poly.length; i++) {
+			//we calculate this using law of cosines:
+			//c^2 = a^2 + b^2 - 2ab cos(angle)
+			
 		}
-//		Console.debug("Iterated through "+j+" points.");
-//		Console.debug("Degree is "+deg);
-		return (int)(deg % 360.0f) == 0;
+		return false; //fix
 	}
+	/**
+	 * Differs from the built-in method Math.atan by providing a continuous
+	 * angle ranging from 0 to 2pi, or 0 to 360. 
+	 * @param x An x-coordinate.
+	 * @param y A y-coordinate.
+	 * @return The tangent of the angle formed.
+	 */
 	public static float atan(float x, float y) {
 		//enables angles from 0->360, instead of Math.tan's 90->(-90)
 		float deg = (float)(Math.atan(y/x) * 180/Math.PI);

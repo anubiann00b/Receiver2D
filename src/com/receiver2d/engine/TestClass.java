@@ -10,15 +10,15 @@ public class TestClass {
 		new Vector2D(0, 0), new Vector2D(0, 10), new Vector2D(10, 10),
 				new Vector2D(10, 0) };
 		Vector2D pnt1 = new Vector2D(0, 5);
-		Console.debug("Geometry.pointInPolygon test: "
-				+ Geometry.pointInPolygon(pnt1, square));
-
+//		Console.debug("Geometry.pointInPolygon test: "
+//				+ Geometry.pointInPolygon(pnt1, square));
 		Vector2D[] ln1 = new Vector2D[] { new Vector2D(0, 0),
 				new Vector2D(10, 10) };
 		Vector2D[] ln2 = new Vector2D[] { new Vector2D(2, 2),
 				new Vector2D(2, 4) };
 		Console.debug("Geometry.linearIntersectionPoint test: "
 				+ (Geometry.linearIntersectionPoint(ln1, ln2).toString() != null));
+		Console.log(""+Geometry.atan(0, 1));
 	}
 
 	public static void main(String[] args) {
