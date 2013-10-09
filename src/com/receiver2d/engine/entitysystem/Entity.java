@@ -3,10 +3,9 @@ package com.receiver2d.engine.entitysystem;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import com.receiver2d.engine.Transform2D;
 import com.receiver2d.engine.Vector2D;
 
-public class Entity extends Transform2D {
+public class Entity {
 	private String uuid;
 	public Vector2D position, dimensions;
 	public ArrayList<Component> components;

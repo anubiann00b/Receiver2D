@@ -137,4 +137,8 @@ public class Geometry {
 		}
 		return (int) deg == 0;
 	}
+	
+	public static Vector2D circleCollision(){
+		return null;
+	}
 }

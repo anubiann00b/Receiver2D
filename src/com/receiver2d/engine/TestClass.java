@@ -1,7 +1,5 @@
 package com.receiver2d.engine;
 
-import org.lwjgl.util.vector.Vector2f;
-
 /**
  * This class is for testing purposes only, although it currently is responsible
  * for initializing Receiver2D. NOT FOR RELEASE
@@ -18,6 +16,6 @@ public class TestClass {
 		Vector2D iPnt = Geometry.linearIntersectionPoint(ln1, ln2);
 		System.out.print("Lines collide: ");
 		System.out.println(iPnt.toString());
-		System.out.println(Vector2f.angle(ln1[0], ln1[1]) * 180/Math.PI);
+		System.out.println(Vector2D.angle(ln1[0], ln1[1]) * 180/Math.PI);
 	}
 }

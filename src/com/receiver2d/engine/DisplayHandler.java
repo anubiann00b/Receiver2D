@@ -14,7 +14,7 @@ public class DisplayHandler {
 		} catch (LWJGLException e) {
 			e.printStackTrace();
 		}
-
+		
 		glDisable(GL_DEPTH_TEST); // 2d engine so no depth buffer needed
 
 		// blending, for transparent sprite rendering
@@ -25,6 +25,5 @@ public class DisplayHandler {
 
 		// set viewport to display dimension
 		glViewport(0, 0, Display.getWidth(), Display.getHeight());
-
 	}
 }
