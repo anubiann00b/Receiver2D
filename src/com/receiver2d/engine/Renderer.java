@@ -1,10 +1,9 @@
 package com.receiver2d.engine;
 
 /**
- * In this function we abstract all rendering functions. There should be little
- * to no openGL drawing calls outside this class
+ * In this class we abstract all drawing functions. We should be able to do, for
+ * example, Renderer.drawQuad(Vector2D a, Vector2D b);
  */
-
 public class Renderer {
 
 }
