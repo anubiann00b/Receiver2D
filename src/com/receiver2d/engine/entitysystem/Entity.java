@@ -16,7 +16,7 @@ public class Entity {
 		 * Creates a new Entity (in-game object) and initializes the component
 		 * list for that entity.
 		 */
-		setUuid(UUID.randomUUID().toString());
+		uuid = UUID.randomUUID().toString();
 		components = new ArrayList<Component>();
 	}
 
@@ -44,9 +44,5 @@ public class Entity {
 
 	public String getUuid() {
 		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
 	}
 }

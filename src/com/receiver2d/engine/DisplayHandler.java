@@ -21,7 +21,7 @@ public class DisplayHandler {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		glClearColor(0, 0, 0, 0); // clear screen with transparent black
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // clear screen with transparent black
 
 		// set viewport to display dimension
 		glViewport(0, 0, Display.getWidth(), Display.getHeight());

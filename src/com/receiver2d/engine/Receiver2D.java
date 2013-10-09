@@ -18,21 +18,6 @@ public class Receiver2D {
 	// program values
 
 	// engine values
-	/**
-	 * A ThreadGroup containing all of the currently running threads which the
-	 * game engine uses to perform updates to rendering and the world.
-	 */
-	public static ThreadGroup threadList;
-	/**
-	 * The central rendering component of the game engine. Rendering functions
-	 * are abstracted to this one class.
-	 */
-	public static RenderThread renderer;
-	/**
-	 * The central logic component of the game engine, responsible for tick(),
-	 * logic updates, physics updates, collision updates, and more.
-	 */
-	public static UpdateThread gameUpdater;
 
 	public static final int fps = 60;
 
@@ -52,29 +37,6 @@ public class Receiver2D {
 
 	public static void init() {
 		DisplayHandler.init(); // init openGL stuff
-		/*
-		 * Below, we create new threads. These threads will only run as long as
-		 * the program value "running" is true. As soon as "running" is false,
-		 * all of the threads will exit on their own and Remote2D will
-		 * subsequently quit.
-		 */
-
-		threadList = new ThreadGroup("R2DThreadGroup");
-
-		renderer = new RenderThread();
-		gameUpdater = new UpdateThread();
-
-		// Renderer thread (everything graphics-related)
-		Thread r2dRenderer = new Thread(threadList, new RenderThread(),
-				"R2DRenderer");
-
-		// Game logic updater thread (physics and other game updates)
-		Thread r2dUpdater = new Thread(threadList, new UpdateThread(),
-				"R2DGameUpdater");
-
-		threadList.setMaxPriority(Thread.MAX_PRIORITY);
-		r2dUpdater.start();
-		r2dRenderer.start();
 
 		Console.log(programName + " ended.");
 	}

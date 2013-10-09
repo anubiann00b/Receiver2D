@@ -1,6 +1,7 @@
 package com.receiver2d.engine;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.lwjgl.util.vector.Vector2f;
 
@@ -115,7 +116,8 @@ public class Geometry {
 	}
 
 	/**
-	 * Determines if a point is inside a polygon using a winding algorithm.
+	 * Determines if a point is inside a polygon using a winding algorithm. If
+	 * the point is on the edge of the polygon, the calculation returns false;
 	 * 
 	 * @param pnt
 	 *            A point.
@@ -124,31 +126,15 @@ public class Geometry {
 	 * @return A true/false value depending on whether or not the point is
 	 *         inside the polygon.
 	 */
-	public static boolean pointInPolygon(Vector2D pnt, Vector2D[] poly) {
-		// TODO: fix this; it doesn't work
-		
-		float[] degs = new float[poly.length+1];
-		float deg = 0.0f; //this is our winding number
-		int j = 0;
-		// compute each of the angles between "pnt" and poly[i], wrapping around
-		for (int i=0; i<poly.length && j<degs.length; i=(i==poly.length-1 ? 0 : i+1), j++) {
-			degs[i] = atan(poly[i].x-pnt.x, poly[i].y-pnt.y);
-			if (i > 0)
-				deg += degs[i] - degs[i-1];
-			else deg = degs[i];
-//			Console.debug("Degree "+j+" is currently "+deg+" degrees.");
-		}
-//		Console.debug("Iterated through "+j+" points.");
-//		Console.debug("Degree is "+deg);
-		return deg == 0.0f;
+	public static boolean pointInPolygon(Vector2D pt, Vector2D[] poly) {
+		float wn = 0.0f; // winding number
+		for (int i = 0; i < poly.length; i++)
+			wn += Math.atan(Math.abs(poly[i].y - pt.y)
+					/ Math.abs(poly[i].x - pt.x));
+		return wn % (float) Math.PI == 0;
 	}
-	public static float atan(float x, float y) {
-		//enables angles from 0->360, instead of Math.tan's 90->(-90)
-		float deg = (float)(Math.atan(y/x) * 180/Math.PI);
-		return x < 0 ? 180+deg : (y < 0 ? 360+deg : deg);
-	}
-	
-	public static Vector2D circleCollision(){
-		return null;
-	}
+
+//	public static Vector2D circleCollision() {
+//		return null;
+//	}
 }
