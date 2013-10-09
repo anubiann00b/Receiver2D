@@ -3,10 +3,9 @@ package com.receiver2d.engine.entitysystem;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import com.receiver2d.engine.Transform2D;
 import com.receiver2d.engine.Vector2D;
 
-public class Entity extends Transform2D {
+public class Entity {
 	private String uuid;
 	public Vector2D position, dimensions;
 	public ArrayList<Component> components;
@@ -17,7 +16,7 @@ public class Entity extends Transform2D {
 		 * Creates a new Entity (in-game object) and initializes the component
 		 * list for that entity.
 		 */
-		setUuid(UUID.randomUUID().toString());
+		uuid = UUID.randomUUID().toString();
 		components = new ArrayList<Component>();
 	}
 
@@ -45,9 +44,5 @@ public class Entity extends Transform2D {
 
 	public String getUuid() {
 		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
 	}
 }
