@@ -1,5 +1,7 @@
 package com.receiver2d.engine;
 
+import org.lwjgl.opengl.Display;
+
 /**
  * This is the main class, where the engine can be started and managed.
  */
@@ -34,6 +36,8 @@ public class Receiver2D {
 	 */
 	public static UpdateThread gameUpdater;
 
+	public static final int fps = 60;
+	
 	// engine values
 
 	/**
@@ -42,6 +46,8 @@ public class Receiver2D {
 	public static void StartReciever2D() {
 		startTime = System.nanoTime();
 		Console.log(programName + " started.");
+		
+		DisplayHandler.init();
 
 		/*
 		 * Below, we create new threads. These threads will only run as long as
@@ -64,7 +70,7 @@ public class Receiver2D {
 		threadList.setMaxPriority(Thread.MAX_PRIORITY);
 		r2dUpdater.start();
 		r2dRenderer.start();
-
+		
 		Console.log(programName + " ended.");
 	}
 }
