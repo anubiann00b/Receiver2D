@@ -125,17 +125,27 @@ public class Geometry {
 	 *         inside the polygon.
 	 */
 	public static boolean pointInPolygon(Vector2D pnt, Vector2D[] poly) {
-		// compute each of the angles between "pnt" and poly[i]
-		float[] degs = new float[poly.length];
-		float deg = 0.0f;
-		for (int i = 0; i < poly.length; i++) {
-			// TODO: implement wrap-around and fix algorithm
-			float d = (float) Math.atan((poly[i].x - pnt.x)
-					/ (poly[i].y - pnt.y));
-			degs[i] = d;
-			deg += i == 0 ? degs[i] : degs[i] - degs[i - 1];
+		// TODO: fix this; it doesn't work
+		
+		float[] degs = new float[poly.length+1];
+		float deg = 0.0f; //this is our winding number
+		int j = 0;
+		// compute each of the angles between "pnt" and poly[i], wrapping around
+		for (int i=0; i<poly.length && j<degs.length; i=(i==poly.length-1 ? 0 : i+1), j++) {
+			degs[i] = atan(poly[i].x-pnt.x, poly[i].y-pnt.y);
+			if (i > 0)
+				deg += degs[i] - degs[i-1];
+			else deg = degs[i];
+//			Console.debug("Degree "+j+" is currently "+deg+" degrees.");
 		}
-		return (int) deg == 0;
+//		Console.debug("Iterated through "+j+" points.");
+//		Console.debug("Degree is "+deg);
+		return deg == 0.0f;
+	}
+	public static float atan(float x, float y) {
+		//enables angles from 0->360, instead of Math.tan's 90->(-90)
+		float deg = (float)(Math.atan(y/x) * 180/Math.PI);
+		return x < 0 ? 180+deg : (y < 0 ? 360+deg : deg);
 	}
 	
 	public static Vector2D circleCollision(){

@@ -5,7 +5,7 @@ package com.receiver2d.engine;
  */
 
 public class Console {
-
+	private static long logStart = System.nanoTime();
 	/**
 	 * Logs system information to the console with time and message.
 	 * 
@@ -14,8 +14,8 @@ public class Console {
 	 * @param exception
 	 *            A possible exception to include in the log.
 	 */
-	public static void log(String message, Exception exception) {
-		long nanoDeltaTime = System.nanoTime() - Receiver2D.startTime;
+	public static void log(String message, Exception exception, String type) {
+		long nanoDeltaTime = System.nanoTime() - logStart;
 		int totalSeconds = (int) (nanoDeltaTime / 1000 / 1000 / 1000);
 		int minutes = totalSeconds / 60;
 		int seconds = totalSeconds % 60;
@@ -23,11 +23,15 @@ public class Console {
 		if (exception != null)
 			exception.printStackTrace();
 		System.out.println(minutes + ":" + (seconds < 10 ? "0" : "") + seconds
-				+ " - " + (exception != null ? exception.getClass() + " " : "")
+				+ " - " + (type != null ? type.toUpperCase() + ": " : "")
+				+ (exception != null ? exception.getClass() + " " : "")
 				+ message);
 	}
-
-	public static void log(String message) {
-		log(message, null);
+	// log() overrides
+		public static void log(String message) {
+			log(message, null, null);
+		}
+	public static void debug(String message) {
+		log(message, null, "debug");
 	}
 }
