@@ -4,7 +4,7 @@ package com.receiver2d.engine;
  * The main thread responsible for updating all of the logic in-game. Such logic
  * includes physics, collision detection, and tick()
  */
-public class GameUpdater implements Runnable {
+public class UpdateThread implements Runnable {
 
 	private long lastTickTime = 0L;
 

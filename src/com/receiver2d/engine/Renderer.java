@@ -1,13 +1,9 @@
 package com.receiver2d.engine;
 
 /**
- * Is responsible for everything that is "seen," that is, everything that
- * involves OpenGL draw calls. At run time, this class is instantiated into
- * Remote2D.renderer, and thus is accessible from there.
+ * In this class we abstract all drawing functions. We should be able to do, for
+ * example, Renderer.drawQuad(Vector2D a, Vector2D b);
  */
-public class Renderer implements Runnable {
-	@Override
-	public void run() {
-		
-	}
+public class Renderer {
+
 }

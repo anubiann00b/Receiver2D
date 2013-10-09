@@ -27,12 +27,12 @@ public class Receiver2D {
 	 * The central rendering component of the game engine. Rendering functions
 	 * are abstracted to this one class.
 	 */
-	public static Renderer renderer;
+	public static RenderThread renderer;
 	/**
 	 * The central logic component of the game engine, responsible for tick(),
 	 * logic updates, physics updates, collision updates, and more.
 	 */
-	public static GameUpdater gameUpdater;
+	public static UpdateThread gameUpdater;
 
 	// engine values
 
@@ -51,8 +51,8 @@ public class Receiver2D {
 		 */
 
 		threadList = new ThreadGroup("R2DThreadGroup");
-		renderer = new Renderer();
-		gameUpdater = new GameUpdater();
+		renderer = new RenderThread();
+		gameUpdater = new UpdateThread();
 
 		// Renderer thread (everything graphics-related)
 		Thread r2dRenderer = new Thread(threadList, renderer, "R2DRenderer");

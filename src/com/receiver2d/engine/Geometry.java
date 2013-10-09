@@ -7,46 +7,7 @@ import java.util.ArrayList;
  * space. This comes in handy for all sorts of things pertaining to the game
  * engine, such as AI and physics.
  */
-public class CollisionDetection {
-	/**
-	 * Checks whether or not two finite lines (Vector2D array of length 2)
-	 * collide, and if they do, returns the point of their collision as a
-	 * Vector2D.
-	 * 
-	 * @param ln1
-	 *            An array containing two points on the first line.
-	 * @param ln2
-	 *            An array containing two points on the second line.
-	 * @return A point of intersection, or null otherwise.
-	 */
-	public static Vector2D linearIntersectionPoint(Vector2D[] ln1,
-			Vector2D[] ln2) {
-		if (ln1.length < 2 || ln2.length < 2)
-			return null; // our parameters do not contain a line
-
-		/**
-		 * we assume line of format Ax + By = C for example, with ln1: x1 =
-		 * ln1[0].x, x2 = ln1[1].x y1 = ln1[0].y, y2 = ln1[1].y
-		 */
-		float A1 = ln1[1].y - ln1[0].y;
-		float B1 = ln1[0].x - ln1[1].x;
-		float C1 = A1 * ln1[0].x + B1 * ln1[0].y;
-		float A2 = ln2[1].y - ln2[0].y;
-		float B2 = ln2[0].x - ln2[1].x;
-		float C2 = A2 * ln2[0].x + B2 * ln2[0].y;
-		float delta = A1 * B2 - A2 * B1;
-
-		if (delta == 0)
-			return null; // lines are parallel
-		else {
-			float x = (B2 * C1 - B1 * C2) / delta;
-			float y = (A1 * C2 - A2 * C1) / delta;
-			// TODO: return null if x, y are out of range for our finite
-			// lines
-
-			return new Vector2D(x, y);
-		}
-	}
+public class Geometry {
 
 	/**
 	 * Checks whether two polygons collide. Polygons are defined as an array of
@@ -66,6 +27,7 @@ public class CollisionDetection {
 			Vector2D[] polyB) {
 		if (polyA.length < 2 || polyB.length < 2)
 			return null; // we have not been given lines
+
 		ArrayList<Vector2D> results = new ArrayList<Vector2D>();
 		for (int i = 0; i < polyA.length; i++)
 			for (int j = 0; j < polyB.length; j++) {
@@ -87,6 +49,57 @@ public class CollisionDetection {
 	}
 
 	/**
+	 * Checks whether or not two finite lines (Vector2D array of length 2)
+	 * collide, and if they do, returns the point of their collision as a
+	 * Vector2D.
+	 * 
+	 * @param ln1
+	 *            An array containing two points on the first line.
+	 * @param ln2
+	 *            An array containing two points on the second line.
+	 * @return A point of intersection, or null otherwise.
+	 */
+	public static Vector2D linearIntersectionPoint(Vector2D[] ln1,
+			Vector2D[] ln2) {
+
+		if (ln1.length != 2 || ln2.length != 2)
+			return null; // our parameters do not contain a line
+
+		/**
+		 * we assume line of format Ax + By = C for example, with ln1: x1 =
+		 * ln1[0].x, x2 = ln1[1].x y1 = ln1[0].y, y2 = ln1[1].y
+		 * 
+		 * Source:
+		 * https://community.topcoder.com/tc?module=Static&d1=tutorials&d2
+		 * =geometry2
+		 */
+		float A1 = ln1[1].y - ln1[0].y;
+		float B1 = ln1[0].x - ln1[1].x;
+		float C1 = A1 * ln1[0].x + B1 * ln1[0].y;
+		float A2 = ln2[1].y - ln2[0].y;
+		float B2 = ln2[0].x - ln2[1].x;
+		float C2 = A2 * ln2[0].x + B2 * ln2[0].y;
+		float delta = A1 * B2 - A2 * B1;
+
+		if (delta == 0)
+			return null; // lines are parallel
+		else {
+			float x = (B2 * C1 - B1 * C2) / delta;
+			float y = (A1 * C2 - A2 * C1) / delta;
+
+			// check if x and y are on the lines, since x and y give the
+			// intersection of infinite lines
+			if (inRange(x, ln1[0].x, ln1[1].x)
+					&& inRange(x, ln2[0].x, ln2[1].x)
+					&& inRange(y, ln1[0].y, ln1[1].y)
+					&& inRange(y, ln2[0].y, ln2[1].y)) {
+				return new Vector2D(x, y);
+			} else
+				return null;
+		}
+	}
+
+	/**
 	 * Returns a true/false value determining whether or not two polygons or
 	 * lines collide.
 	 * 
@@ -97,10 +110,12 @@ public class CollisionDetection {
 	 * @return "true" if the polygons collide; "false" otherwise
 	 */
 	public static boolean checkCollides(Vector2D[] poly1, Vector2D[] poly2) {
-		if (poly1.length > 2 && poly2.length > 2)
-			return linearIntersectionPoint(poly1, poly2) != null;
-		// we do this to save unnecessary calculations for lines
-		return polygonalIntersectionPoints(poly1, poly2) != null;
+		//if we have more than 2 points (and thus a polygon, not a line)
+		if (poly1.length > 2 && poly2.length > 2)	
+			return polygonalIntersectionPoints(poly1, poly2) != null;
+		
+		//otherwise
+		return linearIntersectionPoint(poly1, poly2) != null;
 	}
 
 	/**
@@ -125,5 +140,9 @@ public class CollisionDetection {
 			deg += i == 0 ? degs[i] : degs[i] - degs[i - 1];
 		}
 		return (int) deg == 0;
+	}
+
+	static boolean inRange(float val, float side, float side2) {
+		return (side <= val && val <= side2) || (side2 <= val && val <= side);
 	}
 }
