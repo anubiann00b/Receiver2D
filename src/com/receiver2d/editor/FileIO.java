@@ -45,9 +45,9 @@ public class FileIO {
 	}
 
 	/**
-	 * Request a file or folder from the user
+	 * Request a file or folder from the user.
 	 * 
-	 * @return the selected file or folder, or null if user presses 'cancel'
+	 * @return The selected file or folder, or null if user presses 'cancel'
 	 */
 	public static File requestFileOrDir() {
 		setDefaultUI();
@@ -89,7 +89,7 @@ public class FileIO {
 			return false;
 	}
 
-	static void setDefaultUI() {
+	public static void setDefaultUI() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException
