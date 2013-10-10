@@ -6,8 +6,8 @@ package com.receiver2d.editor;
  */
 
 public class Editor {
+	
 	public static void main(String[] args) {
-		//File file = FileIO.requestFile();
 		System.out.println(System.getProperty("os.name"));
 	}
 }

@@ -33,11 +33,10 @@ public class Receiver2D {
 		init();
 		
 		// temp
-		while(!Display.isCloseRequested()){
+		while (!Display.isCloseRequested())
 			Display.update();
-		}
 		
-		Display.destroy();
+		Display.destroy(); //quiz the display
 		Console.log(programName + " ended.");
 	}
 
