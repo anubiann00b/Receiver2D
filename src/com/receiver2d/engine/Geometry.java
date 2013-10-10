@@ -1,7 +1,6 @@
 package com.receiver2d.engine;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.lwjgl.util.vector.Vector2f;
 
@@ -116,8 +115,9 @@ public class Geometry {
 	}
 
 	/**
-	 * Determines if a point is inside a polygon using a winding algorithm. If
-	 * the point is on the edge of the polygon, the calculation returns false;
+	 * Determines if a point is inside a polygon using a ray casting algorithm.
+	 * If the point is on the edge of the polygon, the calculation returns
+	 * false; See http://www.ecse.rpi.edu/~wrf/Research/Short_Notes/pnpoly.html
 	 * 
 	 * @param pnt
 	 *            A point.
@@ -127,14 +127,32 @@ public class Geometry {
 	 *         inside the polygon.
 	 */
 	public static boolean pointInPolygon(Vector2D pt, Vector2D[] poly) {
-		float wn = 0.0f; // winding number
+		boolean c = false;
+
+		// check if the point matches a vertice
 		for (int i = 0; i < poly.length; i++)
-			wn += Math.atan(Math.abs(poly[i].y - pt.y)
-					/ Math.abs(poly[i].x - pt.x));
-		return wn % (float) Math.PI == 0;
+			if (poly[i].equals(pt))
+				return c;
+
+		// pnpoly
+		for (int i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+			if (((poly[i].y > pt.y) != (poly[j].y > pt.y))
+					&& (pt.x < (poly[j].x - poly[i].x) * (pt.y - poly[i].y)
+							/ (poly[j].y - poly[i].y) + poly[i].x))
+				c = !c;
+		}
+		return c;
 	}
 
-//	public static Vector2D circleCollision() {
-//		return null;
-//	}
+	// public static Vector2D circleCollision() {
+	// return null;
+	// }
+
+	static double d(double x) {
+		return Math.toDegrees(x);
+	}
+
+	static double r(double x) {
+		return Math.toRadians(x);
+	}
 }

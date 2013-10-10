@@ -1,5 +1,7 @@
 package com.receiver2d.engine;
 
+import org.lwjgl.opengl.Display;
+
 /**
  * This is the main class, where the engine can be started and managed.
  */
@@ -18,9 +20,7 @@ public class Receiver2D {
 	// program values
 
 	// engine values
-
-	public static final int fps = 60;
-
+	public static final int RENDER_FPS_CAP = 60;
 	// engine values
 
 	/**
@@ -31,7 +31,13 @@ public class Receiver2D {
 		Console.log(programName + " started.");
 
 		init();
-
+		
+		// temp
+		while(!Display.isCloseRequested()){
+			Display.update();
+		}
+		
+		Display.destroy();
 		Console.log(programName + " ended.");
 	}
 

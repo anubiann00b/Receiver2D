@@ -1,16 +1,17 @@
 package com.receiver2d.editor;
 
+import java.awt.FileDialog;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class FileIO {
-	static JFileChooser jfc = new JFileChooser();
+	static FileDialog fd = new FileDialog(new JFrame());
 
 	/**
 	 * Request a single file from the user
@@ -19,13 +20,9 @@ public class FileIO {
 	 */
 	public static File requestFile() {
 		setDefaultUI();
-		jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		jfc.setMultiSelectionEnabled(false); // allow one file
-		int ret = jfc.showOpenDialog(null);
-		if (ret == JFileChooser.APPROVE_OPTION)
-			return jfc.getSelectedFile();
-		else
-			return null;
+		fd.setMultipleMode(false);
+		fd.setVisible(true);
+		return new File(fd.getFile());
 	}
 
 	/**
@@ -35,29 +32,9 @@ public class FileIO {
 	 */
 	public static File[] requestFiles() {
 		setDefaultUI();
-		jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		jfc.setMultiSelectionEnabled(true); // allow multiple files
-		int ret = jfc.showOpenDialog(null);
-		if (ret == JFileChooser.APPROVE_OPTION)
-			return jfc.getSelectedFiles();
-		else
-			return null;
-	}
-
-	/**
-	 * Request a file or folder from the user.
-	 * 
-	 * @return The selected file or folder, or null if user presses 'cancel'
-	 */
-	public static File requestFileOrDir() {
-		setDefaultUI();
-		jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-		jfc.setMultiSelectionEnabled(false);
-		int ret = jfc.showOpenDialog(null);
-		if (ret == JFileChooser.APPROVE_OPTION)
-			return jfc.getSelectedFile();
-		else
-			return null;
+		fd.setMultipleMode(true); // allow multiple files
+		fd.setVisible(true);
+		return fd.getFiles();
 	}
 
 	/**
@@ -70,23 +47,23 @@ public class FileIO {
 	// *********************
 	// INCOMPLETE DO NOT USE
 	// *********************
-	public static boolean requestSaveFile(Object[] contents, String defaultFileName) {
+	public static boolean requestSaveFile(Object[] contents,
+			String defaultFileName) {
 		setDefaultUI();
-		int ret = jfc.showSaveDialog(null);
-		if (ret == JFileChooser.APPROVE_OPTION){
-			try {
-				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(jfc.getSelectedFile()));
-				for(Object o : contents)
-					out.writeObject(o);
-				out.flush();
-				out.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		fd.setMode(FileDialog.SAVE);
+		fd.setFile(defaultFileName);
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(
+					new FileOutputStream(new File(fd.getFile())));
+			for (Object o : contents)
+				out.writeObject(o);
+			out.flush();
+			out.close();
 			return true;
-		}
-		else
+		} catch (IOException e) {
+			e.printStackTrace();
 			return false;
+		}
 	}
 
 	public static void setDefaultUI() {
