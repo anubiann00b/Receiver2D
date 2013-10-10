@@ -7,7 +7,7 @@ import org.lwjgl.util.vector.Vector2f;
  */
 public class Vector2D extends Vector2f {
 	private static final long serialVersionUID = 7240034157894646780L;
-	
+
 	public Vector2D(float x, float y) {
 		super(x, y);
 	}
@@ -29,8 +29,8 @@ public class Vector2D extends Vector2f {
 		return (float) Math.sqrt(Math.pow(vec1.x - vec2.x, 2)
 				+ Math.pow(vec1.y - vec2.y, 2));
 	}
-	
-	public boolean equals (Vector2D comp){
+
+	public boolean equals(Vector2D comp) {
 		return (comp.x == x && comp.y == y);
 	}
 }

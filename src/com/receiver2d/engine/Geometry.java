@@ -143,16 +143,4 @@ public class Geometry {
 		}
 		return c;
 	}
-
-	// public static Vector2D circleCollision() {
-	// return null;
-	// }
-
-	static double d(double x) {
-		return Math.toDegrees(x);
-	}
-
-	static double r(double x) {
-		return Math.toRadians(x);
-	}
 }

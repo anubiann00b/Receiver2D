@@ -1,4 +1,4 @@
-package com.receiver2d.editor;
+package com.receiver2d.editor.gui;
 
 import java.awt.FileDialog;
 import java.io.File;
@@ -14,8 +14,7 @@ public class FileIO {
 	static FileDialog fd = new FileDialog(new JFrame());
 
 	/**
-	 * Request a single file from the user
-	 * 
+	 * Requests a single file from the user.
 	 * @return the requested file or null if user presses 'cancel'
 	 */
 	public static File requestFile() {
@@ -26,7 +25,7 @@ public class FileIO {
 	}
 
 	/**
-	 * Request multiple files from the user
+	 * Requests multiple files from the user.
 	 * 
 	 * @return the requested files or null if user presses 'cancel'
 	 */

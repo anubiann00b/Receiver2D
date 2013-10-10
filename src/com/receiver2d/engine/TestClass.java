@@ -15,7 +15,6 @@ public class TestClass {
 				if (Geometry.pointInPolygon(pnt1, square))
 					Console.debug("Point " + pnt1.toString() + " is in poly");
 			}
-
 		Vector2D[] ln1 = new Vector2D[] { new Vector2D(0, 0),
 				new Vector2D(10, 10) };
 		Vector2D[] ln2 = new Vector2D[] { new Vector2D(2, 2),
