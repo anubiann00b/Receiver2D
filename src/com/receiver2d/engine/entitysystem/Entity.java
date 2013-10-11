@@ -10,16 +10,22 @@ public class Entity {
 	public Vector2D position, dimensions;
 	public ArrayList<Component> components;
 	public Entity parent = null;
+	public String name;
 
 	/**
 	 * Creates a new Entity (in-game object) and initializes the component
 	 * list for that entity.
 	 */
-	public Entity() {
+	public Entity(String entityName) {
 		uuid = UUID.randomUUID().toString();
 		components = new ArrayList<Component>();
+		name = entityName;
 	}
-
+	// Entity() overrides
+		public Entity() {
+			uuid = UUID.randomUUID().toString();
+			components = new ArrayList<Component>();
+		}
 	/**
 	 * Add a component to the list of components for this entity.
 	 * 

@@ -12,7 +12,7 @@ public class World {
 	private String name;
 	
 	/* --- Resources --- */
-	
+	private ArrayList<String> resourcePaths; //saves memory
 	/* --- Resources --- */
 	public World(String name) {
 		this.name = name;

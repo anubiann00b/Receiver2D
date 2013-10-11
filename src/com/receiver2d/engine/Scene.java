@@ -1,6 +1,8 @@
 package com.receiver2d.engine;
 
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.UUID;
 
 import com.receiver2d.engine.entitysystem.*;
 
@@ -9,6 +11,7 @@ import com.receiver2d.engine.entitysystem.*;
  * attributes.
  */
 public class Scene {
+	private String uuid;
 	private String name = "";
 	private EntityList entityList;
 	
@@ -17,6 +20,7 @@ public class Scene {
 	/* --- Scene variables --- */
 	
 	public Scene(String name) {
+		uuid = UUID.randomUUID().toString();
 		this.name = name;
 		
 		//initializers
