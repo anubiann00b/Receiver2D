@@ -1,5 +1,7 @@
 package com.receiver2d.engine;
 
+import org.lwjgl.opengl.Display;
+
 import com.receiver2d.engine.physics.geometry.Geometry;
 import com.receiver2d.engine.physics.geometry.Polygon;
 
@@ -27,7 +29,12 @@ public class TestClass {
 	}
 
 	public static void main(String[] args) {
-		Receiver2D.StartReciever2D(); // initialize the game
-//		testGeometryMethods(); // test all of the Geometry methods
+
+		Receiver2D.start(); // initialize the game
+		while (!Display.isCloseRequested())
+			Display.update();
+
+		Receiver2D.stop();
+		// testGeometryMethods(); // test all of the Geometry methods
 	}
 }

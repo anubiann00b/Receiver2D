@@ -11,7 +11,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class FileIO {
-	static FileDialog fd = new FileDialog(new JFrame());
+	public static FileDialog fd;
 
 	/**
 	 * Requests a single file from the user.
@@ -19,9 +19,10 @@ public class FileIO {
 	 */
 	public static File requestFile() {
 		setDefaultUI();
+		fd = new FileDialog(new JFrame());
 		fd.setMultipleMode(false);
 		fd.setVisible(true);
-		return new File(fd.getFile());
+		return fd.getFiles()[0];
 	}
 
 	/**
