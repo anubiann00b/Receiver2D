@@ -11,16 +11,10 @@ import com.receiver2d.engine.entitysystem.EntityList;
  * attributes.
  */
 public class Scene {
-<<<<<<< HEAD
 	private String uuid;
 	private String name = "";
 	private EntityList entityList;
 	
-=======
-	private String					name	= "";
-	private EntityList				entityList;
-
->>>>>>> a6addbb7667eba966feb50978b72e3c4af3ce8d9
 	/* --- Scene variables --- */
 	private HashMap<String, Object>	values;
 

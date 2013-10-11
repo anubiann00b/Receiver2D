@@ -9,17 +9,17 @@ public class Receiver2D {
 	/**
 	 * The initial time at which the program began running.
 	 */
-	public static long			startTime		= 0;
+	public static long startTime = 0;
 	/**
 	 * Whether or not the program is running. When false, all currently-running
 	 * threads will automatically close.
 	 */
-	public static boolean		running			= true;
+	public static boolean running = true;
 	// program values
 
 	// engine values
-	public static final int		RENDER_FPS_CAP	= 60;
-	public static ThreadManager	threads;
+	public static final int RENDER_FPS_CAP = 60;
+	public static ThreadManager threads;
 
 	// engine values
 
