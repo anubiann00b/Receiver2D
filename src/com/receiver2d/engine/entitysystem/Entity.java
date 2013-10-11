@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import com.receiver2d.engine.Vector2D;
+import com.receiver2d.engine.components.*;
 
 /**
  * Contains information regarding an in-game Entity. Any object instantiated
@@ -30,6 +31,11 @@ public class Entity {
 	 * The name of the entity.
 	 */
 	public String name;
+	
+	/* --- default component support --- */
+	public Rigidbody rigidbody = null;
+	public Collider collider = null;
+	/* --- default component support --- */
 
 	/**
 	 * Creates a new Entity (in-game object) and initializes the component list
@@ -50,6 +56,15 @@ public class Entity {
 	 * @param comp The component to add.
 	 */
 	public void attachComponent(Component comp) {
+		/*
+		 * Because we wish to have built-in support for our default components,
+		 * such as Collider and Rigidbody, we deviate from the standard here in
+		 * a few special cases.
+		 */
+		if (comp instanceof Rigidbody)
+			rigidbody = (Rigidbody)comp;
+		else if (comp instanceof Collider)
+			collider = (Collider)comp;
 		components.add(comp);
 		comp.entity = this;
 	}

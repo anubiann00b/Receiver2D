@@ -122,7 +122,7 @@ public class CollisionDetection {
 	 * If the point is on the edge of the polygon, the calculation returns
 	 * false; See http://www.ecse.rpi.edu/~wrf/Research/Short_Notes/pnpoly.html
 	 * 
-	 * @param pnt
+	 * @param pt
 	 *            A point.
 	 * @param poly
 	 *            An array of points, or a polygon.
