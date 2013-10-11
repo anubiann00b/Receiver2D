@@ -9,7 +9,7 @@ public abstract class Component {
 	/**
 	 * The current entity that the component is attached to.
 	 */
-	public Entity	entity	= null; // the entity this component is attached to
+	public Entity entity = null; // the entity this component is attached to
 
 	/**
 	 * The main tick function that deals with updates to the logical aspect of

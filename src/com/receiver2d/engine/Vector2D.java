@@ -29,7 +29,12 @@ public class Vector2D extends Vector2f {
 		return (float) Math.sqrt(Math.pow(vec1.x - vec2.x, 2)
 				+ Math.pow(vec1.y - vec2.y, 2));
 	}
-
+	
+	/**
+	 * Determines if the instantiated Vector2D equals the given Vector2D.
+	 * @param comp A Vector2D to compare to.
+	 * @return True if the Vector2D is equivalent; false if otherwise.
+	 */
 	public boolean equals(Vector2D comp) {
 		return (comp.x == x && comp.y == y);
 	}

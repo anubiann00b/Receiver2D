@@ -38,11 +38,17 @@ public class Receiver2D {
 		Display.destroy(); // quit the display
 	}
 
+	/**
+	 * Initializes the display handler. Is called automatically by start().
+	 */
 	public static void init() {
 		DisplayHandler.init(); // init openGL stuff
 		threads = new ThreadManager(); // create new thread pool
 	}
 
+	/**
+	 * Shuts down Remote2D.
+	 */
 	public static void stop() {
 		threads.threadPool.shutdown();
 		Display.destroy();

@@ -11,8 +11,7 @@ public class Transform2D extends Component {
 	/**
 	 * The position of the object in two-dimensional space.
 	 */
-	public Vector2D position = new Vector2D(0.0f, 0.0f),
-			dimensions = new Vector2D(0.0f, 0.0f);
+	public Vector2D position = new Vector2D(0.0f, 0.0f); // we do not consider dimensions
 	/**
 	 * We only have one axis of rotation to keep a two-dimensional view, and it
 	 * is perpendicular to the x, y axes.

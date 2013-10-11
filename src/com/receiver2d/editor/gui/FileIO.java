@@ -10,6 +10,10 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+/**
+ * Implements basic input and output functions for the Editor, in managing
+ * local files.
+ */
 public class FileIO {
 	public static FileDialog fd;
 
@@ -66,6 +70,10 @@ public class FileIO {
 		}
 	}
 
+	/**
+	 * Attempts to set the appearance of the file chooser to the default
+	 * requested by the system's theme.
+	 */
 	public static void setDefaultUI() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

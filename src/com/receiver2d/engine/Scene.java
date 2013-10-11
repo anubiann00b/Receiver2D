@@ -1,6 +1,5 @@
 package com.receiver2d.engine;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -19,6 +18,10 @@ public class Scene {
 	private HashMap<String, Object>	values;
 	/* --- Scene variables --- */
 
+	/**
+	 * Loads a scene into memory and gives it a name.
+	 * @param name The name of the scene.
+	 */
 	public Scene(String name) {
 		uuid = UUID.randomUUID().toString();
 		this.name = name;

@@ -3,7 +3,6 @@ package com.receiver2d.engine;
 /**
  * This class is used for logging and debug information
  */
-
 public class Console {
 	private static long logStart = System.nanoTime();
 	/**

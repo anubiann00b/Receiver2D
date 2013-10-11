@@ -6,6 +6,9 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
+/**
+ * Handles the appearance of things on-screen and draws them.
+ */
 public class DisplayHandler {
 	public static void init() {
 		try { // create display and set res
