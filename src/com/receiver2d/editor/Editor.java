@@ -5,7 +5,7 @@ import com.receiver2d.editor.gui.FileIO;
 
 /**
  * This is the editor. It should not be imported into projects with the engine,
- * but should be used as a standalone map editor.
+ * but should be used as a stand-alone map editor.
  */
 
 public class Editor {

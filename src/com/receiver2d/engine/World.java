@@ -8,9 +8,20 @@ import java.util.ArrayList;
  * transitioning to new worlds).
  */
 public class World {
-	public ArrayList<Scene>	scenes;
-	public String			name;
+	/**
+	 * A list of scenes contained by the current world.
+	 */
+	public ArrayList<Scene> scenes;
+	private String name;
+	
+	/* --- Resources --- */
+	private ArrayList<String> resourcePaths; //saves memory
+	/* --- Resources --- */
 
+	/**
+	 * Loads a world into memory and gives it a particular name.
+	 * @param name The name of the world.
+	 */
 	public World(String name) {
 		this.name = name;
 	}
