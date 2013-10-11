@@ -31,6 +31,15 @@ public class TestClass {
 
 	public static void main(String[] args) {
 		Receiver2D.start(); // initialize the game
+		
+		Receiver2D.threads.queueTask(new Runnable() {
+			@Override
+			public void run() {
+				for(int i = 0; i < 1000; i++)
+					System.out.println(Math.cos(i));
+			}
+		});
+		
 		while (!Display.isCloseRequested())
 			Display.update();
 

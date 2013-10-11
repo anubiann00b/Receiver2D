@@ -16,6 +16,6 @@ public abstract class Component {
 	 * the component. This is called by the engine's central tick manager.
 	 */
 	public void tick() {
-		// the component is able to act on a specific entity according to
+
 	}
 }

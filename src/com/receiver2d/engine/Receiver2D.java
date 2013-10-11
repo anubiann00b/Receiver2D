@@ -10,11 +10,6 @@ public class Receiver2D {
 	 * The initial time at which the program began running.
 	 */
 	public static long			startTime		= 0;
-	/**
-	 * Whether or not the program is running. When false, all currently-running
-	 * threads will automatically close.
-	 */
-	public static boolean		running			= true;
 	// program values
 
 	// engine values
@@ -40,7 +35,7 @@ public class Receiver2D {
 	}
 
 	public static void init() {
-		DisplayHandler.init(); // init openGL stuff
+		DisplayHandler.init("Test Game", false, 1024, 768); // init openGL stuff
 		threads = new ThreadManager(); // create new thread pool
 	}
 
