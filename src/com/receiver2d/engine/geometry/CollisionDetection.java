@@ -1,4 +1,4 @@
-package com.receiver2d.engine.physics.geometry;
+package com.receiver2d.engine.geometry;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import com.receiver2d.engine.Vector2D;
  * space. This comes in handy for all sorts of things pertaining to the game
  * engine, such as AI and physics.
  */
-public class Geometry {
+public class CollisionDetection {
 	/**
 	 * Checks whether or not two finite lines (Vector2f array of length 2)
 	 * collide, and if they do, returns the point of their collision as a

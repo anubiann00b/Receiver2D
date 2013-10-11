@@ -29,7 +29,17 @@ public class Receiver2D {
 	public static void start() {
 		startTime = System.nanoTime();
 		Console.log("Receiver2D started.");
+		init();
 
+		// temp
+		while (!Display.isCloseRequested())
+			Display.update();
+
+		Display.destroy(); // quiz the display
+		Console.log("Receiver2D ended.");
+	}
+
+	public static void init() {
 		DisplayHandler.init(); // init openGL stuff
 		threads = new ThreadManager(); // create new thread pool
 	}
