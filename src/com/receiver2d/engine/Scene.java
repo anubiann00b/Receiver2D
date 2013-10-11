@@ -17,7 +17,6 @@ public class Scene {
 	
 	/* --- Scene variables --- */
 	private HashMap<String, Object>	values;
-
 	/* --- Scene variables --- */
 
 	public Scene(String name) {
@@ -30,8 +29,7 @@ public class Scene {
 
 	/**
 	 * Gets the current name of the scene.
-	 * 
-	 * @return the name of the scene
+	 * @return The name of the scene.
 	 */
 	public String getName() {
 		return name;
@@ -40,8 +38,7 @@ public class Scene {
 	/**
 	 * Sets the current entity list of the scene to whatever is provided.
 	 * 
-	 * @param elist
-	 *            An EntityList, containing entities.
+	 * @param elist An EntityList, containing entities.
 	 */
 	public void setEntityList(EntityList entityList) {
 		this.entityList = entityList;

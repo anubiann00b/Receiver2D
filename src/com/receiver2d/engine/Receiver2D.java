@@ -35,8 +35,7 @@ public class Receiver2D {
 		while (!Display.isCloseRequested())
 			Display.update();
 
-		Display.destroy(); // quiz the display
-		Console.log("Receiver2D ended.");
+		Display.destroy(); // quit the display
 	}
 
 	public static void init() {
