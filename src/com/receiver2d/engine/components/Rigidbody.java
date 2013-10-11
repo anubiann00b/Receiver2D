@@ -7,13 +7,5 @@ import com.receiver2d.engine.entitysystem.Component;
  * it.
  */
 public class Rigidbody extends Component {
-<<<<<<< HEAD
 
-	@Override
-	public void tick() {
-		
-	}
-=======
-	
->>>>>>> b03f834879fb360241361273c485ac75cf3a06da
 }
