@@ -1,5 +1,7 @@
 package com.receiver2d.engine;
 
+import org.lwjgl.opengl.Display;
+
 import com.receiver2d.engine.geometry.CollisionDetection;
 import com.receiver2d.engine.geometry.Polygon;
 
@@ -23,11 +25,16 @@ public class TestClass {
 		Polygon ln2 = new Polygon(new Vector2D[] { new Vector2D(2, 2),
 				new Vector2D(2, 4) });
 		Console.debug("ln1 intersects with ln2: "
-				+ (CollisionDetection.linearIntersectionPoint(ln1, ln2).toString() != null));
+				+ (CollisionDetection.linearIntersectionPoint(ln1, ln2)
+						.toString() != null));
 	}
 
 	public static void main(String[] args) {
-		Receiver2D.StartReciever2D(); // initialize the game
-		testGeometryMethods(); // test all of the Geometry methods
+		Receiver2D.start(); // initialize the game
+		while (!Display.isCloseRequested())
+			Display.update();
+
+		Receiver2D.stop();
+		// testGeometryMethods(); // test all of the Geometry methods
 	}
 }

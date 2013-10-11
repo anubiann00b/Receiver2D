@@ -15,6 +15,8 @@ public class DisplayHandler {
 			e.printStackTrace();
 		}
 		
+		Display.setResizable(true);
+		
 		glDisable(GL_DEPTH_TEST); // 2d engine so no depth buffer needed
 
 		// blending, for transparent sprite rendering

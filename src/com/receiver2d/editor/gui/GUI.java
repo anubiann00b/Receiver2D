@@ -1,13 +1,11 @@
 package com.receiver2d.editor.gui;
 
+import com.receiver2d.engine.Vector2D;
+
 public class GUI {
-	public class Position {
-		public float x = 0.0f;
-		public float y = 0.0f;
-	}
-	public Position position;
-	public GUI() {
-		position = new Position();
-		
+	public Vector2D	position;
+
+	public GUI(float x, float y) {
+		position = new Vector2D(x, y);
 	}
 }

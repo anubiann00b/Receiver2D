@@ -36,7 +36,7 @@ public class CollisionDetection {
 		float B2 = ln2.getPt(0).x - ln2.getPt(1).x;
 		float C2 = A2 * ln2.getPt(0).x + B2 * ln2.getPt(0).y;
 		float delta = A1 * B2 - A2 * B1;
-		
+
 		if (delta == 0)
 			return null; // lines are parallel
 		else {
@@ -80,9 +80,11 @@ public class CollisionDetection {
 		for (int i = 0; i < polyA.length; i++)
 			for (int j = 0; j < polyB.length; j++) {
 
-				Vector2D a1 = polyA.getPt(i); // line from vertex poly[i] to poly[i+1]
+				Vector2D a1 = polyA.getPt(i); // line from vertex poly[i] to
+												// poly[i+1]
 				Vector2D a2 = polyA.getPt(i == polyA.length - 1 ? 0 : i + 1);
-				Vector2D b1 = polyB.getPt(j); // line from vertex poly[j] to poly[j+1]
+				Vector2D b1 = polyB.getPt(j); // line from vertex poly[j] to
+												// poly[j+1]
 				Vector2D b2 = polyB.getPt(j == polyB.length - 1 ? 0 : j + 1);
 
 				Vector2D pnt = linearIntersectionPoint(new Polygon(
@@ -138,10 +140,28 @@ public class CollisionDetection {
 		// pnpoly
 		for (int i = 0, j = poly.length - 1; i < poly.length; j = i++) {
 			if (((poly.getPt(i).y > pt.y) != (poly.getPt(j).y > pt.y))
-					&& (pt.x < (poly.getPt(j).x - poly.getPt(i).x) * (pt.y - poly.getPt(i).y)
-							/ (poly.getPt(j).y - poly.getPt(i).y) + poly.getPt(i).x))
+					&& (pt.x < (poly.getPt(j).x - poly.getPt(i).x)
+							* (pt.y - poly.getPt(i).y)
+							/ (poly.getPt(j).y - poly.getPt(i).y)
+							+ poly.getPt(i).x))
 				c = !c;
 		}
 		return c;
+	}
+
+	// public static Vector2D circleCollide(Circle c1, Circle c2) {
+	public static boolean circleCollide(Circle c1, Circle c2) {
+		double d = Math.sqrt(Math.pow(c1.center.y - c2.center.y, 2)
+				+ Math.pow(c1.center.x - c2.center.x, 2));
+		double r = c1.radius + c2.radius;
+
+		// Vector2D estimate;
+		// if (d < r) { // collision
+		// estimate.x = (c1.center.x - c2.center.x)
+		// }
+		//
+		// return estimate;
+
+		return d <= r;
 	}
 }
