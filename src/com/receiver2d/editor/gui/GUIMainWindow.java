@@ -3,14 +3,19 @@ package com.receiver2d.editor.gui;
 /**
  * The main window in the Editor that manages all other GUI elements.
  */
-//TODO: break away from ENGINE DEPENDENCY
+// TODO: break away from ENGINE DEPENDENCY
 public class GUIMainWindow extends GUIWindow {
+
 	/**
-	 * Creates the main window.
-	 * @param x The x-coordinate of the window.
-	 * @param y The y-coordinate of the window.
+	 * Instantiates a new GUIMainWindow.
+	 * 
+	 * @param x
+	 * @param y
+	 * @param d_x
+	 * @param d_y
 	 */
-	public GUIMainWindow(float x, float y, float width, float height) {
-		super(x, y, width, height);
+	public GUIMainWindow(float x, float y, float d_x, float d_y) {
+		super(x, y, d_x, d_y);
+		// TODO Auto-generated constructor stub
 	}
 }
