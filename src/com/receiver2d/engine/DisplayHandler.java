@@ -67,8 +67,6 @@ public class DisplayHandler {
 	public static void updateFullscreen(boolean fullscreen) {
 		try {
 			Display.setFullscreen(fullscreen);
-		} catch (Exception e) {
-			
-		}
+		} catch (Exception e) { }
 	}
 }
