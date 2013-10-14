@@ -39,9 +39,6 @@ public class TestClass {
 					System.out.println(Math.cos(i));
 			}
 		});
-		
-		while (!Display.isCloseRequested())
-			Display.update();
 
 		Receiver2D.stop();
 		// testGeometryMethods(); // test all of the Geometry methods

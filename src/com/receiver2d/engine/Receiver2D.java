@@ -42,7 +42,7 @@ public class Receiver2D {
 	 * Initializes the display handler. Is called automatically by start().
 	 */
 	public static void init() {
-		DisplayHandler.init("Test Game", false, 1024, 768); // init openGL stuff
+		DisplayHandler.init("Test Game", false, 1600, 900); // init openGL stuff
 		threads = new ThreadManager(); // create new thread pool
 	}
 
