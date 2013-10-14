@@ -14,9 +14,10 @@ public class Circle {
 	 * The radius of the circle.
 	 */
 	public float radius;
-	
+
 	/**
 	 * Creates a new circle.
+	 * 
 	 * @param center
 	 * @param radius
 	 */
