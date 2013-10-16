@@ -9,7 +9,8 @@ Receiver2D File Specifications
 		<values>
 			<int name="Default Enemy Strength">3000</int>
 			<string name="Player Name">Mario</string>
-			<double name="World Size">345.23</double>
+			<int name="worldwidth">1000</int>
+			<int name="worldheight">1000</int>
 		</values>
 		<resources>
 			<resource path="example-project/img/file.png" type="image/png" uuid="13408u34uhdas" />
