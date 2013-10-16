@@ -8,6 +8,24 @@ import org.lwjgl.util.vector.Vector2f;
 public class Vector2D extends Vector2f {
 	private static final long serialVersionUID = 7240034157894646780L;
 
+	/**
+	 * A specific type of Vector2D with a magnitude of 0.
+	 */
+	public static class zero extends Vector2D {
+		public zero() {
+			super(0.0f, 0.0f);
+		}
+	}
+	
+	/**
+	 * A specific type of Vector2D with each component having a magnitude of 1.
+	 */
+	public static class one extends Vector2D {
+		public one() {
+			super(1.0f, 1.0f);
+		}
+	}
+	
 	public Vector2D(float x, float y) {
 		super(x, y);
 	}

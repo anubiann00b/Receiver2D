@@ -21,16 +21,32 @@ public class Console {
 
 		if (exception != null)
 			exception.printStackTrace();
-		System.out.println(minutes + ":" + (seconds < 10 ? "0" : "") + seconds
-				+ " - " + (type != null ? type.toUpperCase() + ": " : "")
-				+ (exception != null ? exception.getClass() + " " : "")
-				+ message);
+		System.out.println(minutes
+				+ ":"
+				+ (seconds < 10 ? "0" : "")
+				+ seconds
+				+ " - "
+				+ (type != null ? type.toUpperCase() + ": " : "")
+				+ (exception != null ? exception.getClass() + " - "
+						+ exception.getMessage() + " - " : "") + message);
 	}
 	// log() overrides
 		public static void log(String message) {
 			log(message, null, null);
 		}
+	/**
+	 * Logs a debug message to the console.
+	 * @param message A description of events.
+	 */
 	public static void debug(String message) {
 		log(message, null, "debug");
+	}
+	/**
+	 * Logs an error to the console.
+	 * @param message A custom message to include.
+	 * @param exc The exception to log to the console.
+	 */
+	public static void logError(String message, Exception exc) {
+		log(message, exc, "error");
 	}
 }

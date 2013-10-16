@@ -11,6 +11,5 @@ public class Editor {
 		System.out.println(System.getProperty("os.name") + " "
 				+ System.getProperty("os.arch") + " "
 				+ System.getProperty("os.version"));
-		System.exit(0);
 	}
 }

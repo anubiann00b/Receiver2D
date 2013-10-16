@@ -41,7 +41,7 @@ public class Scene {
 	/**
 	 * Sets the current entity list of the scene to whatever is provided.
 	 * 
-	 * @param elist An EntityList, containing entities.
+	 * @param entityList An EntityList, containing entities.
 	 */
 	public void setEntityList(EntityList entityList) {
 		this.entityList = entityList;

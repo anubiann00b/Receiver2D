@@ -22,8 +22,9 @@ public class CollisionDetection {
 	 * @return A point of intersection, or null otherwise.
 	 */
 	public static Vector2D linearIntersectionPoint(Polygon ln1, Polygon ln2) {
-		if (ln1.length < 2 || ln2.length < 2)
-			return null; // our parameters do not contain a line
+		if (ln1.length < 2 || ln2.length < 2) return null; // our parameters do
+															// not contain a
+															// line
 
 		/*
 		 * we assume line of format Ax + By = C for example, with ln1: x1 =
@@ -37,8 +38,7 @@ public class CollisionDetection {
 		float C2 = A2 * ln2.getPt(0).x + B2 * ln2.getPt(0).y;
 		float delta = A1 * B2 - A2 * B1;
 
-		if (delta == 0)
-			return null; // lines are parallel
+		if (delta == 0) return null; // lines are parallel
 		else {
 			float x = (B2 * C1 - B1 * C2) / delta;
 			float y = (A1 * C2 - A2 * C1) / delta;
@@ -51,10 +51,9 @@ public class CollisionDetection {
 					&& ((y >= ln1.getPt(0).y && y <= ln1.getPt(1).y) || (y <= ln1
 							.getPt(0).y && y >= ln1.getPt(1).y))
 					&& ((y >= ln2.getPt(0).y && y <= ln2.getPt(1).y) || (y <= ln2
-							.getPt(0).y && y >= ln2.getPt(1).y)))
-				return new Vector2D(x, y);
-			else
-				return null;
+							.getPt(0).y && y >= ln2.getPt(1).y))) return new Vector2D(
+					x, y);
+			else return null;
 		}
 	}
 
@@ -74,11 +73,12 @@ public class CollisionDetection {
 	 */
 	public static Vector2D[] polygonalIntersectionPoints(Polygon polyA,
 			Polygon polyB) {
-		if (polyA.length < 2 || polyB.length < 2)
-			return null; // we have not been given lines
+		if (polyA.length < 2 || polyB.length < 2) return null; // we have not
+																// been given
+																// lines
 		ArrayList<Vector2D> results = new ArrayList<Vector2D>();
-		for (int i = 0; i < polyA.length; i++)
-			for (int j = 0; j < polyB.length; j++) {
+		for (int i = 0;i < polyA.length;i++)
+			for (int j = 0;j < polyB.length;j++) {
 
 				Vector2D a1 = polyA.getPt(i); // line from vertex poly[i] to
 												// poly[i+1]
@@ -90,13 +90,10 @@ public class CollisionDetection {
 				Vector2D pnt = linearIntersectionPoint(new Polygon(
 						new Vector2D[] { a1, a2 }), new Polygon(new Vector2D[] {
 						b1, b2 }));
-				if (pnt != null)
-					results.add(pnt);
+				if (pnt != null) results.add(pnt);
 			}
-		if (results.size() == 0)
-			return null;
-		else
-			return results.toArray(new Vector2D[results.size()]);
+		if (results.size() == 0) return null;
+		else return results.toArray(new Vector2D[results.size()]);
 	}
 
 	/**
@@ -111,8 +108,8 @@ public class CollisionDetection {
 	 */
 	public static boolean checkCollides(Polygon poly1, Polygon poly2) {
 		if (poly1.length > 2 && poly2.length > 2)
-			// we do this to save unnecessary calculations for lines
-			return linearIntersectionPoint(poly1, poly2) != null;
+		// we do this to save unnecessary calculations for lines
+		return linearIntersectionPoint(poly1, poly2) != null;
 
 		return polygonalIntersectionPoints(poly1, poly2) != null;
 	}
@@ -122,7 +119,7 @@ public class CollisionDetection {
 	 * If the point is on the edge of the polygon, the calculation returns
 	 * false; See http://www.ecse.rpi.edu/~wrf/Research/Short_Notes/pnpoly.html
 	 * 
-	 * @param pnt
+	 * @param pt
 	 *            A point.
 	 * @param poly
 	 *            An array of points, or a polygon.
@@ -132,19 +129,17 @@ public class CollisionDetection {
 	public static boolean pointInPolygon(Vector2D pt, Polygon poly) {
 		boolean c = false;
 
-		// check if the point matches a vertice
-		for (int i = 0; i < poly.length; i++)
-			if (poly.getPt(i).equals(pt))
-				return c;
+		// check if the point matches a vertex
+		for (int i = 0;i < poly.length;i++)
+			if (poly.getPt(i).equals(pt)) return c;
 
 		// pnpoly
-		for (int i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+		for (int i = 0,j = poly.length - 1;i < poly.length;j = i++) {
 			if (((poly.getPt(i).y > pt.y) != (poly.getPt(j).y > pt.y))
 					&& (pt.x < (poly.getPt(j).x - poly.getPt(i).x)
 							* (pt.y - poly.getPt(i).y)
 							/ (poly.getPt(j).y - poly.getPt(i).y)
-							+ poly.getPt(i).x))
-				c = !c;
+							+ poly.getPt(i).x)) c = !c;
 		}
 		return c;
 	}
