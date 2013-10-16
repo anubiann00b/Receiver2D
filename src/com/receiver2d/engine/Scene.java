@@ -9,6 +9,7 @@ import com.receiver2d.engine.entitysystem.EntityList;
  * A particular scene within a world, containing a list of entities and other
  * attributes.
  */
+@SuppressWarnings("unused")
 public class Scene {
 	private String uuid;
 	private String name = "";

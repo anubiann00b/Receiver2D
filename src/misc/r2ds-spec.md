@@ -2,6 +2,8 @@ Receiver2D File Specifications
 ==============================
 
 ####.r2ds files
+Mimetype: `application/vnd.r2dscene+xml`
+
 ```XML
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <world>
@@ -9,8 +11,8 @@ Receiver2D File Specifications
 		<values>
 			<int name="Default Enemy Strength">3000</int>
 			<string name="Player Name">Mario</string>
-			<int name="worldwidth">1000</int>
-			<int name="worldheight">1000</int>
+			<int name="World Width">1000</int>
+			<int name="World Height">1000</int>
 		</values>
 		<resources>
 			<resource path="example-project/img/file.png" type="image/png" uuid="13408u34uhdas" />
