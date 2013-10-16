@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import com.receiver2d.engine.Vector2D;
-import com.receiver2d.engine.entitysystem.components.*;
 
 /**
  * Contains information regarding an in-game Entity. Any object instantiated
  * in the game is, in its most basic form, an entity with certain capabilities.
- * @author princeton
- *
  */
 public class Entity {
 	private String uuid;

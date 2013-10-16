@@ -55,12 +55,14 @@ public class DisplayHandler {
 		
 		//set the color of the quad
 		glColor3f(0.05f, 0.05f, 1.0f);
+		/*
 		glBegin(GL_QUADS);
 			glVertex2f(100, 100);
 			glVertex2f(100+200, 100);
 			glVertex2f(100+200, 100+200);
 			glVertex2f(100, 100+200);
 		glEnd();
+		*/
 		
 		return !Display.isCloseRequested();
 	}
