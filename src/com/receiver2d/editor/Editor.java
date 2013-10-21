@@ -7,7 +7,7 @@ package com.receiver2d.editor;
 
 public class Editor {
 
-	public static void main(String[] args) {
+	public static void main (String[] args) {
 		System.out.println(System.getProperty("os.name") + " "
 				+ System.getProperty("os.arch") + " "
 				+ System.getProperty("os.version"));

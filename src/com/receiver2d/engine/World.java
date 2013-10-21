@@ -19,11 +19,10 @@ public class World {
 
 	/**
 	 * Loads a world into memory and gives it a particular name.
-	 * 
-	 * @param name
-	 *            The name of the world.
+	 *
+	 * @param name The name of the world.
 	 */
-	public World(String name) {
+	public World (String name) {
 		this.name = name;
 	}
 }

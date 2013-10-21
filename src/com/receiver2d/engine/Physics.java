@@ -5,5 +5,5 @@ package com.receiver2d.engine;
  * entities that have a Rigidbody component attached.
  */
 public class Physics {
-	
+
 }
