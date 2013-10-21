@@ -18,7 +18,7 @@ public class Console {
 		int totalSeconds = (int) (nanoDeltaTime / 1000 / 1000 / 1000);
 		int minutes = totalSeconds / 60;
 		int seconds = totalSeconds % 60;
-
+		
 		if (exception != null)
 			exception.printStackTrace();
 		System.out.println(minutes

@@ -4,21 +4,19 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import com.receiver2d.engine.Vector2D;
-import com.receiver2d.engine.entitysystem.components.*;
 
 /**
- * Contains information regarding an in-game Entity. Any object instantiated
- * in the game is, in its most basic form, an entity with certain capabilities.
+ * Contains information regarding an in-game Entity. Any object instantiated in the game is, in its most basic form, an entity with certain capabilities.
+ * 
  * @author princeton
- *
+ * 
  */
 public class Entity {
 	private String uuid;
 	/**
 	 * The position of the object in two-dimensional space.
 	 */
-	public Vector2D position; // we do not consider dimensions, which come from
-								// colliders/polygons
+	public Vector2D position; // we do not consider dimensions, which come from colliders/polygons
 	/**
 	 * The components attached to the entity.
 	 */
@@ -33,22 +31,25 @@ public class Entity {
 	public String name;
 
 	/**
-	 * Creates a new Entity (in-game object) and initializes the component list
-	 * for that entity.
+	 * Creates a new Entity (in-game object) and initializes the component list for that entity.
 	 */
 	public Entity(String entityName) {
 		uuid = UUID.randomUUID().toString();
 		components = new ArrayList<Component>();
 		name = entityName;
 	}
+
 	// Entity() overrides
-		public Entity() {
-			uuid = UUID.randomUUID().toString();
-			components = new ArrayList<Component>();
-		}
+	public Entity() {
+		uuid = UUID.randomUUID().toString();
+		components = new ArrayList<Component>();
+	}
+
 	/**
 	 * Add a component to the list of components for this entity.
-	 * @param comp The component to add.
+	 * 
+	 * @param comp
+	 *            The component to add.
 	 */
 	public void attachComponent(Component comp) {
 		components.add(comp);
@@ -57,6 +58,7 @@ public class Entity {
 
 	/**
 	 * Creates an entity whose parent is the calling instance.
+	 * 
 	 * @return The child entity.
 	 */
 	public Entity createChildEntity() {
@@ -67,6 +69,7 @@ public class Entity {
 
 	/**
 	 * Returns a unique ID for this entity.
+	 * 
 	 * @return A string containing the UUID.
 	 */
 	public String getUuid() {

@@ -7,15 +7,14 @@ import java.util.concurrent.Executors;
  * Is responsible for threading all of the game's processes.
  */
 public class ThreadManager {
-	public ExecutorService	threadPool;
+	public ExecutorService threadPool;
+	public static final int numThreads = Runtime.getRuntime().availableProcessors() * 4;
 
 	/**
 	 * Creates a new ThreadManager, and configures the threadPool.
 	 */
 	public ThreadManager() {
-		// using cached thread pools because we will be queueing small,
-		// inexpensive operations
-		threadPool = Executors.newCachedThreadPool();
+		threadPool = Executors.newFixedThreadPool(numThreads);
 	}
 
 	/**

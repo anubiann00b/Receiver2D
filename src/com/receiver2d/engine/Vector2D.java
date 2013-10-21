@@ -5,6 +5,7 @@ import org.lwjgl.util.vector.Vector2f;
 /**
  * Contains point data (x, y). Used for positions, velocity, forces, etc.
  */
+@SuppressWarnings("serial")
 public class Vector2D extends Vector2f {
 	private static final long serialVersionUID = 7240034157894646780L;
 
@@ -16,7 +17,7 @@ public class Vector2D extends Vector2f {
 			super(0.0f, 0.0f);
 		}
 	}
-	
+
 	/**
 	 * A specific type of Vector2D with each component having a magnitude of 1.
 	 */
@@ -25,7 +26,7 @@ public class Vector2D extends Vector2f {
 			super(1.0f, 1.0f);
 		}
 	}
-	
+
 	public Vector2D(float x, float y) {
 		super(x, y);
 	}
@@ -47,10 +48,12 @@ public class Vector2D extends Vector2f {
 		return (float) Math.sqrt(Math.pow(vec1.x - vec2.x, 2)
 				+ Math.pow(vec1.y - vec2.y, 2));
 	}
-	
+
 	/**
 	 * Determines if the instantiated Vector2D equals the given Vector2D.
-	 * @param comp A Vector2D to compare to.
+	 * 
+	 * @param comp
+	 *            A Vector2D to compare to.
 	 * @return True if the Vector2D is equivalent; false if otherwise.
 	 */
 	public boolean equals(Vector2D comp) {
