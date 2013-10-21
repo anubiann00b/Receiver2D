@@ -20,7 +20,7 @@ public class Receiver2D {
 	// engine values
 	public static final int RENDER_FPS_CAP = 60;
 	public static ThreadManager threads;
-
+    public static Thread loop;
 	// engine values
 
 	/**
@@ -29,29 +29,35 @@ public class Receiver2D {
 	public static void start() {
 		startTime = System.nanoTime();
 		Console.log("Receiver2D started.");
-		init();
 
-		// temp
-		while (!Display.isCloseRequested())
-			Display.update();
+        DisplayHandler.init("Test Game", false, 800, 600); // init openGL stuff
+        threads = new ThreadManager(); // create new thread pool
 
-		Display.destroy(); // quit the display
+        loop = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                gameLoop();
+            }
+        });
+        loop.start();
 	}
 
-	/**
-	 * Initializes the display handler. Is called automatically by start().
-	 */
-	public static void init() {
-		DisplayHandler.init("Test Game", false, 1600, 900); // init openGL stuff
-		threads = new ThreadManager(); // create new thread pool
-	}
+    public static void gameLoop(){
+        System.out.println("looping");
+    }
 
 	/**
 	 * Shuts down Remote2D.
 	 */
 	public static void stop() {
-		threads.threadPool.shutdown();
+        try {
+            loop.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        threads.threadPool.shutdown();
 		Display.destroy();
 		Console.log("Receiver2D ended.");
+        System.exit(0);
 	}
 }

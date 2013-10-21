@@ -12,20 +12,12 @@ public class Vector2D extends Vector2f {
 	/**
 	 * A specific type of Vector2D with a magnitude of 0.
 	 */
-	public static class zero extends Vector2D {
-		public zero() {
-			super(0.0f, 0.0f);
-		}
-	}
+    public final static Vector2D ZERO = new Vector2D(0.0f, 0.0f);
 
 	/**
 	 * A specific type of Vector2D with each component having a magnitude of 1.
 	 */
-	public static class one extends Vector2D {
-		public one() {
-			super(1.0f, 1.0f);
-		}
-	}
+	public final static Vector2D ONE = new Vector2D(1.0f, 1.0f);
 
 	public Vector2D(float x, float y) {
 		super(x, y);
@@ -45,18 +37,17 @@ public class Vector2D extends Vector2f {
 	 * @return The distance between two vectors.
 	 */
 	public static float distance(Vector2D vec1, Vector2D vec2) {
-		return (float) Math.sqrt(Math.pow(vec1.x - vec2.x, 2)
-				+ Math.pow(vec1.y - vec2.y, 2));
+		return (float) Math.sqrt(Math.pow(vec1.x - vec2.x, 2) + Math.pow(vec1.y - vec2.y, 2));
 	}
 
 	/**
 	 * Determines if the instantiated Vector2D equals the given Vector2D.
 	 * 
-	 * @param comp
+	 * @param otherVec
 	 *            A Vector2D to compare to.
 	 * @return True if the Vector2D is equivalent; false if otherwise.
 	 */
-	public boolean equals(Vector2D comp) {
-		return (comp.x == x && comp.y == y);
+	public boolean equals(Vector2D otherVec) {
+		return (this.x == otherVec.x && this.y == otherVec.y);
 	}
 }

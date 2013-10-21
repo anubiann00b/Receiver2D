@@ -5,3 +5,8 @@
 .project
 .classpath
 .settings/
+
+#intellij
+.idea
+Receiver2D.eml
+Receiver2D.iml
