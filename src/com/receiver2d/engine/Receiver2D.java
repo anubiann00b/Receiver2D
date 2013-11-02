@@ -1,5 +1,7 @@
 package com.receiver2d.engine;
 
+import java.util.ArrayList;
+
 import org.lwjgl.opengl.Display;
 
 /**
@@ -20,7 +22,10 @@ public class Receiver2D {
 	// engine values
 	public static final int RENDER_FPS_CAP = 60;
 	public static ThreadManager threads;
-
+	/**
+	 * The list of currently-loaded worlds in the engine.
+	 */
+	public static ArrayList<World> worlds;
 	// engine values
 
 	/**

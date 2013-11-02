@@ -3,7 +3,7 @@ package com.receiver2d.engine.physics;
 import com.receiver2d.engine.Vector2D;
 
 /**
- * A circle.
+ * A special circle type of a polygon.
  */
 public class Circle {
 	/**

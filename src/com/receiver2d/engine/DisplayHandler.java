@@ -5,12 +5,23 @@ import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.*;
 import org.lwjgl.opengl.*;
 
+import com.receiver2d.engine.entitysystem.Entity;
+
 /**
  * Handles the appearance of things on-screen and draws them.
  */
 public class DisplayHandler {
-	public static int width = 0;
-	public static int height = 0;
+	private static int width = 0;
+	private static int height = 0;
+	
+	/**
+	 * Initiates the display, which is responsible for all visual output of
+	 * rendering.
+	 * @param title The title of the window.
+	 * @param fullscreen Whether or not the window starts off full-screen.
+	 * @param wd The width of the window, in pixels.
+	 * @param ht The height of the window, in pixels.
+	 */
 	public static void init(String title, boolean fullscreen, int wd,
 			int ht) {
 		width = wd;
@@ -41,6 +52,15 @@ public class DisplayHandler {
 		
 		while (renderUpdate()); // set to currently update the display
 	}
+	
+	/**
+	 * Performs a rendering update.
+	 * 
+	 * @return Whether or not the next rendering update is available (based on
+	 *         if the user prompted a display close event). If false, then the
+	 *         next render is prevented and the display (along with the rest of
+	 *         the program) quits.
+	 */
 	public static boolean renderUpdate() {
 		//does GL calls
 
@@ -53,22 +73,45 @@ public class DisplayHandler {
 		//testing display update
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-		//set the color of the quad
-		glColor3f(0.05f, 0.05f, 1.0f);
-		/*
-		glBegin(GL_QUADS);
-			glVertex2f(100, 100);
-			glVertex2f(100+200, 100);
-			glVertex2f(100+200, 100+200);
-			glVertex2f(100, 100+200);
-		glEnd();
-		*/
+		//render all in-game elements that are visible
+		
 		
 		return !Display.isCloseRequested();
 	}
+	
+	/**
+	 * Draws an entity to the display.
+	 * @param entity
+	 */
+	public static void drawEntity(Entity entity) {
+		if (!entity.visible) return; //don't render invisible entities
+		
+		//TODO: get color of entity
+		
+		
+		glBegin(GL_POLYGON); // draw the mesh of the entity
+		for (Vector2D pnt : entity.mesh.points)
+			glVertex2f(pnt.x, pnt.y);
+		glEnd();
+	}
+	
+	/**
+	 * Changes the state of the window by toggling its fullscreen component.
+	 * @param fullscreen Is true for fullscreen; false for window mode.
+	 */
 	public static void updateFullscreen(boolean fullscreen) {
 		try {
 			Display.setFullscreen(fullscreen);
 		} catch (Exception e) { }
+	}
+	
+	/**
+	 * Updates the display geometry in pixels. Any zero values are unrecognized.
+	 * @param pixelWidth The width of the display.
+	 * @param pixelHeight The height of the display.
+	 */
+	public static void resize(int pixelWidth, int pixelHeight) {
+		width = pixelWidth == 0 ? width : pixelWidth;
+		height = pixelHeight == 0 ? height : pixelHeight;
 	}
 }

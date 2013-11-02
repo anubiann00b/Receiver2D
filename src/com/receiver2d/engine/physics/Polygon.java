@@ -15,9 +15,6 @@ public class Polygon {
 	 */
 	public int length;
 
-	public Polygon() {
-	}
-
 	/**
 	 * Creates a new polygon from a list of points.
 	 * 
@@ -25,11 +22,18 @@ public class Polygon {
 	 *            A set of vertices for the polygon.
 	 */
 	public Polygon(Vector2D[] points) {
-		for (int i = 0; i < points.length; i++) {
+		for (int i=0; i<points.length; i++) {
 			this.points.add(points[i]);
 			this.length++;
 		}
 	}
+	//Polygon overrides
+		public Polygon(double[] points) {
+			for (int i=0; i+1<points.length; i+=2) {
+				this.points.add(new Vector2D(points[i], points[i+1]));
+				this.length++;
+			}
+		}
 
 	/**
 	 * Gets a vertex from the polygon.
