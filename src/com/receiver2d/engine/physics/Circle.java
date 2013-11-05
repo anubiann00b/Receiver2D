@@ -17,11 +17,11 @@ public class Circle {
 
 	/**
 	 * Creates a new circle.
-	 * 
+	 *
 	 * @param center
 	 * @param radius
 	 */
-	public Circle(Vector2D center, float radius) {
+	public Circle (Vector2D center, float radius) {
 		this.center = center;
 		this.radius = radius;
 	}

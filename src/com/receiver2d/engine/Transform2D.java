@@ -23,7 +23,7 @@ public class Transform2D extends Component {
 	 * therefore making its final rotation a sum of the original and the
 	 * specified rotation value, in degrees.
 	 */
-	public void rotate(float degrees) {
-		rotation = (rotation+degrees) % 360;
+	public void rotate (float degrees) {
+		rotation = (rotation + degrees) % 360;
 	}
 }

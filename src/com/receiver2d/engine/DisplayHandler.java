@@ -1,9 +1,10 @@
 package com.receiver2d.engine;
 
-import static org.lwjgl.opengl.GL11.*;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
 
-import org.lwjgl.*;
-import org.lwjgl.opengl.*;
+import static org.lwjgl.opengl.GL11.*;
 
 import com.receiver2d.engine.entitysystem.Entity;
 
@@ -22,20 +23,20 @@ public class DisplayHandler {
 	 * @param wd The width of the window, in pixels.
 	 * @param ht The height of the window, in pixels.
 	 */
-	public static void init(String title, boolean fullscreen, int wd,
-			int ht) {
-		width = wd;
-		height = ht;
-		try { // create display and set res
+	public static void init (String title, boolean fullscreen, int width, int height) {
+		DisplayHandler.width = width;
+		DisplayHandler.height = height;
+		try {
+			Display.setTitle(title);
 			Display.setDisplayMode(new DisplayMode(width, height));
 			Display.setFullscreen(fullscreen);
 			Display.create();
 		} catch (LWJGLException e) {
 			Console.log("Failed to create display.", e, "Error");
 		}
-		
+
 		Display.setResizable(false);
-		
+
 		// basic GL calls
 		glEnable(GL_TEXTURE_2D);
 		glDisable(GL_DEPTH_TEST); // 2d engine so no depth buffer needed
@@ -43,14 +44,14 @@ public class DisplayHandler {
 		// blending, for transparent sprite rendering
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		
-		//set up a orthographic projection
+
+		// set up a orthographic projection
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(0, width, 0, height, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
-		
-		while (renderUpdate()); // set to currently update the display
+
+		while (renderUpdate()) ; // set to currently update the display
 	}
 	
 	/**
@@ -61,16 +62,16 @@ public class DisplayHandler {
 	 *         next render is prevented and the display (along with the rest of
 	 *         the program) quits.
 	 */
-	public static boolean renderUpdate() {
-		//does GL calls
+
+	public static boolean renderUpdate () {
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // clear screen with transparent
-												// black
+		// black
 		// set viewport to display dimension
 		glViewport(0, 0, Display.getWidth(), Display.getHeight());
 		Display.update();
-		
-		//testing display update
+
+		// testing display update
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		//render all in-game elements that are visible
@@ -102,7 +103,7 @@ public class DisplayHandler {
 	public static void updateFullscreen(boolean fullscreen) {
 		try {
 			Display.setFullscreen(fullscreen);
-		} catch (Exception e) { }
+		} catch (Exception e) {}
 	}
 	
 	/**
