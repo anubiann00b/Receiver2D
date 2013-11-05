@@ -27,26 +27,28 @@ public class Receiver2D {
 	 * The list of currently-loaded worlds in the engine.
 	 */
 	public static ArrayList<World> worlds;
-	public static Thread loop;
+	public static Thread gameLoop;
 	// engine values
 
 	/**
 	 * Starts the game engine.
 	 */
 	public static void start () {
+		threads = new ThreadManager(); // create the thread pool
+
 		startTime = System.nanoTime();
 		Console.log("Receiver2D started.");
 
-		DisplayHandler.init("Test Game", false, 800, 600); // init openGL stuff
-		threads = new ThreadManager(); // create new thread pool
-
-		loop = new Thread(new Runnable() {
+		DisplayHandler.init("Test Game", false, 1280, 720); // init openGL stuff
+		gameLoop = new Thread(new Runnable() {
 			@Override
 			public void run () {
 				gameLoop();
 			}
 		});
-		loop.start();
+		
+		threads.queueTask(gameLoop);
+		gameLoop.start();
 	}
 
 	public static void gameLoop () {
@@ -59,7 +61,7 @@ public class Receiver2D {
 	 */
 	public static void stop () {
 		try {
-			loop.join();
+			gameLoop.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

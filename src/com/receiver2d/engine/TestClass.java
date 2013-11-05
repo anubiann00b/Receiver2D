@@ -1,10 +1,10 @@
 package com.receiver2d.engine;
 
-import com.receiver2d.engine.physics.CollisionDetection;
-import com.receiver2d.engine.physics.Polygon;
+import com.receiver2d.engine.physics.*;
 
 /**
- * This class is for testing purposes only, although it currently is responsible for initializing Receiver2D. NOT FOR RELEASE
+ * This class is for testing purposes only, although it currently is responsible
+ * for initializing Receiver2D. NOT FOR RELEASE
  */
 public class TestClass {
 	public static void testGeometryMethods () {
@@ -27,23 +27,8 @@ public class TestClass {
 				.toString() != null));
 	}
 
-	public static void main (String[] args) {
+	public static void main(String[] args) {
 		Receiver2D.start(); // initialize the game
-
-		Receiver2D.threads.queueTask(new Runnable() {
-			@Override
-			public void run () {
-				for (int i = 0; i < 1000; i++)
-					System.out.println("sin: " + Math.sin(i));
-			}
-		});
-		Receiver2D.threads.queueTask(new Runnable() {
-			@Override
-			public void run () {
-				for (int i = 0; i < 1000; i++)
-					System.out.println("cos: " + Math.cos(i));
-			}
-		});
 
 		Receiver2D.stop();
 		// testGeometryMethods(); // test all of the Geometry methods

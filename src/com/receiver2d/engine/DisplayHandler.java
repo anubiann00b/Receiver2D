@@ -14,6 +14,7 @@ import com.receiver2d.engine.entitysystem.Entity;
 public class DisplayHandler {
 	private static int width = 0;
 	private static int height = 0;
+	private static boolean hasInitialized = false;
 	
 	/**
 	 * Initiates the display, which is responsible for all visual output of
@@ -23,7 +24,10 @@ public class DisplayHandler {
 	 * @param wd The width of the window, in pixels.
 	 * @param ht The height of the window, in pixels.
 	 */
-	public static void init (String title, boolean fullscreen, int width, int height) {
+	public static void init(String title, boolean fullscreen, int width, int height) {
+		if (hasInitialized) return;
+		hasInitialized = true;
+		
 		DisplayHandler.width = width;
 		DisplayHandler.height = height;
 		try {
@@ -51,7 +55,7 @@ public class DisplayHandler {
 		glOrtho(0, width, 0, height, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
 
-		while (renderUpdate()) ; // set to currently update the display
+		while (renderUpdate()); // set to currently update the display
 	}
 	
 	/**
@@ -112,6 +116,7 @@ public class DisplayHandler {
 	 * @param pixelHeight The height of the display.
 	 */
 	public static void resize(int pixelWidth, int pixelHeight) {
+		//TODO: enable more robust resizing than simply changing display height
 		width = pixelWidth == 0 ? width : pixelWidth;
 		height = pixelHeight == 0 ? height : pixelHeight;
 	}
