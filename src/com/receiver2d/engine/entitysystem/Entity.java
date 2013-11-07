@@ -4,7 +4,6 @@ import com.receiver2d.engine.Vector2D;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import com.receiver2d.engine.entitysystem.components.Texture;
 import com.receiver2d.engine.physics.Polygon;
 /**
  * Contains information regarding an in-game Entity. Any object instantiated in the game is, in its most basic form, an entity with certain capabilities.
@@ -64,6 +63,16 @@ public class Entity {
 	 */
 	public Entity createChildEntity () {
 		Entity child = new Entity();
+		child.parent = this;
+		return child;
+	}
+	
+	/**
+	 * Sets an entity to be a child of this entity.
+	 * @param child The child to make as an entity.
+	 * @return The same entity, but now as a child of the main entity.
+	 */
+	public Entity setChildEntity(Entity child) {
 		child.parent = this;
 		return child;
 	}

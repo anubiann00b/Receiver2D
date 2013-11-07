@@ -1,16 +1,15 @@
 package com.receiver2d.engine.io;
 
-import com.receiver2d.engine.Scene;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import com.receiver2d.engine.*;
+import com.receiver2d.engine.entitysystem.Entity;
+
+import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
-import java.io.IOException;
+import javax.xml.parsers.*;
+
+import java.io.*;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 /**
@@ -19,16 +18,17 @@ import java.util.regex.Pattern;
  */
 public class FileManager {
 	/**
-	 * Parses a Receiver2D Scene File (.r2ds) and returns the output.
+	 * Parses a Receiver2D World File (.r2dw) and returns the output.
 	 *
 	 * @param location
-	 * @return A series of scenes.
+	 * @return A world.
 	 * @throws ParserConfigurationException
 	 * @throws IOException
 	 * @throws SAXException
 	 */
-	public Scene[] loadScene (String location) throws Exception {
-		boolean isValid = Pattern.matches("\\.r2ds$", location);
+	public static World loadWorld(String location)
+			throws ParserConfigurationException, SAXException, IOException {
+		boolean isValid = Pattern.matches("\\.r2dw$", location);
 		File sceneFile = new File(location);
 		if (!isValid || !sceneFile.exists()) return null;
 
@@ -48,9 +48,10 @@ public class FileManager {
 				Node node = sceneNodeInfo.item(k);
 				if (node.getNodeName() == "values") {
 					NodeList values = node.getChildNodes();
-					for (int i = 0; i < values.getLength(); i++) {
-						// iterate through all values; add to scenes[n]
-					}
+					// iterate through all values; add to scenes[n]
+					for (int i = 0; i < values.getLength(); i++)
+						scenes[n].setValue(values.item(i).getNodeName(), 
+								values.item(i).getNodeValue());
 				} else if (node.getNodeName() == "resources") {
 					NodeList resources = node.getChildNodes();
 					for (int i = 0; i < resources.getLength(); i++) {
@@ -60,10 +61,15 @@ public class FileManager {
 					NodeList entities = node.getChildNodes();
 					for (int i = 0; i < entities.getLength(); i++) {
 						// iterate through all entities; add to scenes[n]
+						Entity entity = new Entity();
+						
 					}
 				}
 			}
 		}
-		return scenes; // TODO: fix
+		World world = new World("Test");
+		for (Scene s : scenes)
+			world.scenes.add(s);
+		return world;
 	}
 }

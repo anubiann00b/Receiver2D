@@ -1,5 +1,6 @@
 package com.receiver2d.engine;
 
+import com.receiver2d.engine.io.FileManager;
 import com.receiver2d.engine.physics.*;
 
 /**
@@ -7,7 +8,10 @@ import com.receiver2d.engine.physics.*;
  * for initializing Receiver2D. NOT FOR RELEASE
  */
 public class TestClass {
-	public static void testGeometryMethods () {
+	/**
+	 * Tests various geometry methods.
+	 */
+	public static void testGeometryMethods() {
 		Polygon square = new Polygon(new Vector2D[] {new Vector2D(2, 1),
 				new Vector2D(3, 2), new Vector2D(2, 3), new Vector2D(1, 2)});
 
@@ -26,11 +30,26 @@ public class TestClass {
 				+ (CollisionDetection.linearIntersectionPoint(ln1, ln2)
 				.toString() != null));
 	}
+	
+	/**
+	 * Tests the FileManager and prints output.
+	 */
+	public static void testWorldLoad() {
+		World world;
+		try {
+			world = FileManager.loadWorld("src/res/test_scene.r2dw");
+		} catch (Exception e) {
+			Console.logError("Exception!", e);
+		}
+		
+	}
 
 	public static void main(String[] args) {
 		Receiver2D.start(); // initialize the game
-
+		
+		testWorldLoad(); // test our world loading
+		
+		
 		Receiver2D.stop();
-		// testGeometryMethods(); // test all of the Geometry methods
 	}
 }

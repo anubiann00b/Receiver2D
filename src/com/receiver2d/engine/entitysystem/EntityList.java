@@ -16,11 +16,12 @@ public class EntityList extends ArrayList<Entity> {
 	}
 
 	// Entity() overrides
-	public EntityList (Entity entity) {
+	public EntityList(Entity entity) {
 		add(entity);
 	}
 
-	public static void setScene (Scene scene, EntityList elist) {
+	public static Scene setScene(Scene scene, EntityList elist) {
 		scene.setEntityList(elist);
+		return scene;
 	}
 }
