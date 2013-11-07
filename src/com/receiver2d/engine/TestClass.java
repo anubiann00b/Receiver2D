@@ -35,20 +35,26 @@ public class TestClass {
 	 * Tests the FileManager and prints output.
 	 */
 	public static void testWorldLoad() {
-		World world;
+		World world = new World("Test");
 		try {
 			world = FileManager.loadWorld("src/res/test_scene.r2dw");
 		} catch (Exception e) {
 			Console.logError("Exception!", e);
 		}
-		
+		if (world == null) {
+			Console.debug("World file is null.");
+			return;
+		}
+		// now, let's try accessing some stuff from our new world
+		Console.debug("Scene length: "+world.scenes.size());
+		//Console.log("Scene 0 has name "+world.scenes.get(0).getName());
 	}
 
 	public static void main(String[] args) {
+		Console.DEBUG = true;
 		Receiver2D.start(); // initialize the game
 		
 		testWorldLoad(); // test our world loading
-		
 		
 		Receiver2D.stop();
 	}

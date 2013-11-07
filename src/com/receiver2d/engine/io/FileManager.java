@@ -1,6 +1,7 @@
 package com.receiver2d.engine.io;
 
 import com.receiver2d.engine.*;
+import com.receiver2d.engine.Console;
 import com.receiver2d.engine.entitysystem.Entity;
 
 import org.w3c.dom.*;
@@ -28,13 +29,19 @@ public class FileManager {
 	 */
 	public static World loadWorld(String location)
 			throws ParserConfigurationException, SAXException, IOException {
-		boolean isValid = Pattern.matches("\\.r2dw$", location);
-		File sceneFile = new File(location);
-		if (!isValid || !sceneFile.exists()) return null;
+		boolean isValid = location.matches("(.*)[\\.]r2dw$");
+		File worldFile = new File(location);
+		
+		if (!worldFile.exists())
+			Console.debug("World file does not exist!");
+		else if (!isValid)
+			Console.debug("World file is not valid!");
+		
+		if (!isValid || !worldFile.exists()) return null;
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();
-		Document doc = db.parse(sceneFile);
+		Document doc = db.parse(worldFile);
 
 		// create node list from scenes in world
 		NodeList sceneNodes = doc.getElementsByTagName("scene");
