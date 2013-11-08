@@ -2,6 +2,7 @@ package com.receiver2d.engine;
 
 import com.receiver2d.engine.entitysystem.EntityList;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -17,6 +18,7 @@ public class Scene {
 
 	/* --- Scene variables --- */
 	private HashMap<String, Object> values;
+	private ArrayList<SceneResource> resources;
 	/* --- Scene variables --- */
 
 	/**
@@ -24,12 +26,14 @@ public class Scene {
 	 *
 	 * @param name The name of the scene.
 	 */
-	public Scene (String name) {
+	public Scene(String name) {
 		uuid = UUID.randomUUID().toString();
 		this.name = name;
 
 		// initializers
 		values = new HashMap<String, Object>();
+		entityList = new EntityList();
+		resources = new ArrayList<SceneResource>();
 	}
 
 	/**
@@ -37,7 +41,7 @@ public class Scene {
 	 *
 	 * @return The name of the scene.
 	 */
-	public String getName () {
+	public String getName() {
 		return name;
 	}
 
@@ -46,7 +50,7 @@ public class Scene {
 	 *
 	 * @param entityList An EntityList, containing entities.
 	 */
-	public void setEntityList (EntityList entityList) {
+	public void setEntityList(EntityList entityList) {
 		this.entityList = entityList;
 	}
 
@@ -56,7 +60,7 @@ public class Scene {
 	 * @param variable The name of the variable.
 	 * @param value    The value of the variable.
 	 */
-	public void setValue (String variable, Object value) {
+	public void setValue(String variable, Object value) {
 		values.put(variable, value);
 	}
 
@@ -67,7 +71,15 @@ public class Scene {
 	 * @param variable The name of the stored variable.
 	 * @return A found value, or null if no variable can be found.
 	 */
-	public Object getValue (String variable) {
+	public Object getValue(String variable) {
 		return values.get(variable);
+	}
+	
+	/**
+	 * Adds a resource to be loaded when the scene is loaded.
+	 * @param res The resource to add.
+	 */
+	public void addResource(SceneResource res) {
+		resources.add(res);
 	}
 }

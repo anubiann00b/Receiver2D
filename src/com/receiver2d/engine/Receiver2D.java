@@ -1,6 +1,7 @@
 package com.receiver2d.engine;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import org.lwjgl.opengl.Display;
 
@@ -26,45 +27,67 @@ public class Receiver2D {
 	/**
 	 * The list of currently-loaded worlds in the engine.
 	 */
-	public static ArrayList<World> worlds;
-	public static Thread gameLoop;
+	public static ArrayList<World> worlds = new ArrayList<World>();
+	public static Thread[] threadList = new Thread[2];
 	// engine values
 
 	/**
 	 * Starts the game engine.
 	 */
-	public static void start () {
-		threads = new ThreadManager(); // create the thread pool
+	public static void start() {
+		threads = new ThreadManager(); // create the thread manager and pool
 
-		startTime = System.nanoTime();
+		Console.setStartTime(startTime = System.nanoTime());
 		Console.log("Receiver2D started.");
-
-		DisplayHandler.init("Test Game", false, 1280, 720); // init openGL stuff
-		gameLoop = new Thread(new Runnable() {
+		
+		/*
+		 * This is our logic thread. It deals with all things pertaining to
+		 * the calculation of non-essential game things (non-essential meaning
+		 * that the engine is not concerned with it as much as it is with
+		 * rendering, physics, audio, etc).
+		 */
+		threadList[0] = new Thread(new Runnable() {
 			@Override
-			public void run () {
-				gameLoop();
+			public void run() {
+				Console.debug("Logic thread is running...");
 			}
 		});
 		
-		threads.queueTask(gameLoop);
-		gameLoop.start();
-	}
-
-	public static void gameLoop () {
-		System.out.println("looping");
-
+		/*
+		 * This is our physics thread. It deals with all updates pertaining to
+		 * the _dynamic_ and interactive rendering of entities that have a 
+		 * Rigidbody component attached to them.
+		 */
+		threadList[1] = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Console.debug("Physics thread is running...");
+				// TODO: while (Physics.update());
+			}
+		});
+		
+		// TODO: audio thread
+		
+		for (Thread t : threadList) {
+			threads.queueTask(t);
+			t.start();
+		}
+		
+		// this comes last
+		Console.debug("Initialized rendering in main thread.");
+		DisplayHandler.init("Test Game", false, 1280, 720);
 	}
 
 	/**
 	 * Shuts down Remote2D.
 	 */
-	public static void stop () {
+	public static void stop() {
 		try {
-			gameLoop.join();
+			threads.threadPool.awaitTermination(777, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			Console.logError("Could not terminate threads.", e);
 		}
+		
 		threads.threadPool.shutdown();
 		Display.destroy();
 		Console.log("Receiver2D ended.");

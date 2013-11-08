@@ -1,11 +1,13 @@
 package com.receiver2d.engine;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Holds all of the game information for a particular world, including scenes, entities, and more low-level stuff such as resources (loaded dynamically when transitioning to new worlds).
  */
 public class World {
+	private String uuid;
 	/**
 	 * A list of scenes contained by the current world.
 	 */
@@ -22,7 +24,28 @@ public class World {
 	 *
 	 * @param name The name of the world.
 	 */
-	public World (String name) {
+	public World(String name) {
+		uuid = UUID.randomUUID().toString();
 		this.name = name;
+		scenes = new ArrayList<Scene>();
+		resourcePaths = new ArrayList<String>();
+	}
+	
+	/**
+	 * Adds a resource path into the World. This differs from adding to an
+	 * individual scene since the resource can remain in memory across multiple
+	 * scenes, instead of being limited to use only for a particular scene.
+	 * @param location
+	 */
+	public void addResourcePath(String location) {
+		resourcePaths.add(location);
+	}
+	
+	/**
+	 * Gets the unique user identifier for this world.
+	 * @return A representation of this unique identifier.
+	 */
+	public String getUUID() {
+		return uuid;
 	}
 }

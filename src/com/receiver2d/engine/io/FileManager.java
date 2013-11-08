@@ -46,9 +46,9 @@ public class FileManager {
 		// create node list from scenes in world
 		NodeList sceneNodes = doc.getElementsByTagName("scene");
 		Scene[] scenes = new Scene[sceneNodes.getLength()];
-
+		
 		// check scene information
-		for (int n = 0; n < sceneNodes.getLength(); n++) {
+		for (int n=0; n<sceneNodes.getLength(); n++) {
 			scenes[n] = new Scene(sceneNodes.item(n).getAttributes().getNamedItem("name").getNodeValue());
 			NodeList sceneNodeInfo = sceneNodes.item(n).getChildNodes();
 			for (int k = 0; k < sceneNodeInfo.getLength(); k++) {
@@ -62,6 +62,7 @@ public class FileManager {
 				} else if (node.getNodeName() == "resources") {
 					NodeList resources = node.getChildNodes();
 					for (int i = 0; i < resources.getLength(); i++) {
+						
 						// iterate through all resources; add to scenes[n]
 					}
 				} else if (node.getNodeName() == "entitylist") {

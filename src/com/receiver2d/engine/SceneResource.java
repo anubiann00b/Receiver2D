@@ -7,11 +7,17 @@ import java.io.File;
  */
 public class SceneResource {
 	private String location;
-	public static final String mimetype = "application/vnd.r2dscene+xml";
-	private File loadedFile = null;
+	
+	/**
+	 * The conventional mime-type of a Rec2D world file (.r2dw) that we assume.
+	 */
+	public static final String MIMETYPE = "application/vnd.r2dworld+xml";
+	
+	private File loadedFile;
 
-	public SceneResource (String location) {
-		this.location = location;
+	public boolean SceneResource(String location) {
+		loadedFile = null;
+		return setResource(location);
 	}
 
 	/**
@@ -20,7 +26,7 @@ public class SceneResource {
 	 * @param location The location (in the filesystem) of the resource.
 	 * @return Whether or not the operation was successful in changing the resource. This is affected by whether or not the file exists in the system. If not, the resource remains unchanged.
 	 */
-	public boolean setResource (String location) {
+	public boolean setResource(String location) {
 		File file = new File(location);
 		if (file.exists() && file.isFile()) {
 			this.location = location;
@@ -30,9 +36,10 @@ public class SceneResource {
 	}
 
 	/**
-	 * Loads a file into memory from the resource's current path. This must be called before calling getLoaded().
+	 * Loads a file into memory from the resource's current path. This must be
+	 * called before calling getLoaded().
 	 */
-	public void load () {
+	public void load() {
 		loadedFile = new File(location);
 	}
 
@@ -41,7 +48,7 @@ public class SceneResource {
 	 *
 	 * @return The file of the loaded resource.
 	 */
-	public File getLoaded () {
+	public File getLoaded() {
 		return loadedFile;
 	}
 }

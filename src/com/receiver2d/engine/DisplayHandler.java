@@ -36,7 +36,7 @@ public class DisplayHandler {
 			Display.setFullscreen(fullscreen);
 			Display.create();
 		} catch (LWJGLException e) {
-			Console.log("Failed to create display.", e, "Error");
+			Console.logError("Failed to create display.", e);
 		}
 
 		Display.setResizable(false);
@@ -55,7 +55,7 @@ public class DisplayHandler {
 		glOrtho(0, width, 0, height, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
 
-		while (renderUpdate()); // set to currently update the display
+		while (update()); // set to currently update the display
 	}
 	
 	/**
@@ -67,8 +67,8 @@ public class DisplayHandler {
 	 *         the program) quits.
 	 */
 
-	public static boolean renderUpdate () {
-
+	public static boolean update() {
+		
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // clear screen with transparent
 		// black
 		// set viewport to display dimension

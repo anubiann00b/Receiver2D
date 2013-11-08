@@ -4,12 +4,22 @@ package com.receiver2d.engine;
  * This class is used for logging and debug information
  */
 public class Console {
-	private static long logStart = System.nanoTime();
+	private static long logStart = 0;
 	
 	/**
 	 * If set to true, all instances of Console.debug() will be logged.
 	 */
 	public static boolean DEBUG = false;
+	
+	/**
+	 * Sets the time at which the Console will assume a recording of events.
+	 * This property is immutable if it has already been set by Receiver2D.
+	 * 
+	 * @param time The time, in nanoseconds, since the engine has started.
+	 */
+	public static void setStartTime(long time) {
+		logStart = logStart == 0 ? time : logStart;
+	}
 
 	/**
 	 * Logs system information to the console with time and message.

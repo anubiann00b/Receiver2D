@@ -47,7 +47,9 @@ public class TestClass {
 		}
 		// now, let's try accessing some stuff from our new world
 		Console.debug("Scene length: "+world.scenes.size());
-		//Console.log("Scene 0 has name "+world.scenes.get(0).getName());
+		Scene scene = world.scenes.get(0);
+		Console.debug("Scene 0 has name \""+scene.getName()+"\"");
+		Console.debug("Player name is "+scene.getValue("Player Name"));
 	}
 
 	public static void main(String[] args) {

@@ -13,11 +13,11 @@ public class ThreadManager {
 	/**
 	 * Creates a new ThreadManager, and configures the threadPool.
 	 */
-	public ThreadManager () {
+	public ThreadManager() {
 		threadPool = Executors.newFixedThreadPool(numThreads);
 		barrier = new CyclicBarrier(numThreads, new Runnable() {
 			@Override
-			public void run () {
+			public void run() {
 				threadPool.shutdown();
 			}
 		});
@@ -28,7 +28,7 @@ public class ThreadManager {
 	 *
 	 * @param task the runnable to execute
 	 */
-	public void queueTask (Runnable task) {
+	public void queueTask(Runnable task) {
 		threadPool.submit(task);
 	}
 
@@ -38,7 +38,7 @@ public class ThreadManager {
 	 * @param task the callable to execute
 	 * @return a future object with the data being returned
 	 */
-	public Future<?> queueTask (Callable<?> task) {
+	public Future<?> queueTask(Callable<?> task) {
 		return threadPool.submit(task);
 	}
 }
