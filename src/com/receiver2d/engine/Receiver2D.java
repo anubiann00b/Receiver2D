@@ -82,13 +82,12 @@ public class Receiver2D {
 	 * Shuts down Remote2D.
 	 */
 	public static void stop() {
+		threads.threadPool.shutdown();
 		try {
 			threads.threadPool.awaitTermination(777, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
 			Console.logError("Could not terminate threads.", e);
 		}
-		
-		threads.threadPool.shutdown();
 		Display.destroy();
 		Console.log("Receiver2D ended.");
 		System.exit(0);
