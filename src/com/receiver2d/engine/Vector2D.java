@@ -6,7 +6,6 @@ import org.lwjgl.util.vector.Vector2f;
  * Contains point data (x, y). Used for positions, velocity, forces, etc.
  */
 public class Vector2D extends Vector2f {
-	private static final long serialVersionUID = 7240034157894646780L;
 
 	/**
 	 * A specific type of Vector2D with a magnitude of 0.
@@ -28,9 +27,11 @@ public class Vector2D extends Vector2f {
 
 	/**
 	 * Calculates the Euclidean distance between two points.
-	 *
-	 * @param vec1 The first vector.
-	 * @param vec2 The second vector.
+	 * 
+	 * @param vec1
+	 *            The first vector.
+	 * @param vec2
+	 *            The second vector.
 	 * @return The distance between two vectors.
 	 */
 	public static float distance(Vector2D vec1, Vector2D vec2) {
@@ -39,8 +40,9 @@ public class Vector2D extends Vector2f {
 
 	/**
 	 * Determines if the instantiated Vector2D equals the given Vector2D.
-	 *
-	 * @param otherVec A Vector2D to compare to.
+	 * 
+	 * @param otherVec
+	 *            A Vector2D to compare to.
 	 * @return True if the Vector2D is equivalent; false if otherwise.
 	 */
 	public boolean equals(Vector2D otherVec) {

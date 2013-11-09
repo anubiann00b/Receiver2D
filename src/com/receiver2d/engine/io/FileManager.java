@@ -5,21 +5,24 @@ import com.receiver2d.engine.Console;
 import com.receiver2d.engine.entitysystem.Entity;
 import com.receiver2d.engine.entitysystem.EntityList;
 
-import org.w3c.dom.*;
-import org.xml.sax.SAXException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
-import javax.xml.parsers.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import java.io.*;
 
 /**
- * Useful for dynamically loading various types of data from Receiver2D-specific
- * files.
+ * Useful for dynamically loading various types of data from Receiver2D-specific files.
  */
 public class FileManager {
 	/**
 	 * Parses a Receiver2D World File (.r2dw) and returns the output.
-	 *
+	 * 
 	 * @param location
 	 * @return A world parsed by XML handling.
 	 * @throws ParserConfigurationException
@@ -30,12 +33,11 @@ public class FileManager {
 			throws ParserConfigurationException, SAXException, IOException {
 		boolean isValid = location.matches("(.*)[\\.]r2dw$");
 		File worldFile = new File(location);
-		
-		if (!worldFile.exists())
-			Console.debug("World file does not exist!");
+
+		if (!worldFile.exists()) Console.debug("World file does not exist!");
 		else if (!isValid)
 			Console.debug("World file is not valid!");
-		
+
 		if (!isValid || !worldFile.exists()) return null;
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
