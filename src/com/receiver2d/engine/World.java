@@ -31,6 +31,10 @@ public class World {
 		resourcePaths = new ArrayList<String>();
 	}
 	
+	public World() {
+		this(UUID.randomUUID().toString()); // generate unique name if not provided
+	}
+
 	/**
 	 * Adds a resource path into the World. This differs from adding to an
 	 * individual scene since the resource can remain in memory across multiple
@@ -39,6 +43,11 @@ public class World {
 	 */
 	public void addResourcePath(String location) {
 		resourcePaths.add(location);
+	}
+	
+	public void addScenes(Scene[] scenes) {
+		for (Scene s : scenes)
+			this.scenes.add(s);
 	}
 	
 	/**

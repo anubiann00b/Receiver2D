@@ -35,8 +35,9 @@ public class TestClass {
 	 * Tests the FileManager and prints output.
 	 */
 	public static void testWorldLoad() {
-		World world = new World("Test");
+		World world = null;
 		try {
+			//load the first world
 			world = FileManager.loadWorld("src/res/test_scene.r2dw");
 		} catch (Exception e) {
 			Console.logError("Exception!", e);
@@ -54,6 +55,7 @@ public class TestClass {
 
 	public static void main(String[] args) {
 		Console.DEBUG = true;
+		Console.PRINT_STACK_TRACE = true;
 		Receiver2D.start(); // initialize the game
 		
 		testWorldLoad(); // test our world loading

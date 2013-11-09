@@ -12,6 +12,11 @@ public class Console {
 	public static boolean DEBUG = false;
 	
 	/**
+	 * Whether or not to print error stack traces.
+	 */
+	public static boolean PRINT_STACK_TRACE = false;
+	
+	/**
 	 * Sets the time at which the Console will assume a recording of events.
 	 * This property is immutable if it has already been set by Receiver2D.
 	 * 
@@ -33,16 +38,12 @@ public class Console {
 		int minutes = totalSeconds / 60;
 		int seconds = totalSeconds % 60;
 
-		if (exception != null)
+		System.out.println(minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+				+ " - " + (type != null ? type.toUpperCase() + ": " : "")
+				+ message);
+		
+		if (exception != null && PRINT_STACK_TRACE)
 			exception.printStackTrace();
-		System.out.println(minutes
-				+ ":"
-				+ (seconds < 10 ? "0" : "")
-				+ seconds
-				+ " - "
-				+ (type != null ? type.toUpperCase() + ": " : "")
-				+ (exception != null ? exception.getClass() + " - "
-				+ exception.getMessage() + " - " : "") + message);
 	}
 
 	// log() overrides

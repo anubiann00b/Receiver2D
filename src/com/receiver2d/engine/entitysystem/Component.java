@@ -15,7 +15,7 @@ public abstract class Component {
 	 * The main tick function that deals with updates to the logical aspect of
 	 * the component. This is called by the engine's central tick manager.
 	 */
-	public void tick () {
+	public void tick() {
 
 	}
 }

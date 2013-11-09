@@ -21,8 +21,8 @@ public class DisplayHandler {
 	 * rendering.
 	 * @param title The title of the window.
 	 * @param fullscreen Whether or not the window starts off full-screen.
-	 * @param wd The width of the window, in pixels.
-	 * @param ht The height of the window, in pixels.
+	 * @param width The width of the window, in pixels.
+	 * @param height The height of the window, in pixels.
 	 */
 	public static void init(String title, boolean fullscreen, int width, int height) {
 		if (hasInitialized) return;

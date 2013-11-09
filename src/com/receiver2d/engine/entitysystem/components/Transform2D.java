@@ -1,9 +1,10 @@
-package com.receiver2d.engine;
+package com.receiver2d.engine.entitysystem.components;
 
+import com.receiver2d.engine.Vector2D;
 import com.receiver2d.engine.entitysystem.Component;
 
 /**
- * This abstract class deals with all entities/objects that are translatable in
+ * This class deals with all entities/objects that are translatable in
  * two-dimensional space. Anything that does not abstract from Transform2D is
  * unable to move in-game.
  */
@@ -23,7 +24,7 @@ public class Transform2D extends Component {
 	 * therefore making its final rotation a sum of the original and the
 	 * specified rotation value, in degrees.
 	 */
-	public void rotate (float degrees) {
+	public void rotate(float degrees) {
 		rotation = (rotation + degrees) % 360;
 	}
 }
