@@ -1,26 +1,29 @@
 package com.receiver2d.engine.io;
 
-import com.receiver2d.engine.*;
-import com.receiver2d.engine.Console;
-import com.receiver2d.engine.entitysystem.Entity;
+import java.io.File;
+import java.io.IOException;
 
-import org.w3c.dom.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.*;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.regex.Pattern;
+import com.receiver2d.engine.Console;
+import com.receiver2d.engine.Scene;
+import com.receiver2d.engine.World;
+import com.receiver2d.engine.entitysystem.Entity;
 
 /**
- * Useful for dynamically loading various types of data from Receiver2D-specific
- * files.
+ * Useful for dynamically loading various types of data from Receiver2D-specific files.
  */
 public class FileManager {
 	/**
 	 * Parses a Receiver2D World File (.r2dw) and returns the output.
-	 *
+	 * 
 	 * @param location
 	 * @return A world.
 	 * @throws ParserConfigurationException
@@ -31,12 +34,11 @@ public class FileManager {
 			throws ParserConfigurationException, SAXException, IOException {
 		boolean isValid = location.matches("(.*)[\\.]r2dw$");
 		File worldFile = new File(location);
-		
-		if (!worldFile.exists())
-			Console.debug("World file does not exist!");
+
+		if (!worldFile.exists()) Console.debug("World file does not exist!");
 		else if (!isValid)
 			Console.debug("World file is not valid!");
-		
+
 		if (!isValid || !worldFile.exists()) return null;
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -46,9 +48,9 @@ public class FileManager {
 		// create node list from scenes in world
 		NodeList sceneNodes = doc.getElementsByTagName("scene");
 		Scene[] scenes = new Scene[sceneNodes.getLength()];
-		
+
 		// check scene information
-		for (int n=0; n<sceneNodes.getLength(); n++) {
+		for (int n = 0; n < sceneNodes.getLength(); n++) {
 			scenes[n] = new Scene(sceneNodes.item(n).getAttributes().getNamedItem("name").getNodeValue());
 			NodeList sceneNodeInfo = sceneNodes.item(n).getChildNodes();
 			for (int k = 0; k < sceneNodeInfo.getLength(); k++) {
@@ -57,12 +59,12 @@ public class FileManager {
 					NodeList values = node.getChildNodes();
 					// iterate through all values; add to scenes[n]
 					for (int i = 0; i < values.getLength(); i++)
-						scenes[n].setValue(values.item(i).getNodeName(), 
+						scenes[n].setValue(values.item(i).getNodeName(),
 								values.item(i).getNodeValue());
 				} else if (node.getNodeName() == "resources") {
 					NodeList resources = node.getChildNodes();
 					for (int i = 0; i < resources.getLength(); i++) {
-						
+
 						// iterate through all resources; add to scenes[n]
 					}
 				} else if (node.getNodeName() == "entitylist") {
@@ -70,7 +72,7 @@ public class FileManager {
 					for (int i = 0; i < entities.getLength(); i++) {
 						// iterate through all entities; add to scenes[n]
 						Entity entity = new Entity();
-						
+
 					}
 				}
 			}
