@@ -11,10 +11,25 @@ public class Console {
 	 * in addition to introducing special behavior for the Console.
 	 */
 	public enum LogLevel {
-		UNDEFINED(0), // for completeness
-		ERROR(1), // critical errors that affect the user
-		INFO(2), // engine and game noncritical info
-		DEBUG(3); // debugging information, specific and ONLY FOR DEBUGGING
+		/**
+		 * Any other miscellaneous message that does not fit a category.
+		 */
+		UNDEFINED(0),
+		
+		/**
+		 * Critical errors that affect the user
+		 */
+		ERROR(1),
+		
+		/**
+		 * Engine and game non-critical info
+		 */
+		INFO(2),
+		
+		/**
+		 * Debugging information, specific and ONLY FOR DEBUGGING
+		 */
+		DEBUG(3);
 
 		int val; // the severity level
 
@@ -33,19 +48,10 @@ public class Console {
 		}
 	}
 
-	public static LogLevel level = LogLevel.ERROR;
-	
-	private static long logStart = 0;
-	
 	/**
-	 * Initializes the Console's log starting time to a particular value in
-	 * nanoseconds. This method only works once.
-	 * @param sTime The time in nanoseconds. Typically, the value from
-	 * 				System.nanoTime() would be passed to this.
+	 * The current log level that the Console is on.
 	 */
-	public static void setLogStart(long sTime) {
-		logStart = logStart == 0 ? sTime : logStart;
-	}
+	public static LogLevel level = LogLevel.ERROR;
 
 	/**
 	 * A Console message object, containing various types of information that may be useful for storing in the backlog.
@@ -61,7 +67,7 @@ public class Console {
 		 * @param time The time (in nanoseconds) of the log.
 		 */
 		public Message(String message, long time) {
-			this.time = time - logStart;
+			this.time = time - Receiver2D.START_TIME;
 			msg = message;
 		}
 
@@ -127,10 +133,9 @@ public class Console {
 	public synchronized static void log(String message, Exception exception,
 			LogLevel type) {
 		if (!level.shouldPrint(type)) return;
-		long nanoDeltaTime = System.nanoTime() - Receiver2D.START_TIME;
 
-		Message m = new Message("R2D " + type.toString() + ": " + message,
-				nanoDeltaTime);
+		Message m = new Message(type.toString() + ": " + message,
+				System.nanoTime());
 		
 		messages.add(m);
 		

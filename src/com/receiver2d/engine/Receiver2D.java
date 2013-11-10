@@ -5,6 +5,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.lwjgl.opengl.Display;
 
+import com.receiver2d.engine.Console.LogLevel;
+
 /**
  * This is the main class, where the engine can be started and managed.
  */
@@ -21,7 +23,7 @@ public class Receiver2D {
 	/**
 	 * Global program start time
 	 */
-	public static long START_TIME = 0;
+	public static long START_TIME = System.nanoTime();
 	// program values
 
 	// engine values
@@ -40,45 +42,50 @@ public class Receiver2D {
 	 * Starts the game engine.
 	 */
 	public static void start() {
-		START_TIME = System.nanoTime();
 		Console.log("Starting Receiver2D", null, Console.LogLevel.INFO);
 
 		if (DEBUG_MODE) {
-			System.setProperty("org.lwjgl.util.Debug", "true"); // TODO: logs to STDOUT, can we change this?
+//			Console.debug("Setting org.lwjgl.util.Debug to "
+//					+ System.setProperty("org.lwjgl.util.Debug", "true"));
 			Console.PRINT_STACK_TRACES = true;
 			Console.level = Console.LogLevel.DEBUG;
 		}
 
 		threads = new ThreadManager(); // create the thread manager and pool
-		Console.log("created thread manager");
 
-		// /*
-		// * This is our logic thread. It deals with all things pertaining to the calculation of non-essential game things (non-essential meaning that the engine is not concerned with it as much as it is with rendering, physics, audio, etc).
-		// */
-		// threadList[0] = new Thread(new Runnable() {
-		// @Override
-		// public void run() {
-		// Console.log("Logic thread is running...", null, "debug");
-		// }
-		// });
-		//
-		// /*
-		// * This is our physics thread. It deals with all updates pertaining to the _dynamic_ and interactive rendering of entities that have a Rigidbody component attached to them.
-		// */
-		// threadList[1] = new Thread(new Runnable() {
-		// @Override
-		// public void run() {
-		// Console.log("Physics thread is running...", null, "debug");
-		// // TODO: while (Physics.update());
-		// }
-		// });
-		//
-		// // TODO: audio thread
-		//
-		// for (Thread t : threadList) {
-		// threads.queueTask(t);
-		// t.start();
-		// }
+		/*
+		 * This is our logic thread. It deals with all things pertaining to the
+		 * calculation of non-essential game things (non-essential meaning that
+		 * the engine is not concerned with it as much as it is with rendering,
+		 * physics, audio, etc).
+		 */
+		threadList[0] = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Console.log("Logic thread is running...", null, LogLevel.DEBUG);
+			}
+		});
+
+		/*
+		 * This is our physics thread. It deals with all updates pertaining to
+		 * the _dynamic_ and interactive rendering of entities that have a
+		 * Rigidbody component attached to them.
+		 */
+		threadList[1] = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Console.log("Physics thread is running...", null,
+						LogLevel.DEBUG);
+				// TODO: while (Physics.update());
+			}
+		});
+
+		// TODO: audio thread
+
+		for (Thread t : threadList) {
+			threads.queueTask(t);
+			t.start();
+		}
 
 		DisplayHandler.init("Test Game", false, 1280, 720);
 		Console.log("Created LWJGL test window");
