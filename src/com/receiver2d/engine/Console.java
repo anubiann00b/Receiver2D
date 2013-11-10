@@ -20,18 +20,21 @@ public class Console {
 		/**
 		 * Creates a new message. Typically, in order to load this into the
 		 * Console, one would immediately call Console.load(message) after.
-		 * @param message
-		 * @param time
+		 * @param message The text of the message.
+		 * @param time The time (in nanoseconds) of the log.
 		 */
 		public Message(String message, long time) {
-			this.time = time;
+			this.time = time - logStart;
 			msg = message;
 			
-			int totalSeconds = (int) (time / 1000 / 1000 / 1000);
-			int minutes = totalSeconds / 60;
+			int totalSeconds = (int) (this.time / 1000 / 1000 / 1000);
+			int hours = totalSeconds / 3600;
+			int minutes = (totalSeconds / 60) % 60;
 			int seconds = totalSeconds % 60;
 			
-			timeStamp = minutes+":"+(seconds < 10 ? "0" : "") + seconds;
+			timeStamp = (hours < 10 ? "0" : "") + hours + ":"
+					+ (minutes < 10 ? "0" : "") + minutes + ":"
+					+ (seconds < 10 ? "0" : "") + seconds;
 		}
 		
 		/**
@@ -87,14 +90,13 @@ public class Console {
 	 * @param message   A custom string containing the message to log.
 	 * @param exception A possible exception to include in the log.
 	 */
-	public static void log(String message, Exception exception, String type) {
-		long nanoDeltaTime = System.nanoTime() - logStart;
-		
+	public synchronized static void log(String message, Exception exception,
+			String type) {
 		Message m = new Message((type != null ? type.toUpperCase() + ": " : "")
-				+ message, nanoDeltaTime);
+				+ message, System.nanoTime());
 		messages.add(m);
 		System.out.println(m.toString());
-		
+
 		if (exception != null && PRINT_STACK_TRACE)
 			exception.printStackTrace();
 	}
@@ -104,7 +106,7 @@ public class Console {
 	 * Simply logs a generic message to the Console.
 	 * @param message The message text.
 	 */
-	public static void log(String message) {
+	public synchronized static void log(String message) {
 		log(message, null, null);
 	}
 
@@ -113,7 +115,7 @@ public class Console {
 	 * 
 	 * @param message A description of events.
 	 */
-	public static void debug(String message) {
+	public synchronized static void debug(String message) {
 		if (DEBUG)
 			log(message, null, "debug");
 	}
@@ -124,7 +126,7 @@ public class Console {
 	 * @param message A custom message to include.
 	 * @param exc     The exception to log to the console.
 	 */
-	public static void logError(String message, Exception exc) {
+	public synchronized static void logError(String message, Exception exc) {
 		log(message, exc, "error");
 	}
 	
@@ -133,7 +135,7 @@ public class Console {
 	 * for various purposes (debugging, logging in Editor, etc).
 	 * @param message The message to load into the Console's backlog.
 	 */
-	public static void load(Message message) {
+	public synchronized static void load(Message message) {
 		messages.add(message);
 	}
 	

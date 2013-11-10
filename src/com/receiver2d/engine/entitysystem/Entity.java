@@ -9,23 +9,29 @@ import com.receiver2d.engine.physics.Polygon;
  * Contains information regarding an in-game Entity. Any object instantiated in the game is, in its most basic form, an entity with certain capabilities.
  */
 public class Entity {
-	private String uuid;
+	private String uuid = null;
 	/**
 	 * The position of the object in two-dimensional space.
 	 */
-	public Vector2D position; // we do not consider dimensions, which come from colliders/polygons
+	public Vector2D position = null; // we do not consider dimensions, which
+										// come from colliders/polygons
+	
+	public float rotation;
+	
 	/**
 	 * The components attached to the entity.
 	 */
-	public ArrayList<Component> components;
+	public ArrayList<Component> components = null;
+	
 	/**
 	 * A parent entity to which the entity is attached to.
 	 */
 	public Entity parent = null;
+	
 	/**
 	 * The name of the entity.
 	 */
-	public String name;
+	public String name = null;
 	
 	/**
 	 * Whether or not the entity is visible. If not, then it will not be
@@ -37,7 +43,7 @@ public class Entity {
 	 * The mesh of the entity. Specifies the morphology as an instance of a
 	 * Polygon.
 	 */
-	public Polygon mesh;
+	public Polygon mesh = null;
 
 	/**
 	 * Creates a new Entity (in-game object) and initializes the component list
@@ -47,13 +53,17 @@ public class Entity {
 		uuid = UUID.randomUUID().toString();
 		components = new ArrayList<Component>();
 		name = entityName;
-		mesh = new Polygon(new double[]{ 0,0 , 0,10 , 10,10 , 10,0 });
+		mesh = new Polygon(new float[]{ 0f,0f , 0f,10f , 10f,10f , 10f,0f });
+		position = new Vector2D(0f, 0f);
 	}
 	
-	//Entity() overrides
-		public Entity() {
-			this("");
-		}
+	/**
+	 * Creates a new Entity (in-game object) and initializes the component list
+	 * for that entity.
+	 */
+	public Entity() {
+		this("");
+	}
 
 	/**
 	 * Creates an entity whose parent is the calling instance.

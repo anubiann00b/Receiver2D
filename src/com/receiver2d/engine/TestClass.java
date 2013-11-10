@@ -1,9 +1,8 @@
 package com.receiver2d.engine;
 
-import com.receiver2d.engine.io.FileManager;
-import com.receiver2d.engine.io.R2DResource;
-import com.receiver2d.engine.physics.CollisionDetection;
-import com.receiver2d.engine.physics.Polygon;
+import com.receiver2d.engine.entitysystem.Entity;
+import com.receiver2d.engine.io.*;
+import com.receiver2d.engine.physics.*;
 
 /**
  * This class is for testing purposes only, although it currently is responsible
@@ -58,6 +57,11 @@ public class TestClass {
 		int des = (int) scene.getValue("Default Enemy Strength");
 		Console.debug("DES + 1 = "+ ++des);
 		Console.debug("Getting resource 0 path: "+world.getResources().get(0).getPath());
+		
+		// here we begin to test Entity loading
+		Entity boss = scene.getEntityList().get(0); // this should be "Boss"
+		Console.debug("Getting Entity 0, aka \""+boss.name+"\"");
+		Console.debug(boss.name+" has rotation "+boss.rotation);
 		
 		// test loading a new resource
 		R2DResource r = new R2DResource("res/test_scene.r2dw");

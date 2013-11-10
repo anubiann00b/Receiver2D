@@ -11,6 +11,7 @@ import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 import java.io.*;
+import java.lang.reflect.Field;
 
 /**
  * Useful for dynamically loading various types of data from Receiver2D-specific files.
@@ -31,8 +32,7 @@ public class FileManager {
 		File worldFile = new File(location);
 
 		if (!worldFile.exists()) Console.debug("World file does not exist!");
-		else if (!isValid)
-			Console.debug("World file is not valid!");
+		else if (!isValid) Console.debug("World file is not valid!");
 
 		if (!isValid || !worldFile.exists()) return null;
 
@@ -45,8 +45,7 @@ public class FileManager {
 		World world = null;
 		if (worldNode.getAttributes().getNamedItem("name") == null)
 			world = new World();
-		else
-			world = new World(worldNode.getAttributes().getNamedItem("name")
+		else world = new World(worldNode.getAttributes().getNamedItem("name")
 					.getNodeValue());
 		
 		// check scene information
@@ -100,12 +99,56 @@ public class FileManager {
 						Node enode = entityNodes.item(i);
 						Entity en = new Entity(enode.getAttributes()
 								.getNamedItem("name").getNodeValue());
-						// add entity attributes
-						
+
+						NamedNodeMap nnm = enode.getAttributes();
+						for (int j=0; j<nnm.getLength(); j++) {
+							String[] fNames = nnm.item(j).getNodeName().split("[\\_]");
+							Class<?> enc = en.getClass();
+							Field f = null;
+							try {
+								f = enc.getField(fNames[0]); // getDeclaredField
+								
+								//iterate until we get to "end" of field chain
+								for (int q=1; q<fNames.length; q++) {
+									enc = f.getClass();
+									f = enc.getField(fNames[q]);
+								}
+								
+								String nodeValue = nnm.item(j).getNodeValue();
+								if (f.getType().equals(Integer.class))
+									f.set(enc, new Integer(nodeValue));
+								else if (f.getType().equals(Boolean.class))
+									f.set(enc, new Integer(nodeValue));
+								else if (f.getType().equals(Short.class))
+									f.set(enc, new Short(nodeValue));
+								else if (f.getType().equals(Long.class))
+									f.set(enc, new Long(nodeValue));
+								else if (f.getType().equals(Double.class))
+									f.set(enc, new Double(nodeValue));
+								else if (f.getType().equals(Float.class))
+									f.set(enc, new Float(nodeValue));
+								else if (f.getType().equals(Byte.class))
+									f.set(enc, new Byte(nodeValue));
+								else if (f.getType().equals(Character.class)) {
+									try {
+										f.set(enc, (char) Integer.parseInt(nodeValue));
+									} catch (Exception e) {
+										f.set(enc, nodeValue.charAt(0));
+									}
+								}
+								
+								Console.debug("Success in setting Entity field \""
+										+ f.getName() + ".\"");
+							} catch (Exception e) {
+								Console.logError("Could not access field \""
+										+ nnm.item(j).getNodeName()
+										+ "\" in Entity class.", e);
+							}
+						}
 						
 						NodeList componentNodes = enode.getChildNodes();
 						for (int j=0; j<componentNodes.getLength(); j++) {
-							// add components
+							// TODO: add components
 							
 						}
 						entityList.add(en);
@@ -134,6 +177,12 @@ public class FileManager {
 		case "int":
 			nVal = new Integer(val);
 			break;
+		case "short":
+			nVal = new Short(val);
+			break;
+		case "long":
+			nVal = new Long(val);
+			break;
 		case "boolean":
 			nVal = new Boolean(val);
 			break;
@@ -144,10 +193,18 @@ public class FileManager {
 			nVal = new Double(val);
 			break;
 		case "char":
-			nVal = val.charAt(0);
+			try {
+				char numVal = (char) Integer.parseInt(val);
+				nVal = numVal;
+			} catch (Exception e) {
+				nVal = val.charAt(0);
+			}
+			break;
+		case "byte":
+			nVal = new Byte(val);
 			break;
 		default:
-			nVal = val;
+			nVal = val; //nVal is a String type
 		}
 		
 		return nVal;

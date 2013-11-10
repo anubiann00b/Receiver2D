@@ -12,7 +12,7 @@
 			<resource path="res/speech.txt" type="text/plain"/>
 		</resources>
 		<entitylist>
-			<entity name="Boss" x="30f" y="23f" rotation="190f">
+			<entity name="Boss" position_x="30f" position_y="23f" rotation="190f">
 				<component type="Rigidbody" mass="30.4f" velocity_x="2.3f" velocity_y="0.0f" />
 				<component type="script" src="example/java/BossAI.java" />
 			</entity>

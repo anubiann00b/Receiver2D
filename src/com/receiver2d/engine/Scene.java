@@ -23,7 +23,6 @@ public class Scene {
 
 	/**
 	 * Loads a scene into memory and gives it a name.
-	 *
 	 * @param name The name of the scene.
 	 */
 	public Scene(String name) {
@@ -38,7 +37,6 @@ public class Scene {
 
 	/**
 	 * Gets the current name of the scene.
-	 *
 	 * @return The name of the scene.
 	 */
 	public String getName() {
@@ -47,11 +45,18 @@ public class Scene {
 
 	/**
 	 * Sets the current entity list of the scene to whatever is provided.
-	 *
 	 * @param entityList An EntityList, containing entities.
 	 */
 	public void setEntityList(EntityList entityList) {
 		this.entityList = entityList;
+	}
+	
+	/**
+	 * Gets the list of entities that are attached to this scene.
+	 * @return A list of entities.
+	 */
+	public EntityList getEntityList() {
+		return entityList;
 	}
 
 	/**
