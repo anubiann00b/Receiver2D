@@ -16,19 +16,23 @@ public class DisplayHandler {
 	private static int width = 0;
 	private static int height = 0;
 	private static boolean hasInitialized = false;
-	
+
 	/**
-	 * Initiates the display, which is responsible for all visual output of
-	 * rendering.
-	 * @param title The title of the window.
-	 * @param fullscreen Whether or not the window starts off full-screen.
-	 * @param width The width of the window, in pixels.
-	 * @param height The height of the window, in pixels.
+	 * Initiates the display, which is responsible for all visual output of rendering.
+	 * 
+	 * @param title
+	 *            The title of the window.
+	 * @param fullscreen
+	 *            Whether or not the window starts off full-screen.
+	 * @param width
+	 *            The width of the window, in pixels.
+	 * @param height
+	 *            The height of the window, in pixels.
 	 */
 	public static void init(String title, boolean fullscreen, int width, int height) {
 		if (hasInitialized) return;
 		hasInitialized = true;
-		
+
 		DisplayHandler.width = width;
 		DisplayHandler.height = height;
 		try {
@@ -58,24 +62,29 @@ public class DisplayHandler {
 
 		while (Renderer.update()); // set to currently update the display
 	}
-	
+
 	/**
 	 * Changes the state of the window by toggling its fullscreen component.
-	 * @param fullscreen Is true for fullscreen; false for window mode.
+	 * 
+	 * @param fullscreen
+	 *            Is true for fullscreen; false for window mode.
 	 */
 	public static void updateFullscreen(boolean fullscreen) {
 		try {
 			Display.setFullscreen(fullscreen);
 		} catch (Exception e) {}
 	}
-	
+
 	/**
 	 * Updates the display geometry in pixels. Any zero values are unrecognized.
-	 * @param pixelWidth The width of the display.
-	 * @param pixelHeight The height of the display.
+	 * 
+	 * @param pixelWidth
+	 *            The width of the display.
+	 * @param pixelHeight
+	 *            The height of the display.
 	 */
 	public static void resize(int pixelWidth, int pixelHeight) {
-		//TODO: enable more robust resizing than simply changing display height
+		// TODO: enable more robust resizing than simply changing display height
 		width = pixelWidth == 0 ? width : pixelWidth;
 		height = pixelHeight == 0 ? height : pixelHeight;
 	}

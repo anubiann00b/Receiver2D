@@ -10,8 +10,9 @@ import java.util.ArrayList;
 public class EntityList extends ArrayList<Entity> {
 	private static final long serialVersionUID = -5861454509544255719L;
 
-	public EntityList() { }
-	public EntityList (Entity[] entities) {
+	public EntityList() {}
+
+	public EntityList(Entity[] entities) {
 		for (Entity entity : entities)
 			add(entity); // add all entities in-game
 	}

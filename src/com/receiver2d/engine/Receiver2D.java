@@ -14,8 +14,7 @@ public class Receiver2D {
 	 */
 	public static long startTime = 0;
 	/**
-	 * Whether or not the program is running. When false, all currently-running
-	 * threads will automatically close.
+	 * Whether or not the program is running. When false, all currently-running threads will automatically close.
 	 */
 	public static boolean running = true;
 	// program values
@@ -29,6 +28,7 @@ public class Receiver2D {
 	 */
 	public static ArrayList<World> worlds = new ArrayList<World>();
 	public static Thread[] threadList = new Thread[2];
+
 	// engine values
 
 	/**
@@ -39,12 +39,9 @@ public class Receiver2D {
 
 		Console.setStartTime(startTime = System.nanoTime());
 		Console.log("Receiver2D started.");
-		
+
 		/*
-		 * This is our logic thread. It deals with all things pertaining to
-		 * the calculation of non-essential game things (non-essential meaning
-		 * that the engine is not concerned with it as much as it is with
-		 * rendering, physics, audio, etc).
+		 * This is our logic thread. It deals with all things pertaining to the calculation of non-essential game things (non-essential meaning that the engine is not concerned with it as much as it is with rendering, physics, audio, etc).
 		 */
 		threadList[0] = new Thread(new Runnable() {
 			@Override
@@ -52,11 +49,9 @@ public class Receiver2D {
 				Console.debug("Logic thread is running...");
 			}
 		});
-		
+
 		/*
-		 * This is our physics thread. It deals with all updates pertaining to
-		 * the _dynamic_ and interactive rendering of entities that have a 
-		 * Rigidbody component attached to them.
+		 * This is our physics thread. It deals with all updates pertaining to the _dynamic_ and interactive rendering of entities that have a Rigidbody component attached to them.
 		 */
 		threadList[1] = new Thread(new Runnable() {
 			@Override
@@ -65,14 +60,14 @@ public class Receiver2D {
 				// TODO: while (Physics.update());
 			}
 		});
-		
+
 		// TODO: audio thread
-		
+
 		for (Thread t : threadList) {
 			threads.queueTask(t);
 			t.start();
 		}
-		
+
 		// this comes last
 		Console.debug("Initialized rendering in main thread.");
 		DisplayHandler.init("Test Game", false, 1280, 720);

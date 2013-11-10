@@ -6,8 +6,7 @@ import com.receiver2d.engine.physics.CollisionDetection;
 import com.receiver2d.engine.physics.Polygon;
 
 /**
- * This class is for testing purposes only, although it currently is responsible
- * for initializing Receiver2D. NOT FOR RELEASE
+ * This class is for testing purposes only, although it currently is responsible for initializing Receiver2D. NOT FOR RELEASE
  */
 public class TestClass {
 	/**
@@ -20,8 +19,7 @@ public class TestClass {
 		for (int i = 0; i <= 10; i++)
 			for (int j = 0; j <= 10; j++) {
 				Vector2D pnt1 = new Vector2D(i, j);
-				if (CollisionDetection.pointInPolygon(pnt1, square))
-					Console.debug("Point " + pnt1.toString() + " is in poly");
+				if (CollisionDetection.pointInPolygon(pnt1, square)) Console.debug("Point " + pnt1.toString() + " is in poly");
 			}
 
 		Polygon ln1 = new Polygon(new Vector2D[] { Vector2D.ZERO,
@@ -40,7 +38,7 @@ public class TestClass {
 		// first, test world loading
 		World world = null;
 		try {
-			//load the first world
+			// load the first world
 			world = FileManager.loadWorld("res/test_scene.r2dw");
 		} catch (Exception e) {
 			Console.logError("Exception!", e);
@@ -54,11 +52,11 @@ public class TestClass {
 		Scene scene = world.scenes.get(0);
 		Console.debug("Scene 0 has name \"" + scene.getName() + "\"");
 		Console.debug("Player name is " + scene.getValue("Player Name"));
-		Console.debug("Default enemy strength is "+scene.getValue("Default Enemy Strength"));
+		Console.debug("Default enemy strength is " + scene.getValue("Default Enemy Strength"));
 		int des = (int) scene.getValue("Default Enemy Strength");
-		Console.debug("DES + 1 = "+ ++des);
-		Console.debug("Getting resource 0 path: "+world.getResources().get(0).getPath());
-		
+		Console.debug("DES + 1 = " + ++des);
+		Console.debug("Getting resource 0 path: " + world.getResources().get(0).getPath());
+
 		// test loading a new resource
 		R2DResource r = new R2DResource("res/test_scene.r2dw");
 		Console.debug(r.load() ? "Loading file \"" + r.getPath()
