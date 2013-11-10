@@ -6,7 +6,8 @@ import com.receiver2d.engine.physics.CollisionDetection;
 import com.receiver2d.engine.physics.Polygon;
 
 /**
- * This class is for testing purposes only, although it currently is responsible for initializing Receiver2D. NOT FOR RELEASE
+ * This class is for testing purposes only, although it currently is responsible
+ * for initializing Receiver2D. NOT FOR RELEASE
  */
 public class TestClass {
 	/**
@@ -35,11 +36,12 @@ public class TestClass {
 	/**
 	 * Tests the FileManager and prints output.
 	 */
-	public static void testWorldLoad() {
+	public static void resourceTest() {
+		// first, test world loading
 		World world = null;
 		try {
 			//load the first world
-			world = FileManager.loadWorld("src/res/test_scene.r2dw");
+			world = FileManager.loadWorld("res/test_scene.r2dw");
 		} catch (Exception e) {
 			Console.logError("Exception!", e);
 		}
@@ -52,8 +54,17 @@ public class TestClass {
 		Scene scene = world.scenes.get(0);
 		Console.debug("Scene 0 has name \"" + scene.getName() + "\"");
 		Console.debug("Player name is " + scene.getValue("Player Name"));
-		// test loading new resource
-		R2DResource r = new R2DResource("f1");
+		Console.debug("Default enemy strength is "+scene.getValue("Default Enemy Strength"));
+		int des = (int) scene.getValue("Default Enemy Strength");
+		Console.debug("DES + 1 = "+ ++des);
+		Console.debug("Getting resource 0 path: "+world.getResources().get(0).getPath());
+		
+		// test loading a new resource
+		R2DResource r = new R2DResource("res/test_scene.r2dw");
+		Console.debug(r.load() ? "Loading file \"" + r.getPath()
+				+ "\" was successful." : "Loading file \"" + r.getPath()
+				+ "\" failed.");
+
 	}
 
 	public static void main(String[] args) {
@@ -62,7 +73,7 @@ public class TestClass {
 		Console.PRINT_STACK_TRACE = true;
 		Receiver2D.start(); // initialize the game
 
-		testWorldLoad(); // test our world loading
+		resourceTest(); // test our world loading
 
 		Receiver2D.stop();
 	}

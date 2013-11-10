@@ -51,7 +51,7 @@ public class FileManager {
 		
 		// check scene information
 		NodeList sceneNodes = doc.getElementsByTagName("scene");
-		Console.log("Scene nodes length: "+sceneNodes.getLength());
+		Console.debug("Scene nodes length: "+sceneNodes.getLength());
 		Scene[] scenes = new Scene[sceneNodes.getLength()];
 		for (int n=0; n<sceneNodes.getLength(); n++) {
 			scenes[n] = new Scene(sceneNodes.item(n).getAttributes()
@@ -78,6 +78,16 @@ public class FileManager {
 						if (!resources.item(i).hasAttributes()) continue;
 						Node rnode = resources.item(i);
 						NamedNodeMap nnm = rnode.getAttributes();
+						
+						Console.debug("Loading "+nnm.getNamedItem(
+									"path").getNodeValue());
+						if (nnm.getNamedItem("type") == null)
+							world.addResource(new R2DResource(nnm.getNamedItem(
+									"path").getNodeValue()));
+						else
+							world.addResource(new R2DResource(nnm.getNamedItem(
+									"path").getNodeValue(), nnm.getNamedItem(
+									"type").getNodeValue()));
 						
 					}
 				} else if (node.getNodeName() == "entitylist") {

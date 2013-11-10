@@ -7,6 +7,7 @@ import org.lwjgl.opengl.DisplayMode;
 import static org.lwjgl.opengl.GL11.*;
 
 import com.receiver2d.engine.entitysystem.Entity;
+import com.receiver2d.engine.graphics.Renderer;
 
 /**
  * Handles the appearance of things on-screen and draws them.
@@ -55,49 +56,7 @@ public class DisplayHandler {
 		glOrtho(0, width, 0, height, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
 
-		while (update()); // set to currently update the display
-	}
-	
-	/**
-	 * Performs a rendering update.
-	 * 
-	 * @return Whether or not the next rendering update is available (based on
-	 *         if the user prompted a display close event). If false, then the
-	 *         next render is prevented and the display (along with the rest of
-	 *         the program) quits.
-	 */
-
-	public static boolean update() {
-		
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // clear screen with transparent
-		// black
-		// set viewport to display dimension
-		glViewport(0, 0, Display.getWidth(), Display.getHeight());
-		Display.update();
-
-		// testing display update
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
-		//render all in-game elements that are visible
-		
-		
-		return !Display.isCloseRequested();
-	}
-	
-	/**
-	 * Draws an entity to the display.
-	 * @param entity
-	 */
-	public static void drawEntity(Entity entity) {
-		if (!entity.visible) return; //don't render invisible entities
-		
-		//TODO: get color of entity
-		
-		
-		glBegin(GL_POLYGON); // draw the mesh of the entity
-		for (Vector2D pnt : entity.mesh.points)
-			glVertex2f(pnt.x, pnt.y);
-		glEnd();
+		while (Renderer.update()); // set to currently update the display
 	}
 	
 	/**

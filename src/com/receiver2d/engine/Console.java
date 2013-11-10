@@ -1,10 +1,65 @@
 package com.receiver2d.engine;
 
+import java.util.ArrayList;
+
 /**
  * This class is used for logging and debug information
  */
 public class Console {
 	private static long logStart = 0;
+	
+	/**
+	 * A Console message object, containing various types of information that 
+	 * may be useful for storing in the backlog.
+	 */
+	public static class Message {
+		private long time = 0;
+		private String msg = null;
+		private String timeStamp = null;
+		
+		/**
+		 * Creates a new message. Typically, in order to load this into the
+		 * Console, one would immediately call Console.load(message) after.
+		 * @param message
+		 * @param time
+		 */
+		public Message(String message, long time) {
+			this.time = time;
+			msg = message;
+			
+			int totalSeconds = (int) (time / 1000 / 1000 / 1000);
+			int minutes = totalSeconds / 60;
+			int seconds = totalSeconds % 60;
+			
+			timeStamp = minutes+":"+(seconds < 10 ? "0" : "") + seconds;
+		}
+		
+		/**
+		 * Gets the time at which the console message was invoked.
+		 * @return The number of nanoseconds since logging began.
+		 */
+		public long getTime() {
+			return time;
+		}
+		
+		/**
+		 * Gets the original text of the console message.
+		 * @return The message text.
+		 */
+		public String getMessage() {
+			return msg;
+		}
+		
+		/**
+		 * Gets the string representation of the message, which differs from
+		 * getMessage() in that it also includes the timeStamp information in
+		 * the returned text.
+		 */
+		public String toString() {
+			return timeStamp + " - " + msg;
+		}
+	}
+	private static ArrayList<Message> messages = new ArrayList<Message>();
 	
 	/**
 	 * If set to true, all instances of Console.debug() will be logged.
@@ -34,19 +89,21 @@ public class Console {
 	 */
 	public static void log(String message, Exception exception, String type) {
 		long nanoDeltaTime = System.nanoTime() - logStart;
-		int totalSeconds = (int) (nanoDeltaTime / 1000 / 1000 / 1000);
-		int minutes = totalSeconds / 60;
-		int seconds = totalSeconds % 60;
-
-		System.out.println(minutes + ":" + (seconds < 10 ? "0" : "") + seconds
-				+ " - " + (type != null ? type.toUpperCase() + ": " : "")
-				+ message);
+		
+		Message m = new Message((type != null ? type.toUpperCase() + ": " : "")
+				+ message, nanoDeltaTime);
+		messages.add(m);
+		System.out.println(m.toString());
 		
 		if (exception != null && PRINT_STACK_TRACE)
 			exception.printStackTrace();
 	}
 
 	// log() overrides
+	/**
+	 * Simply logs a generic message to the Console.
+	 * @param message The message text.
+	 */
 	public static void log(String message) {
 		log(message, null, null);
 	}
@@ -69,5 +126,29 @@ public class Console {
 	 */
 	public static void logError(String message, Exception exc) {
 		log(message, exc, "error");
+	}
+	
+	/**
+	 * Loads a new message into the Console's list, which will now be accessible
+	 * for various purposes (debugging, logging in Editor, etc).
+	 * @param message The message to load into the Console's backlog.
+	 */
+	public static void load(Message message) {
+		messages.add(message);
+	}
+	
+	/**
+	 * Gets all of the Console's currently-stored messages.
+	 * @return The list of messages.
+	 */
+	public static ArrayList<Message> getMessages() {
+		return messages;
+	}
+	
+	/**
+	 * Clears all messages from the Console's backlog.
+	 */
+	public static void clear() {
+		messages.clear();
 	}
 }

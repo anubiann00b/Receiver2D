@@ -6,6 +6,9 @@ import java.util.concurrent.*;
  * Is responsible for threading all of the game's processes.
  */
 public class ThreadManager {
+	/**
+	 * The pool of threads in the game.
+	 */
 	public ExecutorService threadPool;
 	public CyclicBarrier barrier;
 	private int numThreads = 4;
@@ -33,10 +36,11 @@ public class ThreadManager {
 	}
 
 	/**
-	 * Give a task for the thread pool to queue for execution with the ability to get back data
-	 *
-	 * @param task the callable to execute
-	 * @return a future object with the data being returned
+	 * Give a task for the thread pool to queue for execution with the ability
+	 * to get back data.
+	 * 
+	 * @param task The Callable to execute
+	 * @return A future object with the data being returned
 	 */
 	public Future<?> queueTask(Callable<?> task) {
 		return threadPool.submit(task);

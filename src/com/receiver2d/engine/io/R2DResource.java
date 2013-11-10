@@ -62,11 +62,17 @@ public class R2DResource {
 	/**
 	 * Loads a file into memory from the resource's current path. This must be
 	 * called before calling getLoaded().
+	 * 
+	 * @return true if the operation was successful, false if otherwise
 	 */
-	public void load() {
+	public boolean load() {
 		try {
 			ioStream = new FileInputStream(loadedFile = new File(location));
-		} catch (Exception e) { }
+			return true;
+		} catch (Exception e) {
+			Console.logError("Cannot load file which does not exist.", e);
+		}
+		return false;
 	}
 	
 	/**
@@ -77,7 +83,9 @@ public class R2DResource {
 		try {
 			if (ioStream != null)
 				ioStream.close(); // close the stream before nullifying
-		} catch (IOException e) { }
+		} catch (IOException e) {
+			Console.logError("Error when closing file ioStream.", e);
+		}
 		ioStream = null;
 		loadedFile = null;
 	}
@@ -89,6 +97,14 @@ public class R2DResource {
 	 */
 	public File getFile() {
 		return loadedFile;
+	}
+	
+	/**
+	 * Gets the path of the resource.
+	 * @return The path of the resource.
+	 */
+	public String getPath() {
+		return location;
 	}
 	
 	/**
