@@ -3,7 +3,7 @@ package com.receiver2d.engine;
 import java.util.ArrayList;
 
 /**
- * This class is used for logging and debug information
+ * This class is used for logging and debugging information.
  */
 public class Console {
 	/**
