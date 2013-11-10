@@ -1,7 +1,10 @@
 package com.receiver2d.engine.io;
 
-import java.io.*;
-import java.nio.file.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import com.receiver2d.engine.Console;
 
@@ -43,7 +46,7 @@ public class R2DResource {
 			location = loc;
 			mimeType = type;
 			return true;
-		} else Console.debug("File " + loc + " either doesn't exist or is not a file.");
+		} else Console.log("File " + loc + " either doesn't exist or is not a file.");
 		return false;
 	}
 

@@ -1,8 +1,8 @@
 package com.receiver2d.engine.physics;
 
-import com.receiver2d.engine.Vector2D;
-
 import java.util.LinkedList;
+
+import com.receiver2d.engine.Vector2D;
 
 /**
  * Any n-sided polygon, irregular or regular.
@@ -21,14 +21,14 @@ public class Polygon {
 	 *            A set of vertices for the polygon.
 	 */
 	public Polygon(Vector2D[] points) {
-		for (int i = 0; i < points.length; i++) {
-			this.points.add(points[i]);
+		for (Vector2D point : points) {
+			this.points.add(point);
 			this.length++;
 		}
 	}
 
 	// Polygon overrides
-	public Polygon(double[] points) {
+	public Polygon(float[] points) {
 		for (int i = 0; i + 1 < points.length; i += 2) {
 			this.points.add(new Vector2D(points[i], points[i + 1]));
 			this.length++;

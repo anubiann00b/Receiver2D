@@ -1,16 +1,23 @@
 package com.receiver2d.engine.io;
 
-import com.receiver2d.engine.*;
-import com.receiver2d.engine.Console;
-import com.receiver2d.engine.entitysystem.Entity;
-import com.receiver2d.engine.entitysystem.*;
+import java.io.File;
+import java.io.IOException;
 
-import javax.xml.parsers.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import java.io.*;
+import com.receiver2d.engine.Console;
+import com.receiver2d.engine.Scene;
+import com.receiver2d.engine.World;
+import com.receiver2d.engine.entitysystem.Entity;
+import com.receiver2d.engine.entitysystem.EntityList;
 
 /**
  * Useful for dynamically loading various types of data from Receiver2D-specific files.
@@ -30,8 +37,8 @@ public class FileManager {
 		boolean isValid = location.matches("(.*)[\\.]r2dw$");
 		File worldFile = new File(location);
 
-		if (!worldFile.exists()) Console.debug("World file does not exist!");
-		else if (!isValid) Console.debug("World file is not valid!");
+		if (!worldFile.exists()) Console.log("World file does not exist!");
+		else if (!isValid) Console.log("World file is not valid!");
 
 		if (!isValid || !worldFile.exists()) return null;
 
@@ -48,7 +55,7 @@ public class FileManager {
 
 		// check scene information
 		NodeList sceneNodes = doc.getElementsByTagName("scene");
-		Console.debug("Scene nodes length: " + sceneNodes.getLength());
+		Console.log("Scene nodes length: " + sceneNodes.getLength());
 		Scene[] scenes = new Scene[sceneNodes.getLength()];
 		for (int n = 0; n < sceneNodes.getLength(); n++) {
 			scenes[n] = new Scene(sceneNodes.item(n).getAttributes()
@@ -76,7 +83,7 @@ public class FileManager {
 						Node rnode = resources.item(i);
 						NamedNodeMap nnm = rnode.getAttributes();
 
-						Console.debug("Loading " + nnm.getNamedItem(
+						Console.log("Loading " + nnm.getNamedItem(
 								"path").getNodeValue());
 						if (nnm.getNamedItem("type") == null) world.addResource(new R2DResource(nnm.getNamedItem(
 								"path").getNodeValue()));

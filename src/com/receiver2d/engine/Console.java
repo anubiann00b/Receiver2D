@@ -6,31 +6,43 @@ import java.util.ArrayList;
  * This class is used for logging and debug information
  */
 public class Console {
-	private static long logStart = 0;
+	public enum LogLevel {
+		UNDEFINED(0), // for completeness
+		ERROR(1), // critical errors that affect the user
+		INFO(2), // engine and game noncritical info
+		DEBUG(3); // debugging information, specific and ONLY FOR DEBUGGING
+
+		int val; // the severity level
+
+		private LogLevel(int val) {
+			this.val = val;
+		}
+
+		boolean shouldPrint(LogLevel cmp) {
+			return this.val >= cmp.val; // example: if level is debug, we should print error msgs
+		}
+	}
+
+	public static LogLevel level = LogLevel.ERROR;
 
 	/**
 	 * A Console message object, containing various types of information that may be useful for storing in the backlog.
 	 */
 	public static class Message {
-		private long time = 0;
+		private Long time = null; // delta time in nanoseconds since game started
 		private String msg = null;
-		private String timeStamp = null;
 
 		/**
 		 * Creates a new message. Typically, in order to load this into the Console, one would immediately call Console.load(message) after.
 		 * 
 		 * @param message
-		 * @param time
+		 *            the message to be stored
+		 * @param deltaTime
+		 *            the time since the start of the game
 		 */
 		public Message(String message, long time) {
 			this.time = time;
 			msg = message;
-
-			int totalSeconds = (int) (time / 1000 / 1000 / 1000);
-			int minutes = totalSeconds / 60;
-			int seconds = totalSeconds % 60;
-
-			timeStamp = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 		}
 
 		/**
@@ -54,32 +66,30 @@ public class Console {
 		/**
 		 * Gets the string representation of the message, which differs from getMessage() in that it also includes the timeStamp information in the returned text.
 		 */
+		@Override
 		public String toString() {
-			return timeStamp + " - " + msg;
+			return toStringHumanReadable() + " - " + msg;
+		}
+
+		public String toStringHumanReadable() {
+			int totalSeconds = (int) (time / 1000 / 1000 / 1000);
+			int hours = totalSeconds / 60 / 60;
+			int minutes = (totalSeconds - (hours * 60 * 60)) / 60;
+			int seconds = totalSeconds % 60;
+
+			return hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+		}
+
+		public String toStringNS() {
+			return Long.toString(time);
 		}
 	}
 
 	private static ArrayList<Message> messages = new ArrayList<Message>();
-
-	/**
-	 * If set to true, all instances of Console.debug() will be logged.
-	 */
-	public static boolean DEBUG = false;
-
 	/**
 	 * Whether or not to print error stack traces.
 	 */
-	public static boolean PRINT_STACK_TRACE = false;
-
-	/**
-	 * Sets the time at which the Console will assume a recording of events. This property is immutable if it has already been set by Receiver2D.
-	 * 
-	 * @param time
-	 *            The time, in nanoseconds, since the engine has started.
-	 */
-	public static void setStartTime(long time) {
-		logStart = logStart == 0 ? time : logStart;
-	}
+	public static boolean PRINT_STACK_TRACES = false;
 
 	/**
 	 * Logs system information to the console with time and message.
@@ -89,15 +99,28 @@ public class Console {
 	 * @param exception
 	 *            A possible exception to include in the log.
 	 */
+	public static void log(String message, Exception exception, LogLevel type) {
+		if (level.shouldPrint(type)) {
+			long nanoDeltaTime = System.nanoTime() - Receiver2D.START_TIME;
+
+			Message m = new Message("R2D " + type.toString() + ": " + message, nanoDeltaTime);
+			messages.add(m);
+			System.out.println(m.toString()); // TODO: handle this with text or gui mode option
+
+			if (exception != null && PRINT_STACK_TRACES) exception.printStackTrace();
+		}
+	}
+
+	@Deprecated
+	// switch to method above
 	public static void log(String message, Exception exception, String type) {
-		long nanoDeltaTime = System.nanoTime() - logStart;
+		LogLevel l = LogLevel.UNDEFINED;
 
-		Message m = new Message((type != null ? type.toUpperCase() + ": " : "")
-				+ message, nanoDeltaTime);
-		messages.add(m);
-		System.out.println(m.toString());
-
-		if (exception != null && PRINT_STACK_TRACE) exception.printStackTrace();
+		if (type.equalsIgnoreCase("ERROR")) l = LogLevel.ERROR;
+		else if (type.equalsIgnoreCase("INFO")) l = LogLevel.INFO;
+		else if (type.equalsIgnoreCase("DEBUG")) l = LogLevel.DEBUG;
+		else l = LogLevel.UNDEFINED;
+		log(message, exception, l);
 	}
 
 	// log() overrides
@@ -108,17 +131,7 @@ public class Console {
 	 *            The message text.
 	 */
 	public static void log(String message) {
-		log(message, null, null);
-	}
-
-	/**
-	 * Logs a debug message to the console.
-	 * 
-	 * @param message
-	 *            A description of events.
-	 */
-	public static void debug(String message) {
-		if (DEBUG) log(message, null, "debug");
+		log(message, null, LogLevel.INFO);
 	}
 
 	/**
@@ -130,17 +143,7 @@ public class Console {
 	 *            The exception to log to the console.
 	 */
 	public static void logError(String message, Exception exc) {
-		log(message, exc, "error");
-	}
-
-	/**
-	 * Loads a new message into the Console's list, which will now be accessible for various purposes (debugging, logging in Editor, etc).
-	 * 
-	 * @param message
-	 *            The message to load into the Console's backlog.
-	 */
-	public static void load(Message message) {
-		messages.add(message);
+		log(message, exc, LogLevel.ERROR);
 	}
 
 	/**

@@ -1,9 +1,9 @@
 package com.receiver2d.engine.entitysystem;
 
-import com.receiver2d.engine.Vector2D;
-
 import java.util.ArrayList;
 import java.util.UUID;
+
+import com.receiver2d.engine.Vector2D;
 import com.receiver2d.engine.physics.Polygon;
 
 /**
@@ -45,7 +45,7 @@ public class Entity {
 		uuid = UUID.randomUUID().toString();
 		components = new ArrayList<Component>();
 		name = entityName;
-		mesh = new Polygon(new double[] { 0, 0, 0, 10, 10, 10, 10, 0 });
+		mesh = new Polygon(new float[] { 0, 0, 0, 10, 10, 10, 10, 0 });
 	}
 
 	// Entity() overrides
