@@ -8,8 +8,8 @@
 			<int name="World Height">1000</int>
 		</values>
 		<resources>
-			<resource path="example-project/img/file.png" type="image/png" uuid="13408u34uhdas" />
-			<resource path="example-project/misc/speech.txt" type="text/plain" uuid="8dh308asdhdh" />
+			<resource path="example-project/img/file.png" type="image/png"/>
+			<resource path="example-project/misc/speech.txt" type="text/plain"/>
 		</resources>
 		<entitylist>
 			<entity name="Boss" x="30f" y="23f" rotation="190f">

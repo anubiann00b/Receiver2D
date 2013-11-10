@@ -1,6 +1,7 @@
 package com.receiver2d.engine;
 
 import com.receiver2d.engine.io.FileManager;
+import com.receiver2d.engine.io.R2DResource;
 import com.receiver2d.engine.physics.CollisionDetection;
 import com.receiver2d.engine.physics.Polygon;
 
@@ -51,6 +52,8 @@ public class TestClass {
 		Scene scene = world.scenes.get(0);
 		Console.debug("Scene 0 has name \"" + scene.getName() + "\"");
 		Console.debug("Player name is " + scene.getValue("Player Name"));
+		// test loading new resource
+		R2DResource r = new R2DResource("f1");
 	}
 
 	public static void main(String[] args) {

@@ -3,15 +3,11 @@ package com.receiver2d.engine.io;
 import com.receiver2d.engine.*;
 import com.receiver2d.engine.Console;
 import com.receiver2d.engine.entitysystem.Entity;
-import com.receiver2d.engine.entitysystem.EntityList;
+import com.receiver2d.engine.entitysystem.*;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.*;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 import java.io.*;
@@ -80,7 +76,8 @@ public class FileManager {
 					for (int i = 0; i<resources.getLength(); i++) {
 						// check against text nodes and other non-tags
 						if (!resources.item(i).hasAttributes()) continue;
-						// iterate through all resources; add to scenes[n]
+						Node rnode = resources.item(i);
+						NamedNodeMap nnm = rnode.getAttributes();
 						
 					}
 				} else if (node.getNodeName() == "entitylist") {

@@ -1,9 +1,11 @@
 package com.receiver2d.engine;
 
 import com.receiver2d.engine.entitysystem.EntityList;
+import com.receiver2d.engine.io.R2DResource;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -15,11 +17,9 @@ public class Scene {
 	private String uuid;
 	private String name = "";
 	private EntityList entityList;
-
-	/* --- Scene variables --- */
+	
 	private HashMap<String, Object> values;
-	private ArrayList<SceneResource> resources;
-	/* --- Scene variables --- */
+	private ArrayList<R2DResource> resources = null;
 
 	/**
 	 * Loads a scene into memory and gives it a name.
@@ -33,7 +33,7 @@ public class Scene {
 		// initializers
 		values = new HashMap<String, Object>();
 		entityList = new EntityList();
-		resources = new ArrayList<SceneResource>();
+		resources = new ArrayList<R2DResource>();
 	}
 
 	/**
@@ -79,7 +79,16 @@ public class Scene {
 	 * Adds a resource to be loaded when the scene is loaded.
 	 * @param res The resource to add.
 	 */
-	public void addResource(SceneResource res) {
+	public void addResource(R2DResource res) {
 		resources.add(res);
 	}
+	
+	/**
+	 * Gets the currently loaded/unloaded resources in the scene.
+	 * @return The list of resources.
+	 */
+	public ArrayList<R2DResource> getResources() {
+		return resources;
+	}
+	
 }
