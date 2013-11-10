@@ -8,18 +8,17 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 /**
- * Implements basic input and output functions for the Editor, in managing
- * local files.
+ * Implements basic input and output functions for the Editor, in managing local files.
  */
 public class FileIO {
 	public static FileDialog fd;
 
 	/**
 	 * Requests a single file from the user.
-	 *
+	 * 
 	 * @return the requested file or null if user presses 'cancel'
 	 */
-	public static File requestFile () {
+	public static File requestFile() {
 		setDefaultUI();
 		fd = new FileDialog(new JFrame());
 		fd.setMultipleMode(false);
@@ -29,10 +28,10 @@ public class FileIO {
 
 	/**
 	 * Requests multiple files from the user.
-	 *
+	 * 
 	 * @return the requested files or null if user presses 'cancel'
 	 */
-	public static File[] requestFiles () {
+	public static File[] requestFiles() {
 		setDefaultUI();
 		fd.setMultipleMode(true); // allow multiple files
 		fd.setVisible(true);
@@ -41,15 +40,16 @@ public class FileIO {
 
 	/**
 	 * Prompt the user to save a file
-	 *
-	 * @param contents the Object array to save
+	 * 
+	 * @param contents
+	 *            the Object array to save
 	 * @return true for success, false for failure or cancel
 	 */
 	// *********************
 	// INCOMPLETE DO NOT USE
 	// *********************
-	public static boolean requestSaveFile (Object[] contents,
-										   String defaultFileName) {
+	public static boolean requestSaveFile(Object[] contents,
+			String defaultFileName) {
 		setDefaultUI();
 		fd.setMode(FileDialog.SAVE);
 		fd.setFile(defaultFileName);
@@ -68,10 +68,9 @@ public class FileIO {
 	}
 
 	/**
-	 * Attempts to set the appearance of the file chooser to the default
-	 * requested by the system's theme.
+	 * Attempts to set the appearance of the file chooser to the default requested by the system's theme.
 	 */
-	public static void setDefaultUI () {
+	public static void setDefaultUI() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException

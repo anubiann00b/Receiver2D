@@ -1,18 +1,21 @@
 package com.receiver2d.engine.io;
 
-import com.receiver2d.engine.*;
-import com.receiver2d.engine.Console;
-import com.receiver2d.engine.entitysystem.Entity;
-import com.receiver2d.engine.entitysystem.*;
 
 import javax.xml.parsers.*;
 
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.*;
 import java.lang.reflect.Field;
 
+import com.receiver2d.engine.*;
+import com.receiver2d.engine.Console;
+import com.receiver2d.engine.entitysystem.Entity;
+import com.receiver2d.engine.entitysystem.EntityList;
 /**
  * Useful for dynamically loading various types of data from Receiver2D-specific files.
  */
@@ -31,9 +34,8 @@ public class FileManager {
 		boolean isValid = location.matches("(.*)[\\.]r2dw$");
 		File worldFile = new File(location);
 
-		if (!worldFile.exists()) Console.debug("World file does not exist!");
-		else if (!isValid) Console.debug("World file is not valid!");
-
+		if (!worldFile.exists()) Console.log("World file does not exist!");
+		else if (!isValid) Console.log("World file is not valid!");
 		if (!isValid || !worldFile.exists()) return null;
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -50,18 +52,18 @@ public class FileManager {
 		
 		// check scene information
 		NodeList sceneNodes = doc.getElementsByTagName("scene");
-		Console.debug("Scene nodes length: "+sceneNodes.getLength());
+		Console.log("Scene nodes length: " + sceneNodes.getLength());
 		Scene[] scenes = new Scene[sceneNodes.getLength()];
-		for (int n=0; n<sceneNodes.getLength(); n++) {
+		for (int n = 0; n < sceneNodes.getLength(); n++) {
 			scenes[n] = new Scene(sceneNodes.item(n).getAttributes()
 					.getNamedItem("name").getNodeValue());
 			NodeList sceneNodeInfo = sceneNodes.item(n).getChildNodes();
-			for (int k=0; k<sceneNodeInfo.getLength(); k++) {
+			for (int k = 0; k < sceneNodeInfo.getLength(); k++) {
 				Node node = sceneNodeInfo.item(k);
 				if (node.getNodeName() == "values") {
 					NodeList values = node.getChildNodes();
-					
-					for (int i = 0; i<values.getLength(); i++) {
+
+					for (int i = 0; i < values.getLength(); i++) {
 						// check against text nodes and other non-tags
 						if (!values.item(i).hasAttributes()) continue;
 						// parse value and set
@@ -71,29 +73,27 @@ public class FileManager {
 					}
 				} else if (node.getNodeName() == "resources") {
 					NodeList resources = node.getChildNodes();
-					
-					for (int i = 0; i<resources.getLength(); i++) {
+
+					for (int i = 0; i < resources.getLength(); i++) {
 						// check against text nodes and other non-tags
 						if (!resources.item(i).hasAttributes()) continue;
 						Node rnode = resources.item(i);
 						NamedNodeMap nnm = rnode.getAttributes();
-						
-						Console.debug("Loading "+nnm.getNamedItem(
-									"path").getNodeValue());
-						if (nnm.getNamedItem("type") == null)
-							world.addResource(new R2DResource(nnm.getNamedItem(
-									"path").getNodeValue()));
-						else
-							world.addResource(new R2DResource(nnm.getNamedItem(
-									"path").getNodeValue(), nnm.getNamedItem(
-									"type").getNodeValue()));
-						
+
+						Console.log("Loading " + nnm.getNamedItem(
+								"path").getNodeValue());
+						if (nnm.getNamedItem("type") == null) world.addResource(new R2DResource(nnm.getNamedItem(
+								"path").getNodeValue()));
+						else world.addResource(new R2DResource(nnm.getNamedItem(
+								"path").getNodeValue(), nnm.getNamedItem(
+								"type").getNodeValue()));
+
 					}
 				} else if (node.getNodeName() == "entitylist") {
 					NodeList entityNodes = node.getChildNodes();
 					EntityList entityList = new EntityList();
-					
-					for (int i=0; i<entityNodes.getLength(); i++) {
+
+					for (int i = 0; i < entityNodes.getLength(); i++) {
 						// check against text nodes and other non-tags
 						if (!entityNodes.item(i).hasAttributes()) continue;
 						Node enode = entityNodes.item(i);
@@ -157,21 +157,22 @@ public class FileManager {
 				}
 			}
 		}
-		
+
 		world.addScenes(scenes);
 		return world;
 	}
-	
+
 	/**
-	 * Take a particular XML element of convention <datatype>info</datatype>
-	 * and interpret it as a value with a specific type.
-	 * @param node The node to interpret.
+	 * Take a particular XML element of convention <datatype>info</datatype> and interpret it as a value with a specific type.
+	 * 
+	 * @param node
+	 *            The node to interpret.
 	 * @return The node's value and dataType.
 	 */
 	private static Object parseValueElement(Node node) {
 		String dataType = node.getNodeName();
 		String val = node.getTextContent();
-		
+
 		Object nVal = null;
 		switch (dataType) {
 		case "int":
@@ -206,7 +207,7 @@ public class FileManager {
 		default:
 			nVal = val; //nVal is a String type
 		}
-		
+
 		return nVal;
 	}
 }

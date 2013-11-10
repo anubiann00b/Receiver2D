@@ -1,7 +1,10 @@
 package com.receiver2d.engine.io;
 
-import java.io.*;
-import java.nio.file.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import com.receiver2d.engine.Console;
 
@@ -11,20 +14,20 @@ import com.receiver2d.engine.Console;
 public class R2DResource {
 	private String location = null;
 	private String mimeType = null;
-	
+
 	/**
 	 * The conventional mime-type of a Receiver2D World File (.r2dw) that we
 	 * assume.
 	 */
 	public static final String R2DW_MIMETYPE = "application/vnd.r2dworld+xml";
-	
+
 	private File loadedFile = null;
 	private FileInputStream ioStream = null;
-	
+
 	public R2DResource(String loc, String type) {
 		setResource(loc, type);
 	}
-	
+
 	public R2DResource(String loc) {
 		setResource(loc);
 	}
@@ -32,8 +35,8 @@ public class R2DResource {
 	/**
 	 * Changes the current resource to a different one.
 	 * 
-	 * @param loc The location (in the filesystem) of the resource.
-	 * @param type The mime-type of the resource.
+	 * @param loc 	The location (in the filesystem) of the resource.
+	 * @param type	The mime-type of the resource.
 	 * @return Whether or not the operation was successful in changing the
 	 *         resource. This is affected by whether or not the file exists in
 	 *         the system. If not, the resource remains unchanged.
@@ -44,17 +47,16 @@ public class R2DResource {
 			location = loc;
 			mimeType = type;
 			return true;
-		} else 
-			Console.debug("File "+loc+" either doesn't exist or is not a file.");
+		} else Console.log("File " + loc + " either doesn't exist or is not a file.");
 		return false;
 	}
-	
+
 	public boolean setResource(String loc) {
 		try {
 			setResource(loc, Files.probeContentType(Paths.get(loc)));
 			return true;
 		} catch (IOException e) {
-			Console.logError("File "+loc+" mime type cannot be determined.", e);
+			Console.logError("File " + loc + " mime type cannot be determined.", e);
 		}
 		return false;
 	}
@@ -74,15 +76,14 @@ public class R2DResource {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Clears the file from memory by setting it to null. Does not remove the
 	 * location variable of the resource, though.
 	 */
 	public void unLoad() {
 		try {
-			if (ioStream != null)
-				ioStream.close(); // close the stream before nullifying
+			if (ioStream != null) ioStream.close(); // close the stream before nullifying
 		} catch (IOException e) {
 			Console.logError("Error when closing file ioStream.", e);
 		}
@@ -92,31 +93,34 @@ public class R2DResource {
 
 	/**
 	 * Gets the loaded file from the resource's location, or null if undefined.
-	 *
+	 * 
 	 * @return The file of the loaded resource.
 	 */
 	public File getFile() {
 		return loadedFile;
 	}
-	
+
 	/**
 	 * Gets the path of the resource.
+	 * 
 	 * @return The path of the resource.
 	 */
 	public String getPath() {
 		return location;
 	}
-	
+
 	/**
 	 * Gets the mime type of the resource.
+	 * 
 	 * @return The mime type of the file, or null if undefined.
 	 */
 	public String getMimeType() {
 		return mimeType;
 	}
-	
+
 	/**
 	 * Gets the input stream of the currently loaded resource.
+	 * 
 	 * @return The input stream, or null if the file is not loaded.
 	 */
 	public FileInputStream getInputStream() {

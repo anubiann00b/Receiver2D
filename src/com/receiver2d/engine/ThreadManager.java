@@ -28,18 +28,19 @@ public class ThreadManager {
 
 	/**
 	 * Give a task for the thread pool to queue for execution
-	 *
-	 * @param task the runnable to execute
+	 * 
+	 * @param task
+	 *            the runnable to execute
 	 */
 	public void queueTask(Runnable task) {
 		threadPool.submit(task);
 	}
 
 	/**
-	 * Give a task for the thread pool to queue for execution with the ability
-	 * to get back data.
+	 * Give a task for the thread pool to queue for execution with the ability to get back data.
 	 * 
-	 * @param task The Callable to execute
+	 * @param task
+	 *            The Callable to execute
 	 * @return A future object with the data being returned
 	 */
 	public Future<?> queueTask(Callable<?> task) {

@@ -9,15 +9,14 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * A particular scene within a world, containing a list of entities and other
- * attributes.
+ * A particular scene within a world, containing a list of entities and other attributes.
  */
 @SuppressWarnings("unused")
 public class Scene {
 	private String uuid;
 	private String name = "";
 	private EntityList entityList;
-	
+
 	private HashMap<String, Object> values;
 	private ArrayList<R2DResource> resources = null;
 
@@ -61,39 +60,44 @@ public class Scene {
 
 	/**
 	 * Sets a variable for a particular scene.
-	 *
-	 * @param variable The name of the variable.
-	 * @param value    The value of the variable.
+	 * 
+	 * @param variable
+	 *            The name of the variable.
+	 * @param value
+	 *            The value of the variable.
 	 */
 	public void setValue(String variable, Object value) {
 		values.put(variable, value);
 	}
 
 	/**
-	 * Gets a specific scene-based variable. Very useful for having variables
-	 * that only correspond to one type of scene in a game.
-	 *
-	 * @param variable The name of the stored variable.
+	 * Gets a specific scene-based variable. Very useful for having variables that only correspond to one type of scene in a game.
+	 * 
+	 * @param variable
+	 *            The name of the stored variable.
 	 * @return A found value, or null if no variable can be found.
 	 */
 	public Object getValue(String variable) {
 		return values.get(variable);
 	}
-	
+
 	/**
 	 * Adds a resource to be loaded when the scene is loaded.
-	 * @param res The resource to add.
+	 * 
+	 * @param res
+	 *            The resource to add.
 	 */
 	public void addResource(R2DResource res) {
 		resources.add(res);
 	}
-	
+
 	/**
 	 * Gets the currently loaded/unloaded resources in the scene.
+	 * 
 	 * @return The list of resources.
 	 */
 	public ArrayList<R2DResource> getResources() {
 		return resources;
 	}
-	
+
 }
