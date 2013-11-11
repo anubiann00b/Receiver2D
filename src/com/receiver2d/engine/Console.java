@@ -7,8 +7,8 @@ import java.util.ArrayList;
  */
 public class Console {
 	/**
-	 * Involves specificity for messages, allowing them to be grouped accordingly, 
-	 * in addition to introducing special behavior for the Console.
+	 * Involves specificity for messages, allowing them to be grouped
+	 * accordingly, in addition to introducing special behavior for the Console.
 	 */
 	public enum LogLevel {
 		/**
@@ -54,7 +54,8 @@ public class Console {
 	public static LogLevel level = LogLevel.ERROR;
 
 	/**
-	 * A Console message object, containing various types of information that may be useful for storing in the backlog.
+	 * A Console message object, containing various types of information that
+	 * may be useful for storing in the backlog.
 	 */
 	public static class Message {
 		private Long time = null; // delta time in nanoseconds since game started
@@ -125,10 +126,8 @@ public class Console {
 	/**
 	 * Logs system information to the console with time and message.
 	 * 
-	 * @param message
-	 *            A custom string containing the message to log.
-	 * @param exception
-	 *            A possible exception to include in the log.
+	 * @param message  	A custom string containing the message to log.
+	 * @param exception	A possible exception to include in the log.
 	 */
 	public synchronized static void log(String message, Exception exception,
 			LogLevel type) {

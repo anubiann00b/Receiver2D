@@ -16,8 +16,10 @@ import com.receiver2d.engine.*;
 import com.receiver2d.engine.Console;
 import com.receiver2d.engine.entitysystem.Entity;
 import com.receiver2d.engine.entitysystem.EntityList;
+
 /**
- * Useful for dynamically loading various types of data from Receiver2D-specific files.
+ * Useful for dynamically loading various types of data from Receiver2D-specific
+ * files.
  */
 public class FileManager {
 	/**
@@ -80,10 +82,12 @@ public class FileManager {
 						Node rnode = resources.item(i);
 						NamedNodeMap nnm = rnode.getAttributes();
 
-						Console.log("Loading " + nnm.getNamedItem(
-								"path").getNodeValue());
-						if (nnm.getNamedItem("type") == null) world.addResource(new R2DResource(nnm.getNamedItem(
-								"path").getNodeValue()));
+						Console.log("Loading resource \""
+								+ nnm.getNamedItem("path").getNodeValue()
+								+ "\"");
+						if (nnm.getNamedItem("type") == null)
+							world.addResource(new R2DResource(nnm.getNamedItem(
+									"path").getNodeValue()));
 						else world.addResource(new R2DResource(nnm.getNamedItem(
 								"path").getNodeValue(), nnm.getNamedItem(
 								"type").getNodeValue()));
@@ -102,7 +106,8 @@ public class FileManager {
 
 						NamedNodeMap nnm = enode.getAttributes();
 						for (int j=0; j<nnm.getLength(); j++) {
-							String[] fNames = nnm.item(j).getNodeName().split("[\\_]");
+							String[] fNames = nnm.item(j).getNodeName()
+									.split("[\\_]");
 							Class<?> enc = en.getClass();
 							Field f = null;
 							try {
@@ -163,11 +168,11 @@ public class FileManager {
 	}
 
 	/**
-	 * Take a particular XML element of convention <datatype>info</datatype> and interpret it as a value with a specific type.
+	 * Take a particular XML element of convention <datatype>info</datatype> and
+	 * interpret it as a value with a specific type.
 	 * 
-	 * @param node
-	 *            The node to interpret.
-	 * @return The node's value and dataType.
+	 * @param node	The node to interpret.
+	 * @return 		The node's value and dataType.
 	 */
 	private static Object parseValueElement(Node node) {
 		String dataType = node.getNodeName();
