@@ -16,7 +16,7 @@
 				<component type="Rigidbody" mass="30.4f" velocity_x="2.3f" velocity_y="0.0f" />
 				<component type="script" src="example/java/BossAI.java" />
 			</entity>
-			<entity name="Player" x="0f" y="0f" rotation="0f">
+			<entity name="Player" position_x="0f" position_y="0f" rotation="0f">
 				<component type="CharacterController" speed="5.0f" jump_height="4.0f" />
 			</entity>
 		</entitylist>

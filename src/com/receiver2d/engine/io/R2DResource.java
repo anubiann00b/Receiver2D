@@ -56,7 +56,7 @@ public class R2DResource {
 			setResource(loc, Files.probeContentType(Paths.get(loc)));
 			return true;
 		} catch (IOException e) {
-			Console.logError("File " + loc + " mime type cannot be determined.", e);
+			Console.error("File " + loc + " mime type cannot be determined.", e);
 		}
 		return false;
 	}
@@ -72,7 +72,7 @@ public class R2DResource {
 			ioStream = new FileInputStream(loadedFile = new File(location));
 			return true;
 		} catch (Exception e) {
-			Console.logError("Cannot load file which does not exist.", e);
+			Console.error("Cannot load file which does not exist.", e);
 		}
 		return false;
 	}
@@ -85,7 +85,7 @@ public class R2DResource {
 		try {
 			if (ioStream != null) ioStream.close(); // close the stream before nullifying
 		} catch (IOException e) {
-			Console.logError("Error when closing file ioStream.", e);
+			Console.error("Error when closing file ioStream.", e);
 		}
 		ioStream = null;
 		loadedFile = null;

@@ -43,9 +43,9 @@ public class TestClass {
 		World world = null;
 		try {
 			// load the first world
-			world = FileManager.loadWorld("res/test_scene.r2dw");
+			world = FileManager.loadWorld("res/test_world.r2dw");
 		} catch (Exception e) {
-			Console.logError("Exception!", e);
+			Console.error("Exception!", e);
 		}
 		if (world == null) {
 			Console.log("World file is null.");
@@ -69,7 +69,7 @@ public class TestClass {
 		Console.debug(boss.name+" has rotation "+boss.rotation);
 		
 		// test loading a new resource
-		R2DResource r = new R2DResource("res/test_scene.r2dw");
+		R2DResource r = new R2DResource("res/test_world.r2dw");
 		Console.log(r.load() ? "Loading file \"" + r.getPath()
 				+ "\" was successful." : "Loading file \"" + r.getPath()
 				+ "\" failed.");

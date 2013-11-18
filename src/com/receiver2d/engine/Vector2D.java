@@ -27,12 +27,8 @@ public class Vector2D extends Vector2f {
 		super(x, y);
 	}
 	
-	/**
-	 * Creates a new Vector2D from a point of type LWJGL's Vector2f.
-	 * @param vecf The vector to convert.
-	 */
-	public Vector2D(Vector2f vecf) {
-		super(vecf.x, vecf.y);
+	public Vector2D(Vector2f v2f){
+		this(v2f.x, v2f.y);
 	}
 
 	/**
