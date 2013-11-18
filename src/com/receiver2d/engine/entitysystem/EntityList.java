@@ -10,20 +10,44 @@ import java.util.ArrayList;
 public class EntityList extends ArrayList<Entity> {
 	private static final long serialVersionUID = -5861454509544255719L;
 
+	/**
+	 * Creates a new, blank list of entities.
+	 */
 	public EntityList() {}
 
+	/**
+	 * Creates a new list based on an array of entities.
+	 * @param entities An array of entities.
+	 */
 	public EntityList(Entity[] entities) {
 		for (Entity entity : entities)
 			add(entity); // add all entities in-game
 	}
 
 	// Entity() overrides
+	/**
+	 * Creates a new list with a single Entity.
+	 * @param entity The Entity to add.
+	 */
 	public EntityList(Entity entity) {
 		add(entity);
 	}
 
-	public static Scene setScene(Scene scene, EntityList elist) {
+	/**
+	 * Sets the given EntityList for the given Scene.
+	 * @param scene The Scene to modify.
+	 * @param elist The EntityList to set as default for the scene.
+	 */
+	public static void setScene(Scene scene, EntityList elist) {
 		scene.setEntityList(elist);
-		return scene;
+	}
+	
+	/**
+	 * Sets the current EntityList (instantiated) to be the default one for the
+	 * given Scene.
+	 * @param scene The Scene to modify.
+	 */
+	public void setScene(Scene scene) {
+		scene.setEntityList(this);
 	}
 }

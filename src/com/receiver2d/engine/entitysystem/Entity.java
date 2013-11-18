@@ -3,22 +3,17 @@ package com.receiver2d.engine.entitysystem;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import com.receiver2d.engine.Transform2D;
 import com.receiver2d.engine.Vector2D;
 import com.receiver2d.engine.physics.Polygon;
 
 /**
- * Contains information regarding an in-game Entity. Any object instantiated in the game is, in its most basic form, an entity with certain capabilities.
+ * Contains information regarding an in-game Entity. Any object instantiated in
+ * the game is, in its most basic form, an entity with certain capabilities.
  */
-public class Entity {
+public class Entity extends Transform2D {
 	private String uuid = null;
-	/**
-	 * The position of the object in two-dimensional space.
-	 */
-	public Vector2D position = null; // we do not consider dimensions, which
-										// come from colliders/polygons
-	
-	public float rotation;
-	
+		
 	/**
 	 * The components attached to the entity.
 	 */
@@ -35,24 +30,28 @@ public class Entity {
 	public String name;
 
 	/**
-	 * Whether or not the entity is visible. If not, then it will not be rendered in the next draw call.
+	 * Whether or not the entity is visible. If not, then it will not be
+	 * rendered in the next draw call.
 	 */
 	public boolean visible = true;
 
 	/**
-	 * The mesh of the entity. Specifies the morphology as an instance of a Polygon.
+	 * The mesh of the entity. Specifies the morphology as an instance of a
+	 * Polygon.
 	 */
 	public Polygon mesh = null;
 
 	/**
-	 * Creates a new Entity (in-game object) and initializes the component list for that entity.
+	 * Creates a new Entity (in-game object) and initializes the component list
+	 * for that entity.
 	 */
 	public Entity(String entityName) {
 		uuid = UUID.randomUUID().toString();
 		components = new ArrayList<Component>();
 		name = entityName;
 		mesh = new Polygon(new float[]{ 0f,0f , 0f,10f , 10f,10f , 10f,0f });
-		position = new Vector2D(0f, 0f);
+		position = Vector2D.ZERO;
+		rotation = 0f;
 	}
 	
 	/**
@@ -77,13 +76,19 @@ public class Entity {
 	/**
 	 * Sets an entity to be a child of this entity.
 	 * 
-	 * @param child
-	 *            The child to make as an entity.
+	 * @param child The child to make as an entity.
 	 * @return The same entity, but now as a child of the main entity.
 	 */
-	public Entity setChildEntity(Entity child) {
+	public void setChildEntity(Entity child) {
 		child.parent = this;
-		return child;
+	}
+	
+	/**
+	 * Sets the entity to be a child of the given entity, parent.
+	 * @param parentEntity The parent entity to be a child of.
+	 */
+	public void attachToParent(Entity parentEntity) {
+		this.parent = parentEntity;
 	}
 
 	/**

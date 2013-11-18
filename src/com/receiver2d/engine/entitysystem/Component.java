@@ -10,7 +10,8 @@ public abstract class Component {
 	public Entity entity = null; // the entity this component is attached to
 
 	/**
-	 * The main tick function that deals with updates to the logical aspect of the component. This is called by the engine's central tick manager.
+	 * The main tick function that deals with updates to the logical aspect of
+	 * the component. This is called by the engine's central tick manager.
 	 */
 	public void tick() {
 

@@ -16,8 +16,10 @@ public class Rigidbody extends Component {
 	 * The center of mass relative to the transform's origin.
 	 */
 	public Vector2D centerOfMass;
+	
 	/**
-	 * The mass of the rigidbody. Setting this to 0 effectively disables nearly all capabilities of the rigidbody, (save for gravitational acceleration).
+	 * The mass of the rigidbody. Setting this to 0 effectively disables nearly
+	 * all capabilities of the rigidbody, save for gravitational acceleration.
 	 */
 	public float mass;
 
