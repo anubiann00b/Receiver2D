@@ -12,18 +12,18 @@ import com.receiver2d.engine.physics.Polygon;
  * the game is, in its most basic form, an entity with certain capabilities.
  */
 public class Entity extends Transform2D {
-	private String uuid = null;
-		
+	private UUID uuid = null;
+
 	/**
 	 * The components attached to the entity.
 	 */
 	public ArrayList<Component> components = null;
-	
+
 	/**
 	 * A parent entity to which the entity is attached to.
 	 */
 	public Entity parent = null;
-	
+
 	/**
 	 * The name of the entity.
 	 */
@@ -46,14 +46,14 @@ public class Entity extends Transform2D {
 	 * for that entity.
 	 */
 	public Entity(String entityName) {
-		uuid = UUID.randomUUID().toString();
+		uuid = UUID.randomUUID();
 		components = new ArrayList<Component>();
 		name = entityName;
-		mesh = new Polygon(new float[]{ 0f,0f , 0f,10f , 10f,10f , 10f,0f });
+		mesh = new Polygon(new float[] { 0f, 0f, 0f, 10f, 10f, 10f, 10f, 0f });
 		position = Vector2D.ZERO;
 		rotation = 0f;
 	}
-	
+
 	/**
 	 * Creates a new Entity (in-game object) and initializes the component list
 	 * for that entity.
@@ -76,16 +76,19 @@ public class Entity extends Transform2D {
 	/**
 	 * Sets an entity to be a child of this entity.
 	 * 
-	 * @param child The child to make as an entity.
+	 * @param child
+	 *            The child to make as an entity.
 	 * @return The same entity, but now as a child of the main entity.
 	 */
 	public void setChildEntity(Entity child) {
 		child.parent = this;
 	}
-	
+
 	/**
 	 * Sets the entity to be a child of the given entity, parent.
-	 * @param parentEntity The parent entity to be a child of.
+	 * 
+	 * @param parentEntity
+	 *            The parent entity to be a child of.
 	 */
 	public void attachToParent(Entity parentEntity) {
 		this.parent = parentEntity;
@@ -96,7 +99,7 @@ public class Entity extends Transform2D {
 	 * 
 	 * @return A string containing the UUID.
 	 */
-	public String getUuid() {
+	public UUID getUuid() {
 		return uuid;
 	}
 }

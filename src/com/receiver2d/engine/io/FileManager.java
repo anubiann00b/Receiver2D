@@ -106,47 +106,56 @@ public class FileManager {
 
 						NamedNodeMap nnm = enode.getAttributes();
 						for (int j=0; j<nnm.getLength(); j++) {
+							// loop through all entity attributes						
 							String[] fNames = nnm.item(j).getNodeName()
-									.split("[\\_]");
-							Class<?> enc = en.getClass();
+									.split("[_]");
+							for (String name : fNames)
+								Console.log("name is "+name);
+							Class<?> enc = Entity.class;
 							Field f = null;
 							try {
-								f = enc.getField(fNames[0]); // getDeclaredField
-								
+								f = enc.getDeclaredField(fNames[0]);
+								Console.debug("fNames.length = "+fNames.length);
+								if (fNames.length > 1) {
+									Console.debug("fNames[0] = "+fNames[0]);
+									Console.debug("fNames[1] = "+fNames[1]);
+								}
 								//iterate until we get to "end" of field chain
 								for (int q=1; q<fNames.length; q++) {
-									enc = f.getClass();
-									f = enc.getField(fNames[q]);
+									enc = f.getDeclaringClass();
+									f = enc.getDeclaredField(fNames[q]);
+									Console.debug("Class name: "+f.getName());
 								}
 								
 								String nodeValue = nnm.item(j).getNodeValue();
 								if (f.getType().equals(Integer.class))
-									f.set(enc, new Integer(nodeValue));
+									f.set(en, new Integer(nodeValue));
 								else if (f.getType().equals(Boolean.class))
-									f.set(enc, new Integer(nodeValue));
+									f.set(en, new Integer(nodeValue));
 								else if (f.getType().equals(Short.class))
-									f.set(enc, new Short(nodeValue));
+									f.set(en, new Short(nodeValue));
 								else if (f.getType().equals(Long.class))
-									f.set(enc, new Long(nodeValue));
+									f.set(en, new Long(nodeValue));
 								else if (f.getType().equals(Double.class))
-									f.set(enc, new Double(nodeValue));
+									f.set(en, new Double(nodeValue));
 								else if (f.getType().equals(Float.class))
-									f.set(enc, new Float(nodeValue));
+									f.set(en, new Float(nodeValue));
 								else if (f.getType().equals(Byte.class))
-									f.set(enc, new Byte(nodeValue));
+									f.set(en, new Byte(nodeValue));
 								else if (f.getType().equals(Character.class)) {
 									try {
-										f.set(enc, (char) Integer.parseInt(nodeValue));
+										f.set(en, (char) Integer
+												.parseInt(nodeValue));
 									} catch (Exception e) {
-										f.set(enc, nodeValue.charAt(0));
+										f.set(en, nodeValue.charAt(0));
 									}
 								}
 								
 								Console.debug("Success in setting Entity field \""
-										+ f.getName() + ".\"");
+										+ f.getName() + "\".");
 							} catch (Exception e) {
 								Console.logError("Could not access field \""
-										+ nnm.item(j).getNodeName()
+										+ f.getName()
 										+ "\" in Entity class.", e);
 							}
 						}
