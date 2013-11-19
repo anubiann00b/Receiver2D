@@ -18,7 +18,7 @@ public class Polygon {
 	 * Creates a new polygon from a list of points.
 	 * @param points A set of vertices for the polygon.
 	 */
-	public Polygon(Vector2D[] points) {
+	public Polygon(Vector2D... points) {
 		for (Vector2D point : points) {
 			this.points.add(point);
 			this.length++;
@@ -29,7 +29,7 @@ public class Polygon {
 	 * Creates a new polygon from a list of points.
 	 * @param points A set of vertices for the polygon.
 	 */
-	public Polygon(double[] points) {
+	public Polygon(double... points) {
 		for (int i=0; i+1<points.length; i+=2) {
 			this.points.add(new Vector2D((float)points[i], (float)points[i+1]));
 			this.length++;
@@ -40,20 +40,20 @@ public class Polygon {
 	 * Creates a new polygon from a list of points.
 	 * @param points A set of vertices for the polygon.
 	 */
-	public Polygon(float[] points) {
+	public Polygon(float... points) {
 		for (int i=0; i+1<points.length; i+=2) {
 			this.points.add(new Vector2D(points[i], points[i+1]));
 			this.length++;
 		}
 	}
-
+	
 	/**
 	 * Gets a vertex from the polygon.
 	 * 
 	 * @param index
 	 * @return A point representing the coordinates of a vertex in the polygon.
 	 */
-	public Vector2D getPt(int index) {
+	public Vector2D get(int index) {
 		return points.get(index);
 	}
 }

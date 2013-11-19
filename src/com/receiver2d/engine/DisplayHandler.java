@@ -52,7 +52,7 @@ public class DisplayHandler {
 			Display.setFullscreen(fullscreen);
 			Display.create();
 		} catch (LWJGLException e) {
-			Console.logError("Failed to create display.", e);
+			Console.error("Failed to create display.", e);
 		}
 
 		Display.setResizable(false);

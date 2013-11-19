@@ -40,7 +40,7 @@ public class Entity extends Transform2D {
 	 * Polygon.
 	 */
 	public Polygon mesh = null;
-
+	
 	/**
 	 * Creates a new Entity (in-game object) and initializes the component list
 	 * for that entity.
@@ -49,7 +49,7 @@ public class Entity extends Transform2D {
 		uuid = UUID.randomUUID();
 		components = new ArrayList<Component>();
 		name = entityName;
-		mesh = new Polygon(new float[] { 0f, 0f, 0f, 10f, 10f, 10f, 10f, 0f });
+		mesh = new Polygon(0f,0f , 0f,10f , 10f,10f , 10f,0f);
 		position = Vector2D.ZERO;
 		rotation = 0f;
 	}
@@ -59,7 +59,7 @@ public class Entity extends Transform2D {
 	 * for that entity.
 	 */
 	public Entity() {
-		this("");
+		this("Untitled ");
 	}
 
 	/**

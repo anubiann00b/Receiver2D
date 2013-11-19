@@ -31,7 +31,7 @@ public class Console {
 		 */
 		DEBUG(3);
 
-		int val; // the severity level
+		public int val; // the severity level
 
 		private LogLevel(int val) {
 			this.val = val;
@@ -117,11 +117,6 @@ public class Console {
 	}
 
 	private static ArrayList<Message> messages = new ArrayList<Message>();
-	
-	/**
-	 * Whether or not to print error stack traces.
-	 */
-	public static boolean PRINT_STACK_TRACES = false;
 
 	/**
 	 * Logs system information to the console with time and message.
@@ -140,30 +135,8 @@ public class Console {
 		
 		System.out.println(m.toString()); // TODO: handle this with text or gui
 											// mode option
-		if (exception != null && PRINT_STACK_TRACES)
+		if (exception != null && level.val >= 3) //debug mode or higher
 			exception.printStackTrace();
-	}
-
-	/**
-	 * Logs system information to the console with time and message. This method
-	 * is deprecated, therefore it is advised to use the method involving
-	 * LogLevel instead.
-	 *
-	 * @param message   A custom string containing the message to log.
-	 * @param exception A possible exception to include in the log.
-	 * @param type		The custom log type to specify, as a String.
-	 */
-	@Deprecated
-	public synchronized static void log(String message, Exception exception,
-			String type) {
-		LogLevel l = LogLevel.UNDEFINED;
-
-		if (type.equalsIgnoreCase("ERROR")) l = LogLevel.ERROR;
-		else if (type.equalsIgnoreCase("INFO")) l = LogLevel.INFO;
-		else if (type.equalsIgnoreCase("DEBUG")) l = LogLevel.DEBUG;
-		else l = LogLevel.UNDEFINED;
-		
-		log(message, exception, l);
 	}
 
 	// log() overrides
@@ -189,7 +162,7 @@ public class Console {
 	 * @param message	A custom message to include.
 	 * @param exc		The exception to log to the console.
 	 */
-	public synchronized static void logError(String message, Exception exc) {
+	public synchronized static void error(String message, Exception exc) {
 		log(message, exc, LogLevel.ERROR);
 	}
 	

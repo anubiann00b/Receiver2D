@@ -24,10 +24,19 @@ public class R2DResource {
 	private File loadedFile = null;
 	private FileInputStream ioStream = null;
 
+	/**
+	 * Creates a new resource to be allocated by the engine.
+	 * @param loc The location of the resource in the file system.
+	 * @param type The presupposed mime-type of the resource.
+	 */
 	public R2DResource(String loc, String type) {
 		setResource(loc, type);
 	}
 
+	/**
+	 * Creates a new resource to be allocated by the engine.
+	 * @param loc The location of the resource in the file system.
+	 */
 	public R2DResource(String loc) {
 		setResource(loc);
 	}
@@ -51,12 +60,20 @@ public class R2DResource {
 		return false;
 	}
 
+	/**
+	 * Changes the current resource to a different one.
+	 * 
+	 * @param loc 	The location (in the filesystem) of the resource.
+	 * @return Whether or not the operation was successful in changing the
+	 *         resource. This is affected by whether or not the file exists in
+	 *         the system. If not, the resource remains unchanged.
+	 */
 	public boolean setResource(String loc) {
 		try {
 			setResource(loc, Files.probeContentType(Paths.get(loc)));
 			return true;
 		} catch (IOException e) {
-			Console.logError("File " + loc + " mime type cannot be determined.", e);
+			Console.error("File " + loc + " mime type cannot be determined.", e);
 		}
 		return false;
 	}
@@ -72,7 +89,7 @@ public class R2DResource {
 			ioStream = new FileInputStream(loadedFile = new File(location));
 			return true;
 		} catch (Exception e) {
-			Console.logError("Cannot load file which does not exist.", e);
+			Console.error("Cannot load file which does not exist.", e);
 		}
 		return false;
 	}
@@ -85,7 +102,7 @@ public class R2DResource {
 		try {
 			if (ioStream != null) ioStream.close(); // close the stream before nullifying
 		} catch (IOException e) {
-			Console.logError("Error when closing file ioStream.", e);
+			Console.error("Error when closing file ioStream.", e);
 		}
 		ioStream = null;
 		loadedFile = null;

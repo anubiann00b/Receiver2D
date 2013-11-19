@@ -47,7 +47,6 @@ public class Receiver2D {
 		if (DEBUG_MODE) {
 //			Console.debug("Setting org.lwjgl.util.Debug to "
 //					+ System.setProperty("org.lwjgl.util.Debug", "true"));
-			Console.PRINT_STACK_TRACES = true;
 			Console.level = Console.LogLevel.DEBUG;
 		}
 
@@ -84,7 +83,6 @@ public class Receiver2D {
 
 		for (Thread t : threadList) {
 			threads.queueTask(t);
-			t.start();
 		}
 
 		DisplayHandler.init("Test Game", false, 1280, 720);
@@ -101,7 +99,7 @@ public class Receiver2D {
 		try {
 			threads.threadPool.awaitTermination(777, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
-			Console.logError("Could not terminate threads.", e);
+			Console.error("Could not terminate threads.", e);
 		}
 		Display.destroy();
 		Console.log("Receiver2D ended.");

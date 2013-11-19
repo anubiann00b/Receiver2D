@@ -154,8 +154,8 @@ public class FileManager {
 								Console.debug("Success in setting Entity field \""
 										+ f.getName() + "\".");
 							} catch (Exception e) {
-								Console.logError("Could not access field \""
-										+ f.getName()
+								Console.error("Could not access field \""
+										+ nnm.item(j).getNodeName()
 										+ "\" in Entity class.", e);
 							}
 						}
