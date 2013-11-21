@@ -110,7 +110,7 @@ public class FileManager {
 							String[] fNames = nnm.item(j).getNodeName()
 									.split("[_]");
 							for (String name : fNames)
-								Console.log("name is "+name);
+								Console.log("name is \""+name+"\"");
 							Class<?> enc = Entity.class;
 							Field f = null;
 							try {
