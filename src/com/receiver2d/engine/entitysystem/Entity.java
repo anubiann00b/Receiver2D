@@ -17,7 +17,7 @@ public class Entity extends Transform2D {
 	/**
 	 * The components attached to the entity.
 	 */
-	public ArrayList<Component> components = null;
+	private ArrayList<Component> components = null;
 
 	/**
 	 * A parent entity to which the entity is attached to.
@@ -102,4 +102,35 @@ public class Entity extends Transform2D {
 	public UUID getUuid() {
 		return uuid;
 	}
+	
+	/**
+	 * Adds a component to the Entity's component list.
+	 * @param comp The component to add.
+	 */
+	public void attachComponent(Component comp) {
+		comp.entity = this;
+		components.add(comp);
+	}
+	
+	/**
+	 * Returns all of the components attached to the Entity.
+	 * @return A list of the attached components.
+	 */
+	public ArrayList<Component> getComponents() {
+		return components;
+	}
+	
+	/**
+	 * Removes a Component from the Entity.
+	 * @param position The position to remove the Entity from.
+	 * @return The removed Component.
+	 */
+	public Component removeComponent(int position) {
+		Component c = components.remove(position);
+		c.entity = null;
+		return c;
+	}
+	
+	//TODO: implement specific getComponent(int index)
+	//TODO: make Components more robust
 }

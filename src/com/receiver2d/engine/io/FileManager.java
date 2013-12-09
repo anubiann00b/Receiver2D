@@ -143,9 +143,15 @@ public class FileManager {
 							case "Collider":
 								comp = (Collider) loaded;
 								break;
+							case "CharacterController":
+								comp = (CharacterController) loaded;
+								break;
+							case "Script":
+								comp = (Script) loaded;
+								break;
 							}
 							
-							comp.entity = en; // set entity
+							en.attachComponent(comp);
 							
 							Console.log("Added component "+cType+" to entity.");
 						}
