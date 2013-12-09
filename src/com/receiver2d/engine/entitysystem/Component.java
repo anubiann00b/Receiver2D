@@ -1,7 +1,9 @@
 package com.receiver2d.engine.entitysystem;
 
 /**
- * Anything that is able to be attached to an Entity, such as a Collider, Rigidbody, et cetera, that provides additional functionality in-game. This class must be extended by all components.
+ * Anything that is able to be attached to an Entity, such as a Collider,
+ * Rigidbody, CharacterController, et cetera, that provides additional
+ * functionality in-game. This class must be extended by all components.
  */
 public abstract class Component {
 	/**
