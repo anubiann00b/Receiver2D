@@ -27,6 +27,11 @@ public class Vector2D extends Vector2f {
 		super(x, y);
 	}
 	
+
+	/**
+	 * Creates a new Vector2D from an existing Vector2f.
+	 * @param v2f The vector to model.
+	 */
 	public Vector2D(Vector2f v2f){
 		this(v2f.x, v2f.y);
 	}

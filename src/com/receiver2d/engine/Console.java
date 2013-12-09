@@ -10,7 +10,7 @@ public class Console {
 	 * Involves specificity for messages, allowing them to be grouped
 	 * accordingly, in addition to introducing special behavior for the Console.
 	 */
-	public enum LogLevel {
+	public enum LLevel {
 		/**
 		 * Any other miscellaneous message that does not fit a category.
 		 */
@@ -33,7 +33,7 @@ public class Console {
 
 		public int val; // the severity level
 
-		private LogLevel(int val) {
+		private LLevel(int val) {
 			this.val = val;
 		}
 
@@ -42,7 +42,7 @@ public class Console {
 		 * @param cmp
 		 * @return
 		 */
-		public boolean shouldPrint(LogLevel cmp) {
+		public boolean shouldPrint(LLevel cmp) {
 			// example: if level is debug, we should print error msgs
 			return this.val >= cmp.val;
 		}
@@ -51,7 +51,7 @@ public class Console {
 	/**
 	 * The current log level that the Console is on.
 	 */
-	public static LogLevel level = LogLevel.ERROR;
+	public static LLevel level = LLevel.ERROR;
 
 	/**
 	 * A Console message object, containing various types of information that
@@ -125,7 +125,7 @@ public class Console {
 	 * @param exception	A possible exception to include in the log.
 	 */
 	public synchronized static void log(String message, Exception exception,
-			LogLevel type) {
+			LLevel type) {
 		if (!level.shouldPrint(type)) return;
 
 		Message m = new Message(type.toString() + ": " + message,
@@ -145,7 +145,7 @@ public class Console {
 	 * @param message  A custom message to include.
 	 */
 	public synchronized static void log(String message) {
-		log(message, null, LogLevel.INFO);
+		log(message, null, LLevel.INFO);
 	}
 	
 	/**
@@ -153,7 +153,7 @@ public class Console {
 	 * @param message A custom message to include.
 	 */
 	public synchronized static void debug(String message) {
-		log(message, null, LogLevel.DEBUG);
+		log(message, null, LLevel.DEBUG);
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class Console {
 	 * @param exc		The exception to log to the console.
 	 */
 	public synchronized static void error(String message, Exception exc) {
-		log(message, exc, LogLevel.ERROR);
+		log(message, exc, LLevel.ERROR);
 	}
 	
 	/**

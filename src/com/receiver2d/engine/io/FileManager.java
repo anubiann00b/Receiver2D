@@ -3,6 +3,7 @@ package com.receiver2d.engine.io;
 
 import javax.xml.parsers.*;
 
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -30,9 +31,13 @@ public class FileManager {
 	 * @throws ParserConfigurationException
 	 * @throws IOException
 	 * @throws SAXException
+	 * @throws DOMException 
+	 * @throws IllegalAccessException 
+	 * @throws IllegalArgumentException 
 	 */
 	public static World loadWorld(String location)
-			throws ParserConfigurationException, SAXException, IOException {
+			throws ParserConfigurationException, SAXException, IOException,
+			IllegalArgumentException, IllegalAccessException, DOMException {
 		boolean isValid = location.matches("(.*)[\\.]r2dw$");
 		File worldFile = new File(location);
 
@@ -106,57 +111,28 @@ public class FileManager {
 
 						NamedNodeMap nnm = enode.getAttributes();
 						for (int j=0; j<nnm.getLength(); j++) {
-							// loop through all entity attributes						
+							// loop through all entity attributes; get field names						
 							String[] fNames = nnm.item(j).getNodeName()
 									.split("[_]");
-							for (String name : fNames)
-								Console.log("name is \""+name+"\"");
-							Class<?> enc = Entity.class;
+							Console.log(nnm.item(j).getNodeName()+": length "+fNames[
+							           fNames.length > 1 ? 1 : 0]);
+							Object top = null; // our top-level object to set
 							Field f = null;
-							try {
-								f = enc.getDeclaredField(fNames[0]);
-								Console.debug("fNames.length = "+fNames.length);
-								if (fNames.length > 1) {
-									Console.debug("fNames[0] = "+fNames[0]);
-									Console.debug("fNames[1] = "+fNames[1]);
-								}
-								//iterate until we get to "end" of field chain
-								for (int q=1; q<fNames.length; q++) {
-									enc = f.getDeclaringClass();
-									f = enc.getDeclaredField(fNames[q]);
-									Console.debug("Class name: "+f.getName());
+							for (int fn=0; fn < fNames.length; fn++) {
+								try {
+									top = fn == 0 ? en : f.getDeclaringClass();
+									f = fn == 0 ?
+											en.getClass().getField(fNames[fn])
+											: f.getDeclaringClass().getField(fNames[fn]);
+								} catch (NoSuchFieldException e) {
+									Console.error("Loading world could not find item in Entity: "
+											+ fNames[fn], null);
+									break; // end loop
 								}
 								
-								String nodeValue = nnm.item(j).getNodeValue();
-								if (f.getType().equals(Integer.class))
-									f.set(en, new Integer(nodeValue));
-								else if (f.getType().equals(Boolean.class))
-									f.set(en, new Integer(nodeValue));
-								else if (f.getType().equals(Short.class))
-									f.set(en, new Short(nodeValue));
-								else if (f.getType().equals(Long.class))
-									f.set(en, new Long(nodeValue));
-								else if (f.getType().equals(Double.class))
-									f.set(en, new Double(nodeValue));
-								else if (f.getType().equals(Float.class))
-									f.set(en, new Float(nodeValue));
-								else if (f.getType().equals(Byte.class))
-									f.set(en, new Byte(nodeValue));
-								else if (f.getType().equals(Character.class)) {
-									try {
-										f.set(en, (char) Integer
-												.parseInt(nodeValue));
-									} catch (Exception e) {
-										f.set(en, nodeValue.charAt(0));
-									}
-								}
-								
-								Console.debug("Success in setting Entity field \""
-										+ f.getName() + "\".");
-							} catch (Exception e) {
-								Console.error("Could not access field \""
-										+ nnm.item(j).getNodeName()
-										+ "\" in Entity class.", e);
+								// we have our field now
+								f.set(top, nnm.item(j).getNodeValue());
+								Console.log("Set attribute of Entity "+fNames[fn]);
 							}
 						}
 						

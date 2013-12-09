@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.lwjgl.opengl.Display;
 
-import com.receiver2d.engine.Console.LogLevel;
+import com.receiver2d.engine.Console.LLevel;
 
 /**
  * This is the main class, where the engine can be started and managed.
@@ -42,12 +42,12 @@ public class Receiver2D {
 	 * Starts the game engine.
 	 */
 	public static void start() {
-		Console.log("Starting Receiver2D", null, Console.LogLevel.INFO);
+		Console.log("Starting Receiver2D", null, Console.LLevel.INFO);
 
 		if (DEBUG_MODE) {
 //			Console.debug("Setting org.lwjgl.util.Debug to "
 //					+ System.setProperty("org.lwjgl.util.Debug", "true"));
-			Console.level = Console.LogLevel.DEBUG;
+			Console.level = Console.LLevel.DEBUG;
 		}
 
 		threads = new ThreadManager(); // create the thread manager and pool
@@ -61,7 +61,7 @@ public class Receiver2D {
 		threadList[0] = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				Console.log("Logic thread is running...", null, LogLevel.DEBUG);
+				Console.log("Logic thread is running...", null, LLevel.DEBUG);
 			}
 		});
 
@@ -74,7 +74,7 @@ public class Receiver2D {
 			@Override
 			public void run() {
 				Console.log("Physics thread is running...", null,
-						LogLevel.DEBUG);
+						LLevel.DEBUG);
 				// TODO: while (Physics.update());
 			}
 		});
