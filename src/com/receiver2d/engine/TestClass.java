@@ -170,9 +170,9 @@ public class TestClass {
 
 		Receiver2D.start(); // initialize the game
 
-		//resourceTest(); // test our world loading
+		resourceTest(); // test our world loading
 		
-		entityReflection(); // test entity reflection
+		//entityReflection(); // test entity reflection
 
 		Receiver2D.stop();
 	}

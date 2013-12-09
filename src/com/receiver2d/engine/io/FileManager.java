@@ -101,39 +101,97 @@ public class FileManager {
 				} else if (node.getNodeName() == "entitylist") {
 					NodeList entityNodes = node.getChildNodes();
 					EntityList entityList = new EntityList();
+					
+					// loop through all entities
 
 					for (int i = 0; i < entityNodes.getLength(); i++) {
 						// check against text nodes and other non-tags
 						if (!entityNodes.item(i).hasAttributes()) continue;
 						Node enode = entityNodes.item(i);
-						Entity en = new Entity(enode.getAttributes()
-								.getNamedItem("name").getNodeValue());
+						Entity en = new Entity();
 
 						NamedNodeMap nnm = enode.getAttributes();
-						for (int j=0; j<nnm.getLength(); j++) {
+						for (int j = 0; j < nnm.getLength(); j++) {
 							// loop through all entity attributes; get field names						
 							String[] fNames = nnm.item(j).getNodeName()
 									.split("[_]");
-							Console.log(nnm.item(j).getNodeName()+": length "+fNames[
-							           fNames.length > 1 ? 1 : 0]);
-							Object top = null; // our top-level object to set
-							Field f = null;
-							for (int fn=0; fn < fNames.length; fn++) {
-								try {
-									top = fn == 0 ? en : f.getDeclaringClass();
-									f = fn == 0 ?
-											en.getClass().getField(fNames[fn])
-											: f.getDeclaringClass().getField(fNames[fn]);
-								} catch (NoSuchFieldException e) {
-									Console.error("Loading world could not find item in Entity: "
-											+ fNames[fn], null);
-									break; // end loop
-								}
+							
+							Console.log("fNames is "+fNames.length);
+														
+							// oh great, here's where the real fun comes:
+							// prepare yourself for O(2n) goodness! T_T
+							
+							int aN = fNames.length;	// attributes n
+							
+							Object[] objs = new Object[aN]; // our objects
+							Field[] fields = new Field[aN]; // our fields
+							
+							// create object, then field, for _n times_
+							for (int m = 0; m < aN; m++) {
+								objs[m] = m==0 ? en : 
+									fields[m-1].get(objs[m-1]); // set obj
 								
-								// we have our field now
-								f.set(top, nnm.item(j).getNodeValue());
-								Console.log("Set attribute of Entity "+fNames[fn]);
+								// try to get next field in object (is toplevel)
+								try {
+									fields[m] = objs[m].getClass()
+											.getField(fNames[m]); // our fName
+									Console.log("Got the field \""+fNames[m]
+											+"\" in "+objs[m].getClass()
+													.getSimpleName()+".");
+								} catch (NoSuchFieldException
+										| SecurityException e) {
+									Console.log("Could not get field "
+										+fNames[m]+". Aborting.");
+									break;
+								}
 							}
+							
+							// what is our end value?
+							String eVal = nnm.item(j).getNodeValue();
+							
+							// get type of value
+							String type = fields[aN-1].get(objs[aN-1])
+									.getClass().getSimpleName().toLowerCase();
+							switch (type) { // set value
+							case "char":
+								fields[aN-1].set(objs[aN-1], eVal.charAt(0));
+								break;
+							case "byte":
+								fields[aN-1].set(objs[aN-1], new Byte(eVal));
+								break;
+							case "short":
+								fields[aN-1].set(objs[aN-1], new Short(eVal));
+								break;
+							case "integer":
+								fields[aN-1].set(objs[aN-1], new Integer(eVal));
+								break;
+							case "long":
+								fields[aN-1].set(objs[aN-1], new Long(eVal));
+								break;
+							case "float":
+								fields[aN-1].set(objs[aN-1], new Float(eVal));
+								break;
+							case "double":
+								fields[aN-1].set(objs[aN-1], new Double(eVal));
+								break;
+							case "boolean":
+								fields[aN-1].set(objs[aN-1], new Boolean(eVal));
+								break;
+							case "string":
+								fields[aN-1].set(objs[aN-1], eVal);
+								break;
+							default:
+								Console.log("Could not load value!");
+								break;
+							}
+							
+							Console.log("Using type "+type+" for value "+eVal);
+							
+							// set fields now, in bottom-up _n-1 times_
+							for (int m = aN-2; m >= 0; m--)
+								fields[m].set(objs[m], objs[m+1]);
+							
+							Console.log("Loaded values into entity.");
 						}
 						
 						NodeList componentNodes = enode.getChildNodes();
@@ -141,7 +199,9 @@ public class FileManager {
 							// TODO: add components
 							
 						}
+						
 						entityList.add(en);
+						Console.log("Loaded entity \""+en.name+"\".");
 					}
 					scenes[n].setEntityList(entityList);
 				}
