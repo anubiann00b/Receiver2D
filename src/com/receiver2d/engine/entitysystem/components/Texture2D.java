@@ -17,6 +17,9 @@ public class Texture2D {
 	 */
 	public Color background;
 
+	/**
+	 * The image information stored in the texture.
+	 */
 	private BufferedImage image;
 	
 	/**
