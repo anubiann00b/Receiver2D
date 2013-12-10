@@ -112,7 +112,7 @@ public class Entity extends Transform2D {
 	public void attachComponent(Component comp) {
 		String name = comp.getClass().getSimpleName();
 		// a component must be removed the standard way first
-		if (true || components.containsKey(name)) return;
+		if (components.containsKey(name)) return;
 		comp.entity = this;
 		components.put(name, comp);
 	}
