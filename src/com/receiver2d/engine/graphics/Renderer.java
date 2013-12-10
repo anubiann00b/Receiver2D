@@ -20,7 +20,7 @@ public class Renderer {
 	public static void drawEntity(Entity entity) {
 		if (!entity.visible) return; // don't render invisible entities
 
-		// TODO: get color of entity
+		// TODO: get texture of Entity
 
 		glBegin(GL_POLYGON); // draw the mesh of the entity
 		for (Vector2D pnt : entity.mesh.points)
@@ -40,7 +40,7 @@ public class Renderer {
 	public static boolean update() {
 
 		glClearColor(0.5f, 0.5f, 0.5f, 0f); // clear screen with transparent
-		// black
+		// grey
 		// set viewport to display dimension
 		glViewport(0, 0, Display.getWidth(), Display.getHeight());
 

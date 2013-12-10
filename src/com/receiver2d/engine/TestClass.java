@@ -2,7 +2,6 @@ package com.receiver2d.engine;
 
 import java.lang.reflect.Field;
 
-import com.receiver2d.engine.Console.LLevel;
 import com.receiver2d.engine.entitysystem.Entity;
 import com.receiver2d.engine.io.FileManager;
 import com.receiver2d.engine.io.R2DResource;

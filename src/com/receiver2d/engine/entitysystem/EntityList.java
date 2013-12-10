@@ -9,6 +9,8 @@ import java.util.ArrayList;
  */
 public class EntityList extends ArrayList<Entity> {
 	private static final long serialVersionUID = -5861454509544255719L;
+	
+	// TODO: add Entity familial (parent-child) accounting in here
 
 	/**
 	 * Creates a new, blank list of entities.

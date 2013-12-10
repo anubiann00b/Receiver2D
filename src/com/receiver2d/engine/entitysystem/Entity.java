@@ -3,7 +3,6 @@ package com.receiver2d.engine.entitysystem;
 import java.util.HashMap;
 import java.util.UUID;
 
-import com.receiver2d.engine.Console;
 import com.receiver2d.engine.Transform2D;
 import com.receiver2d.engine.Vector2D;
 import com.receiver2d.engine.physics.Polygon;
@@ -77,8 +76,7 @@ public class Entity extends Transform2D {
 	/**
 	 * Sets an entity to be a child of this entity.
 	 * 
-	 * @param child
-	 *            The child to make as an entity.
+	 * @param child The child to make as an entity.
 	 * @return The same entity, but now as a child of the main entity.
 	 */
 	public void setChildEntity(Entity child) {
@@ -119,8 +117,8 @@ public class Entity extends Transform2D {
 	
 	/**
 	 * Gets the current Component attached to the Entity.
-	 * @param name The current component attached to the Entity.
-	 * @return
+	 * @param name The current Component attached to the Entity.
+	 * @return The Component matching the specified name, or null otherwise.
 	 */
 	public Component getComponent(String name) {
 		return components.get(name);
@@ -128,17 +126,18 @@ public class Entity extends Transform2D {
 	
 	/**
 	 * Removes a Component from the Entity.
-	 * @param name The component's name type.
-	 * @return The removed component.
+	 * @param name The Component's name type.
+	 * @return The removed Component, or null if the Component did not exist.
 	 */
 	public Component removeComponent(String name) {
+		if (!components.containsKey(name)) return null;
 		Component c = components.remove(name);
 		c.entity = null;
 		return c;
 	}
 	
 	/**
-	 * @return All of the current components attached to the entity.
+	 * @return All of the current Component items attached to the entity.
 	 */
 	public HashMap<String, Component> getComponents() {
 		return components;

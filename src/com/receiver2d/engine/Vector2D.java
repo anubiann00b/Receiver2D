@@ -7,7 +7,7 @@ import org.lwjgl.util.vector.Vector2f;
  */
 public class Vector2D extends Vector2f {
 	private static final long serialVersionUID = 1181019950100L; // "vec2d" in ascii
-
+	
 	/**
 	 * A specific type of Vector2D with a magnitude of 0.
 	 */
