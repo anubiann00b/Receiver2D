@@ -81,14 +81,12 @@ public class Receiver2D {
 
 		// TODO: audio thread
 
-		for (Thread t : threadList) {
+		for (Thread t : threadList)
 			threads.queueTask(t);
-		}
+		
+		Console.log("Receiver2D started");
 
 		DisplayHandler.init("Test Game", false, 1280, 720);
-		Console.log("Created LWJGL test window");
-
-		Console.log("Receiver2D started");
 	}
 
 	/**

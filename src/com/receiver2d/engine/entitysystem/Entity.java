@@ -1,8 +1,9 @@
 package com.receiver2d.engine.entitysystem;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
+import com.receiver2d.engine.Console;
 import com.receiver2d.engine.Transform2D;
 import com.receiver2d.engine.Vector2D;
 import com.receiver2d.engine.physics.Polygon;
@@ -17,7 +18,7 @@ public class Entity extends Transform2D {
 	/**
 	 * The components attached to the entity.
 	 */
-	private ArrayList<Component> components = null;
+	private HashMap<String, Component> components = null;
 
 	/**
 	 * A parent entity to which the entity is attached to.
@@ -47,7 +48,7 @@ public class Entity extends Transform2D {
 	 */
 	public Entity(String entityName) {
 		uuid = UUID.randomUUID();
-		components = new ArrayList<Component>();
+		components = new HashMap<String, Component>();
 		name = entityName;
 		mesh = new Polygon(0f,0f , 0f,10f , 10f,10f , 10f,0f);
 		position = Vector2D.ZERO;
@@ -104,33 +105,42 @@ public class Entity extends Transform2D {
 	}
 	
 	/**
-	 * Adds a component to the Entity's component list.
+	 * Adds a component to the Component list.
+	 * @param name The component name type.
 	 * @param comp The component to add.
 	 */
 	public void attachComponent(Component comp) {
+		String name = comp.getClass().getSimpleName();
+		// a component must be removed the standard way first
+		if (true || components.containsKey(name)) return;
 		comp.entity = this;
-		components.add(comp);
+		components.put(name, comp);
 	}
 	
 	/**
-	 * Returns all of the components attached to the Entity.
-	 * @return A list of the attached components.
+	 * Gets the current Component attached to the Entity.
+	 * @param name The current component attached to the Entity.
+	 * @return
 	 */
-	public ArrayList<Component> getComponents() {
-		return components;
+	public Component getComponent(String name) {
+		return components.get(name);
 	}
 	
 	/**
 	 * Removes a Component from the Entity.
-	 * @param position The position to remove the Entity from.
-	 * @return The removed Component.
+	 * @param name The component's name type.
+	 * @return The removed component.
 	 */
-	public Component removeComponent(int position) {
-		Component c = components.remove(position);
+	public Component removeComponent(String name) {
+		Component c = components.remove(name);
 		c.entity = null;
 		return c;
 	}
 	
-	//TODO: implement specific getComponent(int index)
-	//TODO: make Components more robust
+	/**
+	 * @return All of the current components attached to the entity.
+	 */
+	public HashMap<String, Component> getComponents() {
+		return components;
+	}
 }

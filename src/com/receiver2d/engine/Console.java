@@ -38,18 +38,19 @@ public class Console {
 		}
 
 		/**
-		 * Determines if we should print 
-		 * @param cmp
+		 * Determines if we should print.
+		 * @param cmp The log level.
 		 * @return
 		 */
 		public boolean shouldPrint(LLevel cmp) {
-			// example: if level is debug, we should print error msgs
+			// example: if level cmp is debug, we should print error msgs
 			return this.val >= cmp.val;
 		}
 	}
 
 	/**
-	 * The current log level that the Console is on.
+	 * The current log level that the Console is on. Any messages that are
+	 * above this log level will be ignored.
 	 */
 	public static LLevel level = LLevel.ERROR;
 

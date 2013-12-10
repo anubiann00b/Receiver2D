@@ -166,7 +166,12 @@ public class TestClass {
 	public static void main(String[] args) {
 		Receiver2D.DEBUG_MODE = true;
 
-		System.out.println(LLevel.DEBUG.shouldPrint(LLevel.UNDEFINED));
+		
+//		System.out.printf("Should we be printing undefined messages when we are at debug level? %s.\n",
+//						LLevel.DEBUG.shouldPrint(LLevel.UNDEFINED) ? "Yes" : "No");
+//		
+//		System.out.printf("Should we be printing debug messages when we are at error level? %s.\n",
+//				LLevel.ERROR.shouldPrint(LLevel.DEBUG) ? "Yes" : "No");
 
 		Receiver2D.start(); // initialize the game
 

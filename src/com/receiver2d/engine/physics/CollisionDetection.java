@@ -5,11 +5,15 @@ import java.util.ArrayList;
 import com.receiver2d.engine.Vector2D;
 
 /**
- * Deals with analyzing collisions between geometric figures in two-dimensional space. This comes in handy for all sorts of things pertaining to the game engine, such as AI and physics.
+ * Deals with analyzing collisions between geometric figures in two-dimensional
+ * space. This comes in handy for all sorts of things pertaining to the game
+ * engine, such as AI and physics.
  */
 public class CollisionDetection {
 	/**
-	 * Checks whether or not two finite lines (Vector2f array of length 2) collide, and if they do, returns the point of their collision as a Vector2f.
+	 * Checks whether or not two finite lines (Vector2f array of length 2)
+	 * collide, and if they do, returns the point of their collision as a
+	 * Vector2f.
 	 * 
 	 * @param ln1
 	 *            An array containing two points on the first line.
@@ -23,7 +27,8 @@ public class CollisionDetection {
 		// line
 
 		/*
-		 * we assume line of format Ax + By = C for example, with ln1: x1 = ln1[0].x, x2 = ln1[1].x y1 = ln1[0].y, y2 = ln1[1].y
+		 * we assume line of format Ax + By = C for example, with ln1: x1 =
+		 * ln1[0].x, x2 = ln1[1].x y1 = ln1[0].y, y2 = ln1[1].y
 		 */
 		float A1 = ln1.get(1).y - ln1.get(0).y;
 		float B1 = ln1.get(0).x - ln1.get(1).x;
@@ -53,7 +58,9 @@ public class CollisionDetection {
 	}
 
 	/**
-	 * Checks whether two polygons collide. Polygons are defined as an array of vertices with each vertex (Vector2f) connected to the next one in the array.
+	 * Checks whether two polygons collide. Polygons are defined as an array of
+	 * vertices with each vertex (Vector2f) connected to the next one in the
+	 * array.
 	 * <p/>
 	 * Example: square - (0,0) (0,1) (1,1) (1,0)
 	 * 
@@ -61,7 +68,8 @@ public class CollisionDetection {
 	 *            the array of points for the first polygon
 	 * @param polyB
 	 *            the array of points for the second polygon
-	 * @return The array of points where the two polygons overlap, or null if they do not collide at all.
+	 * @return The array of points where the two polygons overlap, or null if
+	 *         they do not collide at all.
 	 */
 	public static Vector2D[] polygonalIntersectionPoints(Polygon polyA,
 			Polygon polyB) {
@@ -89,7 +97,8 @@ public class CollisionDetection {
 	}
 
 	/**
-	 * Returns a true/false value determining whether or not two polygons or lines collide.
+	 * Returns a true/false value determining whether or not two polygons or
+	 * lines collide.
 	 * 
 	 * @param poly1
 	 *            A Vector2f array containing points of the first polygon/line.
@@ -107,14 +116,15 @@ public class CollisionDetection {
 
 	/**
 	 * Determines if a point is inside a polygon using a ray casting algorithm.
-	 * If the point is on the edge of the polygon, the calculation returns false.
-	 * See http://www.ecse.rpi.edu/~wrf/Research/Short_Notes/pnpoly.html
+	 * If the point is on the edge of the polygon, the calculation returns
+	 * false. See http://www.ecse.rpi.edu/~wrf/Research/Short_Notes/pnpoly.html
 	 * 
 	 * @param pt
 	 *            A point.
 	 * @param poly
 	 *            An array of points, or a polygon.
-	 * @return A true/false value depending on whether or not the point is inside the polygon.
+	 * @return A true/false value depending on whether or not the point is
+	 *         inside the polygon.
 	 */
 	public static boolean pointInPolygon(Vector2D pt, Polygon poly) {
 		boolean c = false;

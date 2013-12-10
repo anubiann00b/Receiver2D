@@ -51,6 +51,7 @@ public class DisplayHandler {
 			Display.setDisplayMode(new DisplayMode(width, height));
 			Display.setFullscreen(fullscreen);
 			Display.create();
+			Console.log("Created LWJGL test window");
 		} catch (LWJGLException e) {
 			Console.error("Failed to create display.", e);
 		}
