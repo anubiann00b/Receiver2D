@@ -1,6 +1,6 @@
 package com.receiver2d.engine.entitysystem;
 
-import com.receiver2d.engine.entitysystem.components.Texture2D;
+import com.receiver2d.engine.graphics.Texture2D;
 
 public class Skybox {
 	/**
@@ -8,7 +8,11 @@ public class Skybox {
 	 */
 	public Texture2D texture;
 	
-	public Skybox() {
-		texture = new Texture2D();
+	/**
+	 * Creates a new Skybox from a given texture.
+	 * @param tex The rendered texture to the Skybox in the game.
+	 */
+	public Skybox(Texture2D tex) {
+		texture = tex;
 	}
 }

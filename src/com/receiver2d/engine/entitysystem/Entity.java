@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.receiver2d.engine.Transform2D;
 import com.receiver2d.engine.Vector2D;
+import com.receiver2d.engine.graphics.Texture2D;
 import com.receiver2d.engine.physics.Polygon;
 
 /**
@@ -12,17 +13,17 @@ import com.receiver2d.engine.physics.Polygon;
  * the game is, in its most basic form, an entity with certain capabilities.
  */
 public class Entity extends Transform2D {
-	private UUID uuid = null;
+	private UUID uuid;
 
 	/**
 	 * The components attached to the entity.
 	 */
-	private HashMap<String, Component> components = null;
+	private HashMap<String, Component> components;
 
 	/**
 	 * A parent entity to which the entity is attached to.
 	 */
-	public Entity parent = null;
+	public Entity parent;
 
 	/**
 	 * The name of the entity.
@@ -39,7 +40,13 @@ public class Entity extends Transform2D {
 	 * The mesh of the entity. Specifies the morphology as an instance of a
 	 * Polygon.
 	 */
-	public Polygon mesh = null;
+	public Polygon mesh;
+	
+	/**
+	 * The texture of the entity. Specifies the visual morphology as an instance
+	 * of a Texture.
+	 */
+	public Texture2D texture;
 	
 	/**
 	 * Creates a new Entity (in-game object) and initializes the component list
