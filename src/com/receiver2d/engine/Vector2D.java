@@ -23,6 +23,15 @@ public class Vector2D extends Vector2f {
 	 * @param x The x-coordinate.
 	 * @param y The y-coordinate.
 	 */
+	public Vector2D(double x, double y) {
+		super((float)x, (float)y);
+	}
+	
+	/**
+	 * Creates a new Vector2D from given points.
+	 * @param x The x-coordinate.
+	 * @param y The y-coordinate.
+	 */
 	public Vector2D(float x, float y) {
 		super(x, y);
 	}

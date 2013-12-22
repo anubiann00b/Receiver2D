@@ -46,7 +46,7 @@ public class Entity extends Transform2D {
 	 * The texture of the entity. Specifies the visual morphology as an instance
 	 * of a Texture.
 	 */
-	public Texture2D texture;
+	public Texture2D texture; // TODO: multi-texture support
 	
 	/**
 	 * Creates a new Entity (in-game object) and initializes the component list

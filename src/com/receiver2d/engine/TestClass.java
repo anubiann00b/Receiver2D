@@ -1,6 +1,7 @@
 package com.receiver2d.engine;
 
 import com.receiver2d.engine.entitysystem.Entity;
+import com.receiver2d.engine.graphics.Texture2D;
 import com.receiver2d.engine.io.FileManager;
 import com.receiver2d.engine.io.R2DResource;
 import com.receiver2d.engine.physics.CollisionDetection;
@@ -73,6 +74,8 @@ public class TestClass {
 				+ "\" was successful." : "Loading file \"" + r.getPath()
 				+ "\" failed.");
 
+		// test texture loading
+		//Texture2D ishygddt = new Texture2D(r, null);
 	}
 
 	public static void main(String[] args) {

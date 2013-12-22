@@ -18,7 +18,6 @@ import com.receiver2d.engine.io.R2DResource;
  * additional color or image data to be drawn on by the Renderer, as specified.
  */
 
-// TODO: multi-texture support
 public class Texture2D {
 	/**
 	 * The background color of the texture, which is rendered with first
@@ -135,7 +134,7 @@ public class Texture2D {
 	/**
 	 * The rendered image applies the dimensions of the texture to the original
 	 * static image, and returns the "stretched" output.
-	 * @return A 
+	 * @return A rendered version of the image.
 	 */
 	public Image getRendered() {
 		return image != null ? image.getScaledInstance((int)(width+.5), 

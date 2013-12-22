@@ -11,3 +11,5 @@ The original engine was created by Adrian Biagioli and can be found at his GitHu
 With that, we hope that you may find our version to be useful.
 
 \- Princeton and Ben
+
+Consult [todo.md](/todo.md) for a list of completed and incomplete objectives.

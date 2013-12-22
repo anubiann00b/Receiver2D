@@ -15,4 +15,5 @@ public class Skybox {
 	public Skybox(Texture2D tex) {
 		texture = tex;
 	}
+	
 }
