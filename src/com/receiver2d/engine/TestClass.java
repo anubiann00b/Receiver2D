@@ -31,7 +31,7 @@ public class TestClass {
 		Polygon ln2 = new Polygon(new Vector2D[] { new Vector2D(2, 2),
 				new Vector2D(2, 4) });
 		Console.log("ln1 intersects with ln2: "
-				+ (CollisionDetection.linearIntersectionPoint(ln1, ln2)
+				+ (CollisionDetection.linesIntersect(ln1, ln2)
 						.toString() != null));
 	}
 

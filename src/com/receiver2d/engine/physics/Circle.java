@@ -48,7 +48,12 @@ public class Circle {
 	 * @param n The complexity of the Polygon, or the number of vertices.
 	 * @return A polygonal representation of this circle.
 	 */
-	public Polygon toPolygon(int n) {
+	public Polygon asPolygon(int n) {
 		return new Polygon(getVertices(n));
+	}
+	
+	@Override
+	public String toString() {
+		return "(" + center.x + ", " + center.y + ", r = " + radius + ")";
 	}
 }
