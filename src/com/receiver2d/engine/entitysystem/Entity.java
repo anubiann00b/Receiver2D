@@ -3,8 +3,7 @@ package com.receiver2d.engine.entitysystem;
 import java.util.HashMap;
 import java.util.UUID;
 
-import com.receiver2d.engine.Transform2D;
-import com.receiver2d.engine.Vector2D;
+import com.receiver2d.engine.*;
 import com.receiver2d.engine.graphics.Texture2D;
 import com.receiver2d.engine.physics.Polygon;
 
@@ -14,16 +13,21 @@ import com.receiver2d.engine.physics.Polygon;
  */
 public class Entity extends Transform2D {
 	private UUID uuid;
+	
+	/**
+	 * The current scene that the entity is in.
+	 */
+	protected Scene scene;
 
 	/**
 	 * The components attached to the entity.
 	 */
-	private HashMap<String, Component> components;
+	protected HashMap<String, Component> components;
 
 	/**
 	 * A parent entity to which the entity is attached to.
 	 */
-	public Entity parent;
+	protected Entity parent;
 
 	/**
 	 * The name of the entity.
@@ -59,6 +63,7 @@ public class Entity extends Transform2D {
 		mesh = new Polygon(0f,0f , 0f,10f , 10f,10f , 10f,0f);
 		position = Vector2D.ZERO;
 		rotation = 0f;
+		scene = null;
 	}
 
 	/**
@@ -148,5 +153,12 @@ public class Entity extends Transform2D {
 	 */
 	public HashMap<String, Component> getComponents() {
 		return components;
+	}
+	
+	/**
+	 * @return The current Scene that the Entity is in.
+	 */
+	public Scene getScene() {
+		return scene;
 	}
 }

@@ -19,11 +19,11 @@ public class Receiver2D {
 	/**
 	 * Should debug messages be printed?
 	 */
-	public static boolean DEBUG_MODE = true;
+	public static boolean DEBUG_MODE = false;
 	/**
 	 * Global program start time
 	 */
-	public static long START_TIME = System.nanoTime();
+	public static final long START_TIME = System.nanoTime();
 	// program values
 
 	// engine values
@@ -33,8 +33,9 @@ public class Receiver2D {
 	/**
 	 * The list of currently-loaded worlds in the engine.
 	 */
-	public static ArrayList<World> worlds = new ArrayList<World>();
+	private static ArrayList<World> worlds = new ArrayList<World>();
 	public static Thread[] threadList = new Thread[2];
+	private static World loadedWorld;
 
 	// engine values
 
@@ -103,4 +104,14 @@ public class Receiver2D {
 		Console.log("Receiver2D ended.");
 		System.exit(0);
 	}
+	
+	/**
+	 * Loads a world into the world queue.
+	 * @param world
+	 */
+	public static boolean loadWorld(World world) {
+		// TODO: extensive check for world compatibility; update
+		return worlds.add(loadedWorld = world);
+	}
+	
 }

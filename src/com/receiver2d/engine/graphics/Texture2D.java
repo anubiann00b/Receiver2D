@@ -95,7 +95,7 @@ public class Texture2D {
 	 * @param i The BufferedImage to use.
 	 * @param color The background color of the texture to render.
 	 */
-	public Texture2D(BufferedImage i, Color color) throws IOException {
+	public Texture2D(BufferedImage i, Color color) {
 		image = new BufferedImage(i.getWidth(), i.getHeight(),
 				BufferedImage.TYPE_INT_ARGB);
 		
@@ -104,7 +104,7 @@ public class Texture2D {
 		g.drawImage(i, 0, 0, null);
 		g.dispose();
 		
-		bgColor = color != null ? color : new Color(0, 0, 0, 255);
+		bgColor = color != null ? color : new Color(0, 0, 0, 0);
 		width = image.getWidth();
 		height = image.getHeight();
 	}

@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public class EntityList extends ArrayList<Entity> {
 	private static final long serialVersionUID = -5861454509544255719L;
 	
+	private Scene scene;
+	
 	// TODO: add Entity familial (parent-child) accounting in here
 
 	/**
@@ -50,6 +52,8 @@ public class EntityList extends ArrayList<Entity> {
 	 * @param scene The Scene to modify.
 	 */
 	public void setScene(Scene scene) {
-		scene.setEntityList(this);
+		(this.scene = scene).setEntityList(this);
+		for (Entity e : this.toArray(new Entity[this.size()]))
+			e.scene = this.scene;
 	}
 }

@@ -1,6 +1,7 @@
 package com.receiver2d.engine;
 
 import com.receiver2d.engine.entitysystem.EntityList;
+import com.receiver2d.engine.entitysystem.Skybox;
 import com.receiver2d.engine.io.R2DResource;
 
 import java.util.ArrayList;
@@ -9,16 +10,22 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * A particular scene within a world, containing a list of entities and other attributes.
+ * A particular scene within a world, containing a list of entities and other 
+ * attributes.
  */
 @SuppressWarnings("unused")
 public class Scene {
 	private String uuid;
 	private String name = "";
-	private EntityList entityList;
+	protected EntityList entityList;
 
-	private HashMap<String, Object> values;
-	private ArrayList<R2DResource> resources = null;
+	protected HashMap<String, Object> values;
+	protected ArrayList<R2DResource> resources;
+	
+	/**
+	 * The Skybox of the Scene.
+	 */
+	public Skybox skybox;
 
 	/**
 	 * Loads a scene into memory and gives it a name.
@@ -32,6 +39,7 @@ public class Scene {
 		values = new HashMap<String, Object>();
 		entityList = new EntityList();
 		resources = new ArrayList<R2DResource>();
+		skybox = null;
 	}
 
 	/**
@@ -71,7 +79,8 @@ public class Scene {
 	}
 
 	/**
-	 * Gets a specific scene-based variable. Very useful for having variables that only correspond to one type of scene in a game.
+	 * Gets a specific scene-based variable. Very useful for having variables 
+	 * that only correspond to one type of scene in a game.
 	 * 
 	 * @param variable
 	 *            The name of the stored variable.

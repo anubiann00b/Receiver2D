@@ -1,11 +1,11 @@
 package com.receiver2d.engine;
 
-import com.receiver2d.engine.entitysystem.Entity;
+import java.io.IOException;
+
+import com.receiver2d.engine.entitysystem.*;
 import com.receiver2d.engine.graphics.Texture2D;
-import com.receiver2d.engine.io.FileManager;
-import com.receiver2d.engine.io.R2DResource;
-import com.receiver2d.engine.physics.CollisionDetection;
-import com.receiver2d.engine.physics.Polygon;
+import com.receiver2d.engine.io.*;
+import com.receiver2d.engine.physics.*;
 
 /**
  * This class is for testing purposes only, although it currently is responsible
@@ -75,12 +75,20 @@ public class TestClass {
 				+ "\" failed.");
 
 		// test texture loading
-		//Texture2D ishygddt = new Texture2D(r, null);
+		Texture2D ishygddt = null;
+		try {
+			ishygddt = new Texture2D(r, null);
+		} catch (IOException e) {
+			Console.error("Could not load resource "+
+						r.getPath()+" into a texture.", e);
+		}
+		scene.skybox = new Skybox(ishygddt);
+				
 	}
 
 	public static void main(String[] args) {
 		Receiver2D.DEBUG_MODE = true;
-
+		resourceTest(); // test our world loading
 		
 //		System.out.printf("Should we be printing undefined messages when we are at debug level? %s.\n",
 //						LLevel.DEBUG.shouldPrint(LLevel.UNDEFINED) ? "Yes" : "No");
@@ -89,8 +97,6 @@ public class TestClass {
 //				LLevel.ERROR.shouldPrint(LLevel.DEBUG) ? "Yes" : "No");
 
 		Receiver2D.start(); // initialize the game
-
-		resourceTest(); // test our world loading
 		
 		//entityReflection(); // test entity reflection
 
