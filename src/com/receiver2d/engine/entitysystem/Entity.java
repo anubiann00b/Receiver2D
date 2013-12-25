@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import com.receiver2d.engine.*;
+import com.receiver2d.engine.geometry.Polygon;
 import com.receiver2d.engine.graphics.Texture2D;
-import com.receiver2d.engine.physics.Polygon;
 
 /**
  * Contains information regarding an in-game Entity. Any object instantiated in
@@ -13,11 +13,6 @@ import com.receiver2d.engine.physics.Polygon;
  */
 public class Entity extends Transform2D {
 	private UUID uuid;
-	
-	/**
-	 * The current scene that the entity is in.
-	 */
-	protected Scene scene;
 
 	/**
 	 * The components attached to the entity.
@@ -39,10 +34,16 @@ public class Entity extends Transform2D {
 	 * rendered in the next draw call.
 	 */
 	public boolean visible = true;
+	
+	/**
+	 * The current position of the entity.
+	 */
+	public Vector2D position;
 
 	/**
 	 * The mesh of the entity. Specifies the morphology as an instance of a
-	 * Polygon.
+	 * Polygon. Note that the polygon's individual points are localized to the
+	 * entity's position.
 	 */
 	public Polygon mesh;
 	
@@ -63,7 +64,6 @@ public class Entity extends Transform2D {
 		mesh = new Polygon(0f,0f , 0f,10f , 10f,10f , 10f,0f);
 		position = Vector2D.ZERO;
 		rotation = 0f;
-		scene = null;
 	}
 
 	/**
@@ -156,9 +156,15 @@ public class Entity extends Transform2D {
 	}
 	
 	/**
-	 * @return The current Scene that the Entity is in.
+	 * Gets the absolute location of the mesh of the entity.
+	 * @return A new polygon where the position of each point is absolute.
 	 */
-	public Scene getScene() {
-		return scene;
+	public Polygon getDelocalizedMesh() {
+		Vector2D[] pnts = mesh.points.toArray(new Vector2D[]{});
+		for (Vector2D p : pnts) {
+			p.x += position.x;
+			p.y += position.y;
+		}
+		return new Polygon(pnts);
 	}
 }

@@ -78,10 +78,9 @@ public class DisplayHandler {
 	/**
 	 * Changes the state of the window by toggling its fullscreen component.
 	 * 
-	 * @param fullscreen
-	 *            Is true for fullscreen; false for window mode.
+	 * @param fullscreen Is true for fullscreen; false for window mode.
 	 */
-	public static void updateFullscreen(boolean fullscreen) {
+	public static synchronized void updateFullscreen(boolean fullscreen) {
 		try {
 			Display.setFullscreen(fullscreen);
 		} catch (Exception e) {}

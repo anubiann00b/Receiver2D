@@ -91,7 +91,7 @@ public class Receiver2D {
 	}
 
 	/**
-	 * Shuts down Remote2D.
+	 * Stops the game engine.
 	 */
 	public static void stop() {
 		threads.threadPool.shutdown();
@@ -114,4 +114,11 @@ public class Receiver2D {
 		return worlds.add(loadedWorld = world);
 	}
 	
+	/**
+	 * Gets the currently-loaded world.
+	 * @return
+	 */
+	public static World getLoadedWorld() {
+		return loadedWorld;
+	}
 }

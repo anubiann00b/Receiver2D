@@ -1,6 +1,7 @@
-package com.receiver2d.engine.physics;
+package com.receiver2d.engine.geometry;
 
 import java.util.ArrayList;
+
 import com.receiver2d.engine.Vector2D;
 
 /**
@@ -65,7 +66,7 @@ public class CollisionDetection {
 				return new Vector2D(x, y);
 			else return null;
 			
-			// TODO: use pnpoly implementation instead of this stupid if-statement
+			// TODO: use pnpoly implementation instead of this
 		}
 	}
 
@@ -76,16 +77,14 @@ public class CollisionDetection {
 	 * <p/>
 	 * Example: square - (0,0) (0,1) (1,1) (1,0)
 	 * 
-	 * @param polyA
-	 *            the array of points for the first polygon
-	 * @param polyB
-	 *            the array of points for the second polygon
+	 * @param polyA The array of points for the first polygon.
+	 * @param polyB The array of points for the second polygon.
 	 * @return The array of points where the two polygons overlap, or null if
 	 *         they do not collide at all.
 	 */
 	public static Vector2D[] polyIntersect(Polygon polyA, Polygon polyB) {
-		if (polyA.length < 2 || polyB.length < 2) return null; // we have not been given lines
-		
+		if (polyA.length < 2 || polyB.length < 2) return null; 
+												// we have not been given lines
 		ArrayList<Vector2D> pnts = new ArrayList<Vector2D>();
 		for (int i = 0; i < polyA.length; i++)
 			for (int j = 0; j < polyB.length; j++) {
@@ -109,13 +108,12 @@ public class CollisionDetection {
 	 * Returns a true/false value determining whether or not two polygons or
 	 * lines collide.
 	 * 
-	 * @param poly1
-	 *            A Vector2f array containing points of the first polygon/line.
-	 * @param poly2
-	 *            A Vector2f array containing points of the second polygon/line.
+	 * @param poly1 An array containing points of the first polygon/line.
+	 * @param poly2 An array containing points of the second polygon/line.
 	 * @return "true" if the polygons collide; "false" otherwise
 	 */
 	public static boolean checkCollides(Polygon poly1, Polygon poly2) {
+		// TODO: use fast method that doesn't require much calculation
 		if (poly1.length > 2 && poly2.length > 2)
 			// we do this to save unnecessary calculations for lines
 			return linesIntersect(poly1, poly2) != null;
@@ -157,7 +155,7 @@ public class CollisionDetection {
 	 * @param c2 The second circle.
 	 * @return Whether or not the circles are colliding.
 	 */
-	public static boolean circlesCollide(Circle c1, Circle c2) {
+	public static boolean checkCollides(Circle c1, Circle c2) {
 		double d = Math.sqrt(Math.pow(c1.center.y - c2.center.y, 2)
 				+ Math.pow(c1.center.x - c2.center.x, 2));
 		
@@ -172,7 +170,7 @@ public class CollisionDetection {
 	 * 		   intersect.
 	 */
 	public static Vector2D[] circleIntersect(Circle c1, Circle c2) {
-		if (!circlesCollide(c1, c2)) return null;
+		if (!checkCollides(c1, c2)) return null;
 		else if (c1.center.equals(c2) && c1.radius == c2.radius)
 			return c1.getVertices(MAXIMUM_VERTICE_COUNT); // circles are inside
 		

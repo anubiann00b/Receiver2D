@@ -4,23 +4,24 @@ import java.util.*;
 import com.receiver2d.engine.io.R2DResource;
 
 /**
- * Holds all of the game information for a particular world, including scenes, entities, and more low-level stuff such as resources (loaded dynamically when transitioning to new worlds).
+ * Holds all of the game information for a particular world, including scenes, 
+ * entities, and more low-level stuff such as resources (loaded dynamically when
+ * transitioning to new worlds).
  */
 public class World {
-	private String uuid;
+	private final String uuid;
 	/**
 	 * A list of scenes contained by the current world.
 	 */
-	public ArrayList<Scene> scenes = null;
-	public String name = null;
+	public ArrayList<Scene> scenes;
+	public final String name;
 
-	private ArrayList<R2DResource> resources = null;
+	private ArrayList<R2DResource> resources;
 
 	/**
 	 * Loads a world into memory and gives it a particular name.
 	 * 
-	 * @param name
-	 *            The name of the world.
+	 * @param name The name of the world.
 	 */
 	public World(String name) {
 		uuid = UUID.randomUUID().toString();
@@ -30,7 +31,7 @@ public class World {
 	}
 
 	public World() {
-		this(UUID.randomUUID().toString()); // generate unique name if not provided
+		this(UUID.randomUUID().toString());
 	}
 
 	/**
@@ -55,17 +56,19 @@ public class World {
 	}
 
 	/**
-	 * Adds a resource to be loaded when the world is loaded. This differs from adding the resource to a particular scene, which would only be loaded when that scene is loaded.
+	 * Adds a resource to be loaded when the world is loaded. This differs from
+	 * adding the resource to a particular scene, which would only be loaded
+	 * when that scene is loaded.
 	 * 
-	 * @param res
-	 *            The resource to add.
+	 * @param res The resource to add.
 	 */
 	public void addResource(R2DResource res) {
 		resources.add(res);
 	}
 
 	/**
-	 * Gets the currently loaded/unloaded resources in the world, but not in an individual scene.
+	 * Gets the currently loaded/unloaded resources in the world, but not in an 
+	 * individual scene.
 	 * 
 	 * @return The list of resources.
 	 */

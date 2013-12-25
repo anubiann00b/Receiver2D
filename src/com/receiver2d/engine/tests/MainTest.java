@@ -9,7 +9,6 @@ public class MainTest {
 	@Test
 	public void test() {
 		Receiver2D.DEBUG_MODE = true;
-
 		Receiver2D.start();
 		Receiver2D.stop();
 	}

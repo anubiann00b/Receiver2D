@@ -1,4 +1,4 @@
-package com.receiver2d.engine.physics;
+package com.receiver2d.engine.geometry;
 
 import com.receiver2d.engine.Vector2D;
 

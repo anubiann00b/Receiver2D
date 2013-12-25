@@ -4,30 +4,17 @@ import static org.lwjgl.opengl.GL11.*;
 
 import org.lwjgl.opengl.Display;
 
+import com.receiver2d.engine.Receiver2D;
 import com.receiver2d.engine.Vector2D;
+import com.receiver2d.engine.World;
 import com.receiver2d.engine.entitysystem.Entity;
+import com.receiver2d.engine.entitysystem.Skybox;
 
 /**
  * In this class we abstract all drawing functions. We should be able to do, for
  * example, Renderer.drawQuad(Vector2D a, Vector2D b);
  */
 public class Renderer {
-	/**
-	 * Draws an Entity to the display.
-	 * 
-	 * @param entity The Entity to draw.
-	 */
-	public static void drawEntity(Entity entity) {
-		if (!entity.visible) return; // don't render invisible entities
-
-		// TODO: get texture of Entity
-
-		glBegin(GL_POLYGON); // draw the mesh of the entity
-		for (Vector2D pnt : entity.mesh.points)
-			glVertex2f(pnt.x, pnt.y);
-		glEnd();
-	}
-
 	/**
 	 * Performs a rendering update, in which the Display is cleared and new
 	 * things are drawn on screen.
@@ -52,5 +39,33 @@ public class Renderer {
 		// TODO: render all in-game elements that are visible here
 
 		return !Display.isCloseRequested();
+	}
+	
+	/**
+	 * Draws an Entity to the display.
+	 * 
+	 * @param entity The Entity to draw.
+	 */
+	public static void drawEntity(Entity entity) {
+		if (!entity.visible) return; // don't render invisible entities
+
+		// TODO: get texture of Entity
+
+		glBegin(GL_POLYGON); // draw the mesh of the entity
+		for (Vector2D pnt : entity.getDelocalizedMesh().points)
+			glVertex2f(pnt.x, pnt.y);
+		glEnd();
+	}
+	
+	/**
+	 * Updates the visual aspects of the game.
+	 */
+	public static void gameUpdate() {
+		World world;
+		if ((world = Receiver2D.getLoadedWorld()) == null) return;
+		
+		// draw skybox first
+		Skybox sbox = world.scenes.get(0).skybox;
+		Texture2D sTex = sbox.texture;
 	}
 }

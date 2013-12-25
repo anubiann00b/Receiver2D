@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class EntityList extends ArrayList<Entity> {
 	private static final long serialVersionUID = -5861454509544255719L;
 	
-	private Scene scene;
+	protected Scene scene;
 	
 	// TODO: add Entity familial (parent-child) accounting in here
 
@@ -25,7 +25,7 @@ public class EntityList extends ArrayList<Entity> {
 	 */
 	public EntityList(Entity[] entities) {
 		for (Entity entity : entities)
-			add(entity); // add all entities in-game
+			add(entity);
 	}
 
 	// Entity() overrides
@@ -43,7 +43,7 @@ public class EntityList extends ArrayList<Entity> {
 	 * @param elist The EntityList to set as default for the scene.
 	 */
 	public static void setScene(Scene scene, EntityList elist) {
-		scene.setEntityList(elist);
+		(elist.scene = scene).setEntityList(elist);
 	}
 	
 	/**
@@ -53,7 +53,5 @@ public class EntityList extends ArrayList<Entity> {
 	 */
 	public void setScene(Scene scene) {
 		(this.scene = scene).setEntityList(this);
-		for (Entity e : this.toArray(new Entity[this.size()]))
-			e.scene = this.scene;
 	}
 }

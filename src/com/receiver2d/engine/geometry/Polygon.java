@@ -1,4 +1,4 @@
-package com.receiver2d.engine.physics;
+package com.receiver2d.engine.geometry;
 
 import java.util.Iterator;
 import java.util.LinkedList;
