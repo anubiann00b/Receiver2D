@@ -30,7 +30,7 @@ public class CollisionDetection {
 	 * @param ln2 An array containing two points on the second line.
 	 * @return A point of intersection, or null if the lines do not intersect.
 	 */
-	public static Vector2D linearIntersectionPoint(Polygon ln1, Polygon ln2) {
+	public static Vector2D linesIntersect(Polygon ln1, Polygon ln2) {
 		if (ln1.length < 2 || ln2.length < 2) return null; // our parameters do
 		// not contain a
 		// line
@@ -83,11 +83,9 @@ public class CollisionDetection {
 	 * @return The array of points where the two polygons overlap, or null if
 	 *         they do not collide at all.
 	 */
-	public static Vector2D[] polygonalIntersectionPoints(Polygon polyA,
-			Polygon polyB) {
-		if (polyA.length < 2 || polyB.length < 2) return null; // we have not
-		// been given
-		// lines
+	public static Vector2D[] polyIntersect(Polygon polyA, Polygon polyB) {
+		if (polyA.length < 2 || polyB.length < 2) return null; // we have not been given lines
+		
 		ArrayList<Vector2D> pnts = new ArrayList<Vector2D>();
 		for (int i = 0; i < polyA.length; i++)
 			for (int j = 0; j < polyB.length; j++) {
@@ -99,7 +97,7 @@ public class CollisionDetection {
 				// poly[j+1]
 				Vector2D b2 = polyB.get(j == polyB.length - 1 ? 0 : j + 1);
 
-				Vector2D pnt = linearIntersectionPoint(
+				Vector2D pnt = linesIntersect(
 						new Polygon(a1, a2), new Polygon(b1, b2));
 				if (pnt != null) pnts.add(pnt);
 			}
@@ -120,9 +118,9 @@ public class CollisionDetection {
 	public static boolean checkCollides(Polygon poly1, Polygon poly2) {
 		if (poly1.length > 2 && poly2.length > 2)
 			// we do this to save unnecessary calculations for lines
-			return linearIntersectionPoint(poly1, poly2) != null;
+			return linesIntersect(poly1, poly2) != null;
 
-		return polygonalIntersectionPoints(poly1, poly2) != null;
+		return polyIntersect(poly1, poly2) != null;
 	}
 
 	/**
@@ -173,7 +171,7 @@ public class CollisionDetection {
 	 * @return The points of intersection, or null if the circles do not
 	 * 		   intersect.
 	 */
-	public static Vector2D[] circleIntersectionPoints(Circle c1, Circle c2) {
+	public static Vector2D[] circleIntersect(Circle c1, Circle c2) {
 		if (!circlesCollide(c1, c2)) return null;
 		else if (c1.center.equals(c2) && c1.radius == c2.radius)
 			return c1.getVertices(MAXIMUM_VERTICE_COUNT); // circles are inside

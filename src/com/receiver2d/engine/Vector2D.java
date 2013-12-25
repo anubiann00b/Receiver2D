@@ -19,6 +19,11 @@ public class Vector2D extends Vector2f {
 	public final static Vector2D ONE = new Vector2D(1.0f, 1.0f);
 
 	/**
+	 * Precision for use with equals()
+	 */
+	private static final float EPSILON = 1e-6f;
+	
+	/**
 	 * Creates a new Vector2D from given points.
 	 * @param x The x-coordinate.
 	 * @param y The y-coordinate.
@@ -63,8 +68,11 @@ public class Vector2D extends Vector2f {
 	 * @param other A Vector2D to compare to.
 	 * @return True if the Vector2D is equivalent; false if otherwise.
 	 */
-	public boolean equals(Vector2D other) {
-		return (this.x == other.x && this.y == other.y);
+	@Override
+	public boolean equals(Object other) {
+		return other instanceof Vector2f && 
+				(Math.abs(this.x-((Vector2f)other).x) < EPSILON && 
+						Math.abs(this.y-((Vector2f)other).y) < EPSILON);
 	}
 	
 	/**
@@ -75,5 +83,10 @@ public class Vector2D extends Vector2f {
 	public void add(Vector2D other) {
 		x += other.x;
 		y += other.y;
+	}
+	
+	@Override
+	public String toString() {
+		return "(" + x + ", " + y + ")";
 	}
 }

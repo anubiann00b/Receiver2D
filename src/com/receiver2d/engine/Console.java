@@ -10,7 +10,7 @@ public class Console {
 	 * Involves specificity for messages, allowing them to be grouped
 	 * accordingly, in addition to introducing special behavior for the Console.
 	 */
-	public enum LLevel {
+	public enum LogLevel {
 		/**
 		 * Any other miscellaneous message that does not fit a category.
 		 */
@@ -33,7 +33,7 @@ public class Console {
 
 		public int val; // the severity level
 
-		private LLevel(int val) {
+		private LogLevel(int val) {
 			this.val = val;
 		}
 
@@ -42,7 +42,7 @@ public class Console {
 		 * @param cmp The log level.
 		 * @return
 		 */
-		public boolean shouldPrint(LLevel cmp) {
+		public boolean shouldPrint(LogLevel cmp) {
 			// example: if level cmp is debug, we should print error msgs
 			return this.val >= cmp.val;
 		}
@@ -52,7 +52,7 @@ public class Console {
 	 * The current log level that the Console is on. Any messages that are
 	 * above this log level will be ignored.
 	 */
-	public static LLevel level = LLevel.ERROR;
+	public static LogLevel level = LogLevel.ERROR;
 
 	/**
 	 * A Console message object, containing various types of information that
@@ -126,7 +126,7 @@ public class Console {
 	 * @param exception	A possible exception to include in the log.
 	 */
 	public synchronized static void log(String message, Exception exception,
-			LLevel type) {
+			LogLevel type) {
 		if (!level.shouldPrint(type)) return;
 
 		Message m = new Message(type.toString() + ": " + message,
@@ -146,7 +146,7 @@ public class Console {
 	 * @param message  A custom message to include.
 	 */
 	public synchronized static void log(String message) {
-		log(message, null, LLevel.INFO);
+		log(message, null, LogLevel.INFO);
 	}
 	
 	/**
@@ -154,7 +154,7 @@ public class Console {
 	 * @param message A custom message to include.
 	 */
 	public synchronized static void debug(String message) {
-		log(message, null, LLevel.DEBUG);
+		log(message, null, LogLevel.DEBUG);
 	}
 
 	/**
@@ -164,7 +164,7 @@ public class Console {
 	 * @param exc		The exception to log to the console.
 	 */
 	public synchronized static void error(String message, Exception exc) {
-		log(message, exc, LLevel.ERROR);
+		log(message, exc, LogLevel.ERROR);
 	}
 	
 	/**
