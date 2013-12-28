@@ -98,9 +98,9 @@ public class R2DResource {
 	 * Clears the file from memory by setting it to null. Does not remove the
 	 * location variable of the resource, though.
 	 */
-	public void unLoad() {
+	public void unload() {
 		try {
-			if (ioStream != null) ioStream.close(); // close the stream before nullifying
+			if (ioStream != null) ioStream.close(); // close the stream first
 		} catch (IOException e) {
 			Console.error("Error when closing file ioStream.", e);
 		}
@@ -110,10 +110,12 @@ public class R2DResource {
 
 	/**
 	 * Gets the loaded file from the resource's location, or null if undefined.
-	 * 
+	 * If the file is not loaded prior by calling .load() then it is loaded
+	 * automatically.
 	 * @return The file of the loaded resource.
 	 */
 	public File getFile() {
+		load(); // load the file automatically
 		return loadedFile;
 	}
 

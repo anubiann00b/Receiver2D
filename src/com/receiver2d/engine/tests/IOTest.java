@@ -2,21 +2,15 @@ package com.receiver2d.engine.tests;
 
 import static org.junit.Assert.*;
 
+import java.awt.Image;
 import java.io.IOException;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.junit.Before;
-import org.junit.Test;
-import org.w3c.dom.DOMException;
-import org.xml.sax.SAXException;
 
-import com.receiver2d.engine.Console;
-import com.receiver2d.engine.Scene;
-import com.receiver2d.engine.World;
-import com.receiver2d.engine.entitysystem.Entity;
-import com.receiver2d.engine.io.FileManager;
-import com.receiver2d.engine.io.R2DResource;
+import com.receiver2d.engine.*;
+import com.receiver2d.engine.entitysystem.*;
+import com.receiver2d.engine.graphics.Texture2D;
+import com.receiver2d.engine.io.*;
 
 public class IOTest {
 
@@ -26,7 +20,7 @@ public class IOTest {
 	}
 
 //	@Test //will not be implemented until FileManager.load() is broken up and throws exceptions
-	public void testLoadRsrc(){
+	public void testLoadRsrc() throws IOException {
 		Console.level = Console.LogLevel.DEBUG;
 		
 		World world = null;
@@ -61,7 +55,9 @@ public class IOTest {
 				+ "\" failed.");
 
 		// test texture loading
-		//Texture2D ishygddt = new Texture2D(r, null);
+		Texture2D ishygddt = new Texture2D(r, null);
+		scene.skybox = new Skybox(ishygddt);
+		Image i = scene.skybox.getSkyboxRendered(); // load image
 	}
 	
 }

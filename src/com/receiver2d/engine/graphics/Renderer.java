@@ -2,6 +2,8 @@ package com.receiver2d.engine.graphics;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import java.awt.Image;
+
 import org.lwjgl.opengl.Display;
 
 import com.receiver2d.engine.Receiver2D;
@@ -50,9 +52,10 @@ public class Renderer {
 		if (!entity.visible) return; // don't render invisible entities
 
 		// TODO: get texture of Entity
+		Image i = entity.texture.getRendered();
 
 		glBegin(GL_POLYGON); // draw the mesh of the entity
-		for (Vector2D pnt : entity.getDelocalizedMesh().points)
+		for (Vector2D pnt : entity.getDelocalizedMesh())
 			glVertex2f(pnt.x, pnt.y);
 		glEnd();
 	}
@@ -66,6 +69,6 @@ public class Renderer {
 		
 		// draw skybox first
 		Skybox sbox = world.scenes.get(0).skybox;
-		Texture2D sTex = sbox.texture;
+//		Image i = sbox.texture.getRendered();
 	}
 }

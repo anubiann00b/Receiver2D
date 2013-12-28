@@ -160,7 +160,7 @@ public class Entity extends Transform2D {
 	 * @return A new polygon where the position of each point is absolute.
 	 */
 	public Polygon getDelocalizedMesh() {
-		Vector2D[] pnts = mesh.points.toArray(new Vector2D[]{});
+		Vector2D[] pnts = mesh.vertices();
 		for (Vector2D p : pnts) {
 			p.x += position.x;
 			p.y += position.y;

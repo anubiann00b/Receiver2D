@@ -116,16 +116,24 @@ public class Texture2D {
 	public Texture2D(R2DResource res, Color color) throws IOException {
 		this(ImageIO.read(res.getFile()), color);
 	}
+	
+	public Texture2D(R2DResource res, byte r, byte g, byte b, byte a) 
+			throws IOException{
+		this(ImageIO.read(res.getFile()), new Color(r, g, b, a));
+	}
 
 	/**
 	 * Sets the current BufferedImage of the texture.
 	 * @param i A buffered image.
 	 */
 	public void setImage(BufferedImage i) {
+		image.flush();
+		
 		// draw input to image
 		Graphics2D g = image.createGraphics();
 		g.drawImage(i, 0, 0, null);
 		g.dispose(); // clear resources
+		image = i;
 		
 		width = image.getWidth(); // set default dimensions
 		height = image.getHeight();

@@ -11,15 +11,30 @@ import com.receiver2d.engine.Console.LogLevel;
  * This is the main class, where the engine can be started and managed.
  */
 public class Receiver2D {
+	
+	public static enum DebugMode {
+		NO_DEBUG(false), DEBUG_R2D(true), DEBUG_R2D_AND_LWJGL(true);
+		
+		private boolean debugging;
+		private DebugMode(boolean b) {
+			debugging = b;
+		}
+		
+		public boolean valueOf() {
+			return debugging;
+		}
+	}
+	
 	// program values
 	/**
-	 * Whether or not the program is running. When false, all currently-running threads will automatically close.
+	 * Whether or not the program is running. When false, all currently-running
+	 * threads will automatically close.
 	 */
 	public static boolean running = true;
 	/**
 	 * Should debug messages be printed?
 	 */
-	public static boolean DEBUG_MODE = false;
+	public static DebugMode DEBUG_MODE = DebugMode.NO_DEBUG;
 	/**
 	 * Global program start time
 	 */
@@ -27,27 +42,35 @@ public class Receiver2D {
 	// program values
 
 	// engine values
+	/**
+	 * The limit on frames per second for the engine to render at.
+	 */
 	public static final int RENDER_FPS_CAP = 60;
 	public static ThreadManager threads;
 
 	/**
-	 * The list of currently-loaded worlds in the engine.
+	 * The list of worlds in the engine.
 	 */
 	private static ArrayList<World> worlds = new ArrayList<World>();
-	public static Thread[] threadList = new Thread[2];
+	private static Thread[] threadList = new Thread[2];
+	
+	/**
+	 * The currently-loaded world in the engine.
+	 */
 	private static World loadedWorld;
 
-	// engine values
+	// end of engine values
 
+	// start/stop methods
 	/**
 	 * Starts the game engine.
 	 */
 	public static void start() {
 		Console.log("Starting Receiver2D", null, Console.LogLevel.INFO);
 
-		if (DEBUG_MODE) {
-//			Console.debug("Setting org.lwjgl.util.Debug to "
-//					+ System.setProperty("org.lwjgl.util.Debug", "true"));
+		if (DEBUG_MODE.valueOf()) {
+			if (DEBUG_MODE == DebugMode.DEBUG_R2D_AND_LWJGL)
+				System.setProperty("org.lwjgl.util.Debug", "true");
 			Console.level = Console.LogLevel.DEBUG;
 		}
 
@@ -62,7 +85,8 @@ public class Receiver2D {
 		threadList[0] = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				Console.log("Logic thread is running...", null, LogLevel.DEBUG);
+				Console.debug("Logic thread is running...");
+				// TODO: update game logic here
 			}
 		});
 
@@ -74,9 +98,8 @@ public class Receiver2D {
 		threadList[1] = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				Console.log("Physics thread is running...", null,
-						LogLevel.DEBUG);
-				// TODO: while (Physics.update());
+				Console.debug("Physics thread is running...");
+				while (Physics.update());
 			}
 		});
 
@@ -104,6 +127,7 @@ public class Receiver2D {
 		Console.log("Receiver2D ended.");
 		System.exit(0);
 	}
+	// end of start/stop methods
 	
 	/**
 	 * Loads a world into the world queue.
@@ -120,5 +144,13 @@ public class Receiver2D {
 	 */
 	public static World getLoadedWorld() {
 		return loadedWorld;
+	}
+	
+	
+	// this is all that is needed for the main method
+	public static void main(String[] args) {
+		DEBUG_MODE = DebugMode.DEBUG_R2D;
+		start();
+		stop();
 	}
 }

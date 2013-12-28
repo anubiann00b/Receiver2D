@@ -32,9 +32,8 @@ public class CollisionDetection {
 	 * @return A point of intersection, or null if the lines do not intersect.
 	 */
 	public static Vector2D linesIntersect(Polygon ln1, Polygon ln2) {
-		if (ln1.length < 2 || ln2.length < 2) return null; // our parameters do
-		// not contain a
-		// line
+		if (ln1.length() < 2 || ln2.length() < 2) 
+			return null; // one of our parameters is not a line
 
 		/*
 		 * we assume line of format Ax + By = C 
@@ -65,7 +64,6 @@ public class CollisionDetection {
 							.get(0).y && y >= ln2.get(1).y))) 
 				return new Vector2D(x, y);
 			else return null;
-			
 			// TODO: use pnpoly implementation instead of this
 		}
 	}
@@ -83,18 +81,18 @@ public class CollisionDetection {
 	 *         they do not collide at all.
 	 */
 	public static Vector2D[] polyIntersect(Polygon polyA, Polygon polyB) {
-		if (polyA.length < 2 || polyB.length < 2) return null; 
-												// we have not been given lines
+		if (polyA.length() < 2 || polyB.length() < 2) 
+			return null; // we have not been given lines
 		ArrayList<Vector2D> pnts = new ArrayList<Vector2D>();
-		for (int i = 0; i < polyA.length; i++)
-			for (int j = 0; j < polyB.length; j++) {
+		for (int i = 0; i < polyA.length(); i++)
+			for (int j = 0; j < polyB.length(); j++) {
 
 				Vector2D a1 = polyA.get(i); // line from vertex poly[i] to
 				// poly[i+1]
-				Vector2D a2 = polyA.get(i == polyA.length - 1 ? 0 : i + 1);
+				Vector2D a2 = polyA.get(i == polyA.length() - 1 ? 0 : i + 1);
 				Vector2D b1 = polyB.get(j); // line from vertex poly[j] to
 				// poly[j+1]
-				Vector2D b2 = polyB.get(j == polyB.length - 1 ? 0 : j + 1);
+				Vector2D b2 = polyB.get(j == polyB.length() - 1 ? 0 : j + 1);
 
 				Vector2D pnt = linesIntersect(
 						new Polygon(a1, a2), new Polygon(b1, b2));
@@ -114,7 +112,7 @@ public class CollisionDetection {
 	 */
 	public static boolean checkCollides(Polygon poly1, Polygon poly2) {
 		// TODO: use fast method that doesn't require much calculation
-		if (poly1.length > 2 && poly2.length > 2)
+		if (poly1.length() > 2 && poly2.length() > 2)
 			// we do this to save unnecessary calculations for lines
 			return linesIntersect(poly1, poly2) != null;
 
@@ -135,11 +133,11 @@ public class CollisionDetection {
 		boolean c = false;
 
 		// check if the point matches a vertex
-		for (int i = 0; i < poly.length; i++)
+		for (int i = 0; i < poly.length(); i++)
 			if (poly.get(i).equals(pt)) return c;
 
 		// pnpoly
-		for (int i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+		for (int i = 0, j = poly.length() - 1; i < poly.length(); j = i++) {
 			if (((poly.get(i).y > pt.y) != (poly.get(j).y > pt.y))
 					&& (pt.x < (poly.get(j).x - poly.get(i).x)
 							* (pt.y - poly.get(i).y)
