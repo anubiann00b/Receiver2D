@@ -13,7 +13,7 @@ public class GeometryTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		Console.level = Console.LogLevel.DEBUG;
+		Console.CURRENT_LOG_LEVEL = Console.LogLevel.DEBUG;
 	}
 	
 	@Test

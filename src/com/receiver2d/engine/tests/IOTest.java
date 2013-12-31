@@ -16,12 +16,12 @@ public class IOTest {
 
 	@Before
 	public void setUp() throws Exception {
-		Console.level = Console.LogLevel.DEBUG;
+		Console.CURRENT_LOG_LEVEL = Console.LogLevel.DEBUG;
 	}
 
 //	@Test //will not be implemented until FileManager.load() is broken up and throws exceptions
 	public void testLoadRsrc() throws IOException {
-		Console.level = Console.LogLevel.DEBUG;
+		Console.CURRENT_LOG_LEVEL = Console.LogLevel.DEBUG;
 		
 		World world = null;
 		try {
