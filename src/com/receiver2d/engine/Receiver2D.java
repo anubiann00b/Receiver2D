@@ -52,7 +52,6 @@ public class Receiver2D {
 	 * The list of worlds in the engine.
 	 */
 	private static ArrayList<World> worlds = new ArrayList<World>();
-	private static Thread[] threadList = new Thread[2];
 	
 	/**
 	 * The currently-loaded world in the engine.
@@ -75,6 +74,7 @@ public class Receiver2D {
 		}
 
 		threads = new ThreadManager(); // create the thread manager and pool
+		Thread[] threadList = new Thread[2]; // create threads
 
 		/*
 		 * This is our logic thread. It deals with all things pertaining to the
@@ -135,7 +135,7 @@ public class Receiver2D {
 	 */
 	public static boolean loadWorld(World world) {
 		// TODO: extensive check for world compatibility; update
-		return worlds.add(loadedWorld = world);
+		return worlds.add(worlds.size() == 0 ? loadedWorld = world : world);
 	}
 	
 	/**

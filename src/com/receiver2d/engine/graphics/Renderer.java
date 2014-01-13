@@ -39,6 +39,7 @@ public class Renderer {
 		Display.update();
 
 		// TODO: render all in-game elements that are visible here
+		gameUpdate();
 
 		return !Display.isCloseRequested();
 	}
@@ -51,7 +52,7 @@ public class Renderer {
 	public static void drawEntity(Entity entity) {
 		if (!entity.visible) return; // don't render invisible entities
 
-		// TODO: get texture of Entity
+		// TODO: get texture of Entity and paint it
 		Image i = entity.texture.getRendered();
 
 		glBegin(GL_POLYGON); // draw the mesh of the entity
@@ -63,12 +64,12 @@ public class Renderer {
 	/**
 	 * Updates the visual aspects of the game.
 	 */
-	public static void gameUpdate() {
+	private static void gameUpdate() {
 		World world;
 		if ((world = Receiver2D.getLoadedWorld()) == null) return;
 		
 		// draw skybox first
 		Skybox sbox = world.scenes.get(0).skybox;
-//		Image i = sbox.texture.getRendered();
+		Image i = sbox.getSkyboxRendered();
 	}
 }

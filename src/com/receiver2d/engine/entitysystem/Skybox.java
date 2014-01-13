@@ -13,6 +13,17 @@ public class Skybox {
 	public float distance;
 	
 	/**
+	 * Creates a new Skybox from a given texture at a given "distance" from the
+	 * camera's main view.
+	 * @param tex
+	 * @param distance
+	 */
+	public Skybox(Texture2D tex, float distance) {
+		texture = tex;
+		this.distance = distance;
+	}
+	
+	/**
 	 * Creates a new Skybox from a given texture.
 	 * @param tex The rendered texture to the Skybox in the game.
 	 */
@@ -26,6 +37,6 @@ public class Skybox {
 	 * @return
 	 */
 	public Image getSkyboxRendered() {
-		return null;
+		return texture.getRendered(); // TODO: implement distance rendering
 	}
 }
