@@ -11,6 +11,7 @@ import com.receiver2d.engine.Vector2D;
 import com.receiver2d.engine.World;
 import com.receiver2d.engine.entitysystem.Entity;
 import com.receiver2d.engine.entitysystem.Skybox;
+import com.receiver2d.engine.geometry.Point2D;
 
 /**
  * In this class we abstract all drawing functions. We should be able to do, for
@@ -56,7 +57,7 @@ public class Renderer {
 		Image i = entity.texture.getRendered();
 
 		glBegin(GL_POLYGON); // draw the mesh of the entity
-		for (Vector2D pnt : entity.getDelocalizedMesh())
+		for (Point2D pnt : entity.getDelocalizedMesh())
 			glVertex2f(pnt.x, pnt.y);
 		glEnd();
 	}

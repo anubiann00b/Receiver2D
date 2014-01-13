@@ -12,29 +12,12 @@ import com.receiver2d.engine.Console.LogLevel;
  */
 public class Receiver2D {
 	
-	public static enum DebugMode {
-		NO_DEBUG(false), DEBUG_R2D(true), DEBUG_R2D_AND_LWJGL(true);
-		
-		private boolean debugging;
-		private DebugMode(boolean b) {
-			debugging = b;
-		}
-		
-		public boolean valueOf() {
-			return debugging;
-		}
-	}
-	
 	// program values
 	/**
 	 * Whether or not the program is running. When false, all currently-running
 	 * threads will automatically close.
 	 */
 	public static boolean running = true;
-	/**
-	 * Should debug messages be printed?
-	 */
-	public static DebugMode DEBUG_MODE = DebugMode.NO_DEBUG;
 	/**
 	 * Global program start time
 	 */
@@ -67,10 +50,10 @@ public class Receiver2D {
 	public static void start() {
 		Console.log("Starting Receiver2D", null, Console.LogLevel.INFO);
 
-		if (DEBUG_MODE.valueOf()) {
-			if (DEBUG_MODE == DebugMode.DEBUG_R2D_AND_LWJGL)
+		if (Console.CURRENT_DEBUG_MODE.isTrue()) {
+			if (Console.CURRENT_DEBUG_MODE == Console.DebugMode.DEBUG_R2D_AND_LWJGL)
 				System.setProperty("org.lwjgl.util.Debug", "true");
-			Console.level = Console.LogLevel.DEBUG;
+			Console.CURRENT_LOG_LEVEL = Console.LogLevel.DEBUG;
 		}
 
 		threads = new ThreadManager(); // create the thread manager and pool
@@ -144,13 +127,5 @@ public class Receiver2D {
 	 */
 	public static World getLoadedWorld() {
 		return loadedWorld;
-	}
-	
-	
-	// this is all that is needed for the main method
-	public static void main(String[] args) {
-		DEBUG_MODE = DebugMode.DEBUG_R2D;
-		start();
-		stop();
 	}
 }

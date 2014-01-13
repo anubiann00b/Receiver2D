@@ -1,5 +1,3 @@
-To-do List
-==========
 #####Key
  * **not started** - development on project has not yet initialized
  * **started** - project has been started
@@ -12,7 +10,7 @@ To-do List
 ###Main Components
   * Console (**done**)
   * Display handler (**done**)
-  * Threaded processes (**mostly done**)
+  * Threaded processes (**WIP**)
   * 
 ###Renderer
   * Render Entities (**not started**)

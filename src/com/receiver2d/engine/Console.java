@@ -47,13 +47,34 @@ public class Console {
 			return this.val >= cmp.val;
 		}
 	}
+	
+	/**
+	 * Modes of debugging, different from levels above
+	 */
+	public static enum DebugMode {
+		NO_DEBUG(false), DEBUG_R2D(true), DEBUG_R2D_AND_LWJGL(true);
+		
+		private boolean debugging;
+		private DebugMode(boolean b) {
+			debugging = b;
+		}
+		
+		public boolean isTrue(){
+			return debugging;
+		}
+	}
 
 	/**
 	 * The current log level that the Console is on. Any messages that are
 	 * above this log level will be ignored.
 	 */
-	public static LogLevel level = LogLevel.ERROR;
+	public static LogLevel CURRENT_LOG_LEVEL = LogLevel.ERROR;
 
+	/**
+	 * Should debug messages be printed?
+	 */
+	public static DebugMode CURRENT_DEBUG_MODE = DebugMode.NO_DEBUG;
+	
 	/**
 	 * A Console message object, containing various types of information that
 	 * may be useful for storing in the backlog.
@@ -127,7 +148,7 @@ public class Console {
 	 */
 	public synchronized static void log(String message, Exception exception,
 			LogLevel type) {
-		if (!level.shouldPrint(type)) return;
+		if (!CURRENT_LOG_LEVEL.shouldPrint(type)) return;
 
 		Message m = new Message(type.toString() + ": " + message,
 				System.nanoTime());
@@ -136,7 +157,7 @@ public class Console {
 		
 		System.out.println(m.toString()); // TODO: handle this with text or gui
 											// mode option
-		if (exception != null && level.val >= 3) //debug mode or higher
+		if (exception != null && CURRENT_LOG_LEVEL.val >= LogLevel.DEBUG.val) //debug mode or higher
 			exception.printStackTrace();
 	}
 
