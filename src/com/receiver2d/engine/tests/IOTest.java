@@ -20,7 +20,7 @@ public class IOTest {
 	}
 
 //	@Test //will not be implemented until FileManager.load() is broken up and throws exceptions
-	public void testLoadRsrc() throws IOException {
+	public static void testLoadRsrc() throws IOException {
 		Console.CURRENT_LOG_LEVEL = Console.LogLevel.DEBUG;
 		
 		World world = null;

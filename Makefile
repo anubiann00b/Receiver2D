@@ -14,7 +14,7 @@ JFILES=$(shell find $(SRC) -type f -name '*.java')
 
 all: $(JFILES)
 	$(JCC) -classpath $(LIBJARS) $(JFLAGS) $(JFILES) -d $(BIN)
-	$(JARCC) $(JARFLAGS) $(JAR) $(MANIFEST) $(LIBDIRS) -C $(BIN) .
+	$(JARCC) $(JARFLAGS) $(JAR) $(MANIFEST) -C $(BIN) .
 
 clean:
 	@rm -f $(JAR)

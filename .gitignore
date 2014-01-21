@@ -1,5 +1,11 @@
 *.class
+Receiver2D.jar
 /bin
+*~
+
+# Anjuta Project Files
+*.anjuta*
+.anjuta/
 
 # Eclipse Project Files
 .project
