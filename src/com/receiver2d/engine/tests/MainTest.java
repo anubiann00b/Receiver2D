@@ -12,8 +12,7 @@ public class MainTest {
 	@Test
 	public static void main(String[] args) throws IOException {
 		Console.CURRENT_DEBUG_MODE = Console.DebugMode.DEBUG_R2D;
-		// test loading
-		IOTest.testLoadRsrc();
+		IOTest.testLoadRsrc(); // test loading
 		Receiver2D.start();
 		Receiver2D.stop();
 	}
