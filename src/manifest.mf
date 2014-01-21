@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Name: Receiver2D
-URL: https://github.com/Prince781/Receiver2D
-Built-By: Prince781
-Main-Class: com.receiver2d.engine.tests.MainTest
-Class-Path: lib/lwjgl/lwjgl.jar lib/lwjgl/lwjgl_util.jar
- lib/junit/hamcrest-core-1.3.jar lib/junit/junit-4.11.jar
