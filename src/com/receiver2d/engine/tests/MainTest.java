@@ -8,7 +8,7 @@ import com.receiver2d.engine.Receiver2D;
 
 public class MainTest {
 	@Test
-	public void test() {
+	public static void main(String[] args) {
 		Console.CURRENT_DEBUG_MODE = Console.DebugMode.DEBUG_R2D_AND_LWJGL;
 		Receiver2D.start();
 		Receiver2D.stop();
