@@ -45,7 +45,10 @@ public class FileManager {
 
 		if (!worldFile.exists()) Console.log("World file does not exist!");
 		else if (!isValid) Console.log("World file is not valid!");
-		if (!isValid || !worldFile.exists()) return null;
+		if (!isValid || !worldFile.exists()) {
+			Console.log("World file does not exist.");
+			return null;
+		}
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();
@@ -239,7 +242,7 @@ public class FileManager {
 		// create new oType object
 		Object o = null;
 		try {
-			o = Class.forName(oType).newInstance();
+			o = Class.forName(oType).newInstance(); //.newInstance();
 		} catch (InstantiationException | IllegalAccessException
 				| ClassNotFoundException e) {
 			Console.log("Could not create class \""+oType+"\" for resource.");

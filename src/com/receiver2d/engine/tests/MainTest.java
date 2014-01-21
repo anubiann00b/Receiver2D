@@ -10,7 +10,7 @@ import java.io.*;
 
 public class MainTest {
 	@Test
-	public static void main(String[] args) throws IOException {
+	public void test() throws IOException {
 		Console.CURRENT_DEBUG_MODE = Console.DebugMode.DEBUG_R2D;
 		IOTest.testLoadRsrc(); // test loading
 		Receiver2D.start();

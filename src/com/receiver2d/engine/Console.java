@@ -68,7 +68,7 @@ public class Console {
 	 * The current log level that the Console is on. Any messages that are
 	 * above this log level will be ignored.
 	 */
-	public static LogLevel CURRENT_LOG_LEVEL = LogLevel.ERROR;
+	public static LogLevel CURRENT_LOG_LEVEL = LogLevel.INFO;
 
 	/**
 	 * Should debug messages be printed?
