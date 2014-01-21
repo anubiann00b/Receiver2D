@@ -13,3 +13,11 @@ With that, we hope that you may find our version to be useful.
 \- Princeton and Ben
 
 Consult [todo.md](/todo.md) for a list of completed and incomplete objectives.
+
+##Building Receiver2D
+If you're on a *nix operating system and have GNU Make installed, you can do the following:
+
+```Bash
+$ ./configure.sh --initial  # this only needs to be done once
+$ make && ./test.sh
+```
