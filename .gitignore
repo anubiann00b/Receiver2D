@@ -1,6 +1,6 @@
 *.class
 Receiver2D.jar
-/bin
+!lib/
 *~
 
 # Anjuta Project Files
