@@ -242,7 +242,6 @@ public class FileManager {
 		// create new oType object
 		Object o = null;
 		try {
-			Console.log("Creating new instance of type "+oType);
 			o = Class.forName(oType).newInstance(); //.newInstance();
 		} catch (InstantiationException | IllegalAccessException
 				| ClassNotFoundException e) {
@@ -321,11 +320,6 @@ public class FileManager {
 			}
 			
 			Console.debug("Using type \""+type+"\" for value "+eVal);
-			
-			// the below code is unnecessary due to passing by reference:
-			// set fields now, in bottom-up _n-1 times_
-//			for (int j = aN-2; j >= 0; j--)
-//				fields[j].set(objs[j], objs[j+1]);
 			
 			Console.log("Loaded values into "+o.getClass().getSimpleName());
 		}
