@@ -242,6 +242,7 @@ public class FileManager {
 		// create new oType object
 		Object o = null;
 		try {
+			Console.log("Creating new instance of type "+oType);
 			o = Class.forName(oType).newInstance(); //.newInstance();
 		} catch (InstantiationException | IllegalAccessException
 				| ClassNotFoundException e) {

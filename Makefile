@@ -2,7 +2,7 @@
 SRC=src
 BIN=bin
 LIB=lib
-JAR=`basename $(PWD)`.jar
+JAR=`basename "$(PWD)"`.jar
 MANIFEST=manifest.mf
 JCC=javac
 # LIBJARS=$(shell find $(LIB) -type f -name '*.jar' | sed ':a;N;$$!ba;s/\n/:/g')

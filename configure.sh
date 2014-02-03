@@ -26,6 +26,16 @@ for arg in "$@"; do
 		printf "Name: %s\n" `basename $((pwd))` > manifest.mf
 		printf "Class-Path: %s" `find lib -type f -name '*.java' | sed ':a;N;$$!ba;s/\n/\n /g'` > manifest.mf
 		;;
+	"--dependencies" | "-d") # install any necessary dependencies
+		printf "Installing dependencies...\n"
+		if [ -e /usr/bin/dnf ]; then
+			dnf -y install make javapackages-tools java-openjdk java;
+		elif [ -e /usr/bin/yum ]; then
+			yum -y install make javapackages-tools java-openjdk java;
+		elif [ -e /usr/bin/apt-get ]; then 
+			apt-get install make default-openjdk default-jre;
+		fi
+		;;
 	"--help" | "-h") # default
 		display_help
 		;;
