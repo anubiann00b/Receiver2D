@@ -3,6 +3,7 @@ package com.receiver2d.engine.geometry;
 import java.util.*;
 
 import com.receiver2d.engine.Vector2D;
+import com.receiver2d.engine.Console;
 
 /**
  * 
@@ -40,9 +41,9 @@ public class Polygon implements Iterable<Point2D> {
 	 */
 	public Polygon(float... fs) {
 		Point2D[] fpnts = new Point2D[fs.length/2];
-		for (int i=0; i+1<fs.length; i+=2) {
-			fpnts[i] = new Point2D(fs[i], fs[i+1]);
-			if (i > 0) fpnts[i].pointFrom(fpnts[i-1]);
+		for (int i=0,f=0; i+1<fs.length; i+=2,f=i/2) {
+			fpnts[f] = new Point2D(fs[i], fs[i+1]);
+			if (f > 0) fpnts[f].pointFrom(fpnts[f-1]);
 		}
 		verts = fpnts;
 		length = verts.length;
@@ -57,9 +58,9 @@ public class Polygon implements Iterable<Point2D> {
 	 */
 	public Polygon(double... ds) {
 		Point2D[] dpnts = new Point2D[ds.length/2];
-		for (int i=0; i+1<ds.length; i+=2) {
-			dpnts[i] = new Point2D((float)ds[i], (float)ds[i+1]);
-			if (i > 0) dpnts[i].pointFrom(dpnts[i-1]);
+		for (int i=0,d=0; i+1<ds.length; i+=2,d=0) {
+			dpnts[d] = new Point2D((float)ds[i], (float)ds[i+1]);
+			if (d > 0) dpnts[d].pointFrom(dpnts[d-1]);
 		}
 		verts = dpnts;
 		length = verts.length;
