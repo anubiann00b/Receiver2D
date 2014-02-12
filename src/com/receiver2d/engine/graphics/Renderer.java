@@ -12,6 +12,7 @@ import com.receiver2d.engine.World;
 import com.receiver2d.engine.entitysystem.Entity;
 import com.receiver2d.engine.entitysystem.Skybox;
 import com.receiver2d.engine.geometry.Point2D;
+import com.receiver2d.engine.Console;
 
 /**
  * In this class we abstract all drawing functions. We should be able to do, for
@@ -29,7 +30,7 @@ public class Renderer {
 	 */
 	public static boolean update() {
 
-		glClearColor(0.5f, 0.5f, 0.5f, 0f); // clear screen with transparent
+		glClearColor(0.5f, 0.1f, 0.5f, 0f); // clear screen with transparent
 		// grey
 		// set viewport to display dimension
 		glViewport(0, 0, Display.getWidth(), Display.getHeight());
@@ -72,5 +73,7 @@ public class Renderer {
 		// draw skybox first
 		Skybox sbox = world.scenes.get(0).skybox;
 		Image i = sbox.getSkyboxRendered();
+
+		
 	}
 }

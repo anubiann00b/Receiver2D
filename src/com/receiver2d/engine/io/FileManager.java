@@ -14,10 +14,11 @@ import java.io.*;
 import java.lang.reflect.Field;
 
 import com.receiver2d.engine.*;
-import com.receiver2d.engine.Console;
+import com.receiver2d.engine.Console; // this is NOT redundant; it's necessary
 import com.receiver2d.engine.entitysystem.Component;
 import com.receiver2d.engine.entitysystem.Entity;
 import com.receiver2d.engine.entitysystem.EntityList;
+import com.receiver2d.engine.entitysystem.Skybox;
 import com.receiver2d.engine.entitysystem.components.*;
 
 /**
@@ -26,9 +27,10 @@ import com.receiver2d.engine.entitysystem.components.*;
  */
 public class FileManager {
 	/**
-	 * Parses a Receiver2D World File (.r2dw) and returns the output.
+	 * Parses a Receiver2D World File (.r2dw) into a World. To load this new
+	 * world into the engine, Receiver2D.loadWorld() must be called.
 	 * 
-	 * @param location
+	 * @param location The directory-based location of the world.
 	 * @return A world parsed by XML handling.
 	 * @throws ParserConfigurationException
 	 * @throws IOException
@@ -165,6 +167,24 @@ public class FileManager {
 					}
 					
 					scenes[n].setEntityList(entityList);
+				} else if (node.getNodeName() == "skybox") {
+					NodeList childNodes = node.getChildNodes();
+					
+					if (childNodes.getLength() == 0) {
+						Console.log("Skybox has no resource. Skipping.");
+						continue;
+					}
+
+					Skybox skybox = (Skybox) loadResourceFromNode(
+						node, "com.receiver2d.engine.graphics.Skybox");
+
+					Node resourceNode = childNodes.item(0);
+					R2DResource res = (R2DResource) loadResourceFromNode(
+						resourceNode, "com.receiver2d.engine.io.R2DResource");
+
+					
+
+					// TODO: finish up Skybox-parsing code
 				}
 			}
 		}
@@ -233,9 +253,7 @@ public class FileManager {
 	 * @throws IllegalAccessException 
 	 * @throws IllegalArgumentException 
 	 */
-	
-	public static Object loadResourceFromNode(Node node, String oType,
-			String... toIgnore)
+	public static Object loadResourceFromNode(Node node, String oType, String... toIgnore)
 			throws IllegalArgumentException, IllegalAccessException {
 		NamedNodeMap nnm = node.getAttributes();
 		
@@ -245,7 +263,7 @@ public class FileManager {
 			o = Class.forName(oType).newInstance(); //.newInstance();
 		} catch (InstantiationException | IllegalAccessException
 				| ClassNotFoundException e) {
-			Console.log("Could not create class \""+oType+"\" for resource.");
+			Console.debug("Could not create class \""+oType+"\" for resource.");
 			return null;
 		}
 		
@@ -320,7 +338,6 @@ public class FileManager {
 			}
 			
 			Console.debug("Using type \""+type+"\" for value "+eVal);
-			
 			Console.log("Loaded values into "+o.getClass().getSimpleName());
 		}
 		

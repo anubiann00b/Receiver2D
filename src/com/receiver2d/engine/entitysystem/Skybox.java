@@ -33,8 +33,9 @@ public class Skybox {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Returns a rendered image of the Skybox, accounting for distance and other
+	 * factors.
+	 * @return A rendered image.
 	 */
 	public Image getSkyboxRendered() {
 		return texture.getRendered(); // TODO: implement distance rendering

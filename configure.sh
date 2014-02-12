@@ -29,9 +29,9 @@ for arg in "$@"; do
 	"--dependencies" | "-d") # install any necessary dependencies
 		printf "Installing dependencies...\n"
 		if [ -e /usr/bin/dnf ]; then
-			dnf -y install make javapackages-tools java-openjdk java;
+			dnf -y install make java-1.7.0-openjdk-devel java-1.8.0-openjdk-devel java java8;
 		elif [ -e /usr/bin/yum ]; then
-			yum -y install make javapackages-tools java-openjdk java;
+			yum -y install make java-1.7.0-openjdk-devel java-1.8.0-openjdk-devel java java8;
 		elif [ -e /usr/bin/apt-get ]; then 
 			apt-get install make default-openjdk default-jre;
 		fi

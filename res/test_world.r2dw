@@ -11,6 +11,9 @@
 			<resource path="res/file.jpg" type="image/jpeg"/>
 			<resource path="res/speech.txt" type="text/plain"/>
 		</resources>
+		<skybox distance="0">
+			<texture resource="0"/>
+		</skybox>
 		<entitylist>
 			<entity name="Boss" position_x="30f" position_y="23f" rotation="190f">
 				<component type="Rigidbody" mass="30.4f" velocity_x="2.3f" velocity_y="0.0f" />
