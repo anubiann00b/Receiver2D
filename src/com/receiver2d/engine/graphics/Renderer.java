@@ -72,6 +72,7 @@ public class Renderer {
 		
 		// draw skybox first
 		Skybox sbox = world.scenes.get(0).skybox;
+		Console.debug("Skybox is " + sbox);
 		Image i = sbox.getSkyboxRendered();
 
 		
