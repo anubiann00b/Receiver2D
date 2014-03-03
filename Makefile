@@ -12,13 +12,19 @@ JARCC=jar
 JARFLAGS=cfm
 JFILES=$(shell find $(SRC) -type f -name '*.java')
 SUBPACKAGES=$(shell cd $(SRC) && find . -mindepth 1 -maxdepth 1 -type d && cd ..)
+JDOCCC=javadoc
+JDOPTS=-d $(DOC) -classpath $(LIB) -sourcepath $(SRC)
+LWJGLDOCS=http://www.lwjgl.org/javadoc/
+ORACLEDOCS=http://docs.oracle.com/javase/7/docs/api/
+JDFLAGS=-use -author -link $(LWJGLDOCS) -link $(ORACLEDOCS)
 
 all: $(JFILES)
-	$(JCC) -classpath $(LIBJARS) $(JFLAGS) $(JFILES) -d $(BIN)
+	@# use $(LIB), instead of $LIBJARS)
+	$(JCC) -classpath $(LIB) $(JFLAGS) $(JFILES) -d $(BIN)
 	$(JARCC) $(JARFLAGS) $(JAR) $(MANIFEST) -C $(BIN) .
 
 javadoc: $(JFILES)
-	javadoc -d $(DOC) -sourcepath $(SRC) -subpackages $(SUBPACKAGES)
+	$(JDOCCC) $(JDOPTS) $(JDFLAGS) -subpackages com
 
 clean: clean-javadoc
 	@rm -f $(JAR)
