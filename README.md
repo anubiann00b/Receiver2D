@@ -21,3 +21,9 @@ If you're on a *nix operating system and have GNU Make installed, you can do the
 $ ./configure.sh --initial  # this only needs to be done once
 $ make && ./test.sh
 ```
+
+###Building the Javadocs
+```Bash
+$ make javadoc
+```
+Docs will be located in `doc/`.
